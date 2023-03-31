@@ -39,7 +39,8 @@ public class MenuPanel extends JPanel {
         lvl1Button.setForeground(Color.WHITE);
         add(lvl1Button);
         lvl1Button.addActionListener(e -> {
-            //TODO show battle panel
+            //TODO set up battle
+            gui.changePanel(GUI.Panel.Battle);
         });
     }
 
@@ -50,7 +51,8 @@ public class MenuPanel extends JPanel {
         lvl5Button.setForeground(Color.WHITE);
         add(lvl5Button);
         lvl5Button.addActionListener(e -> {
-            //TODO show battle panel
+            //TODO set up battle
+            gui.changePanel(GUI.Panel.Battle);
         });
     }
 
@@ -61,7 +63,8 @@ public class MenuPanel extends JPanel {
         lvl10Button.setForeground(Color.WHITE);
         add(lvl10Button);
         lvl10Button.addActionListener(e -> {
-            //TODO show battle panel
+            //TODO set up battle
+            gui.changePanel(GUI.Panel.Battle);
         });
     }
 
@@ -72,7 +75,8 @@ public class MenuPanel extends JPanel {
         bossButton.setForeground(Color.WHITE);
         add(bossButton);
         bossButton.addActionListener(e -> {
-            //TODO show battle panel
+            //TODO set up battle
+            gui.changePanel(GUI.Panel.Battle);
         });
     }
 
@@ -94,7 +98,7 @@ public class MenuPanel extends JPanel {
         CustomBattleButton.setForeground(Color.WHITE);
         add(CustomBattleButton);
         CustomBattleButton.addActionListener(e -> {
-            //TODO show battle panel
+            //TODO show battle creation panel
         });
     }
 

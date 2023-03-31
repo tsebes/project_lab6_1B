@@ -6,10 +6,13 @@ public class GUI extends JFrame{
 
     private final MenuPanel menuPanel;
     private final OptionsPanel optionsPanel;
+    private final BattlePanel battlePanel;
 
     public GUI() {
         menuPanel = new MenuPanel(this);
         optionsPanel = new OptionsPanel(this);
+        battlePanel = new BattlePanel(this);
+
         //TODO add other panels
         configureFrame();
         setVisible(true);
@@ -29,21 +32,31 @@ public class GUI extends JFrame{
         switch (panel) {
             case Menu -> {
                 optionsPanel.setVisible(false);
+                battlePanel.setVisible(false);
                 setContentPane(menuPanel);
                 pack();
                 menuPanel.setVisible(true);
             }
             case Options -> {
                 menuPanel.setVisible(false);
+                battlePanel.setVisible(false);
                 setContentPane(optionsPanel);
                 pack();
                 optionsPanel.setVisible(true);
+            }
+            case Battle -> {
+                menuPanel.setVisible(false);
+                optionsPanel.setVisible(false);
+                setContentPane(battlePanel);
+                pack();
+                battlePanel.setVisible(true);
             }
         }
     }
 
     public enum Panel {
         Menu,
-        Options
+        Options,
+        Battle
     }
 }
