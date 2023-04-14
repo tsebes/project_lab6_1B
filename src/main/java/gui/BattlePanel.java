@@ -13,6 +13,7 @@ public class BattlePanel extends JPanel {
     private final TargetingPanel targeting;
     private final AnalyzePanel analyze;
     private final LogsPanel logs;
+    private final ConfirmationPanel confirmation;
     private JButton exitButton;
 
     public BattlePanel(GUI gui) {
@@ -23,6 +24,7 @@ public class BattlePanel extends JPanel {
         targeting = new TargetingPanel(this);
         analyze = new AnalyzePanel(this);
         logs = new LogsPanel(this);
+        confirmation = new ConfirmationPanel(this);
         this.gui = gui;
         //TODO rework menu graphics
         setPreferredSize(new Dimension(800, 600));
@@ -36,6 +38,7 @@ public class BattlePanel extends JPanel {
         add(targeting);
         add(analyze);
         add(logs);
+        add(confirmation);
     }
 
     private void addExitButton() {
@@ -58,6 +61,7 @@ public class BattlePanel extends JPanel {
             turns.setVisible(false);
             bOptions.setVisible(false);
             exitButton.setVisible(false);
+            confirmation.setVisible(false);
             logs.setVisible(true);
         }else{
             logs.setVisible(false);
@@ -67,29 +71,71 @@ public class BattlePanel extends JPanel {
             exitButton.setVisible(true);
             switch (panel) {
                 case Skills -> {
+                    confirmation.setVisible(false);
                     analyze.setVisible(false);
                     targeting.setVisible(false);
                     skills.setVisible(true);
                 }
                 case Analyze -> {
+                    confirmation.setVisible(false);
                     targeting.setVisible(false);
                     skills.setVisible(false);
                     analyze.setVisible(true);
                 }
                 case Targeting -> {
+                    confirmation.setVisible(false);
                     analyze.setVisible(false);
                     skills.setVisible(false);
                     targeting.setVisible(true);
                 }
+                case Confirmation -> {
+                    analyze.setVisible(false);
+                    skills.setVisible(false);
+                    targeting.setVisible(false);
+                    confirmation.setVisible(true);
+                }
             }
         }
+    }
+
+    public TurnPanel getTurns() {
+        return turns;
+    }
+
+    public CharactersPanel getCharacters() {
+        return characters;
+    }
+
+    public BattleOptionsPanel getbOptions() {
+        return bOptions;
+    }
+
+    public SkillsPanel getSkills() {
+        return skills;
+    }
+
+    public TargetingPanel getTargeting() {
+        return targeting;
+    }
+
+    public AnalyzePanel getAnalyze() {
+        return analyze;
+    }
+
+    public LogsPanel getLogs() {
+        return logs;
+    }
+
+    public ConfirmationPanel getConfirmation() {
+        return confirmation;
     }
 
     public enum Panel {
         Skills,
         Analyze,
         Targeting,
-        Logs
+        Logs,
+        Confirmation
     }
 
 }

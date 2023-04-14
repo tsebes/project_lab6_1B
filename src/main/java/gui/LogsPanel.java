@@ -15,6 +15,7 @@ public class LogsPanel  extends JPanel {
         setVisible(false);
         setLayout(null);
         addExitButton();
+        //TODO make createLogLabel function
     }
 
     private void addExitButton() {

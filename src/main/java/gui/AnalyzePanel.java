@@ -14,5 +14,6 @@ public class AnalyzePanel extends JPanel {
         setBackground(Color.BLUE);
         setVisible(false);
         setLayout(null);
+        //TODO add label with known chosen enemy information
     }
 }

@@ -14,6 +14,7 @@ public class TurnPanel extends JPanel {
         setBackground(Color.GRAY);
         setLayout(null);
         addLogsButton();
+        //TODO add turn order
     }
 
     private void addLogsButton() {

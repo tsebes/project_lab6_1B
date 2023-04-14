@@ -13,5 +13,6 @@ public class SkillsPanel  extends JPanel {
         setBounds(200, 400, 600, 200);
         setBackground(Color.BLUE);
         setLayout(null);
+        //TODO show possible skills
     }
 }

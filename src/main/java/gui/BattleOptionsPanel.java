@@ -27,8 +27,10 @@ public class BattleOptionsPanel extends JPanel {
         addAttackButton.setForeground(Color.RED);
         add(addAttackButton);
         addAttackButton.addActionListener(e -> {
-            //TODO change targeting panel with current character info
+            //TODO change action to basic attack
             battle.changePanel(BattlePanel.Panel.Targeting);
+            battle.getTargeting().changeInformationPanel("Using basic attack");
+            battle.getCharacters().addEnemyTargeting();
         });
     }
 
@@ -39,6 +41,8 @@ public class BattleOptionsPanel extends JPanel {
         addSkillsButton.setForeground(Color.RED);
         add(addSkillsButton);
         addSkillsButton.addActionListener(e -> {
+            //TODO change action to skill
+            //TODO show current character skills
             battle.changePanel(BattlePanel.Panel.Skills);
         });
     }
@@ -50,7 +54,8 @@ public class BattleOptionsPanel extends JPanel {
         addGuardButton.setForeground(Color.RED);
         add(addGuardButton);
         addGuardButton.addActionListener(e -> {
-            //TODO character starts guarding (or need to confirm guarding)
+            //TODO change action to guard
+            //TODO show confirmation screen
         });
     }
 
@@ -61,8 +66,10 @@ public class BattleOptionsPanel extends JPanel {
         addAnalyzeButton.setForeground(Color.RED);
         add(addAnalyzeButton);
         addAnalyzeButton.addActionListener(e -> {
-            //TODO change info to analyze info
             battle.changePanel(BattlePanel.Panel.Targeting);
+            battle.getTargeting().changeInformationPanel("Using analyze");
+            battle.getCharacters().addEnemyTargeting();
+            //TODO make analyze work
         });
     }
 
@@ -73,6 +80,7 @@ public class BattleOptionsPanel extends JPanel {
         addItemButton.setForeground(Color.RED);
         add(addItemButton);
         addItemButton.addActionListener(e -> {
+            //TODO change action to item
             //TODO show items panel
         });
     }
