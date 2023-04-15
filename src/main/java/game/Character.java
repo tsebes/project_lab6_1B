@@ -1,12 +1,16 @@
 package game;
 
+import javax.swing.*;
 import java.util.Map;
+import java.util.Random;
 
 public abstract class Character {
 
     protected final String name;
+    protected final int level;
     protected AttackResistanceType basicAttack;
-    protected double healthPoints;
+    protected double maxHealthPoints;
+    protected double currentHealthPoints;
     protected double basicStrength;
     protected double currentStrength;
     protected double basicIntelligence;
@@ -22,11 +26,12 @@ public abstract class Character {
     //protected ArrayList<Debuff> debuffs;
     //protected ArrayList<Skill> skills;
 
-
-    public Character(String name, AttackResistanceType basicAttack, double healthPoints, double basicStrength, double basicIntelligence, double basicSpeed, double basicLuck, Map<AttackResistanceType, Double> basicResistance) {
+    public Character(String name, int level, AttackResistanceType basicAttack, double maxHealthPoints, double basicStrength, double basicIntelligence, double basicSpeed, double basicLuck, Map<AttackResistanceType, Double> basicResistance) {
         this.name = name;
+        this.level = level;
         this.basicAttack = basicAttack;
-        this.healthPoints = healthPoints;
+        this.maxHealthPoints = maxHealthPoints;
+        this.currentHealthPoints = maxHealthPoints;
         this.basicStrength = basicStrength;
         this.currentStrength = basicStrength;
         this.basicIntelligence = basicIntelligence;
@@ -42,8 +47,10 @@ public abstract class Character {
         return name;
     }
 
-    public double getHealthPoints() {
-        return healthPoints;
+    public int getLevel() { return level; }
+
+    public double getMaxHealthPoints() {
+        return maxHealthPoints;
     }
 
     public AttackResistanceType getBasicAttack() {
@@ -54,9 +61,13 @@ public abstract class Character {
         this.basicAttack = basicAttack;
     }
 
-    public void setHealthPoints(double healthPoints) {
-        this.healthPoints = healthPoints;
+    public void setMaxHealthPoints(double maxHealthPoints) {
+        this.maxHealthPoints = maxHealthPoints;
     }
+
+    public double getCurrentHealthPoints() { return currentHealthPoints; }
+
+    public void setCurrentHealthPoints(double currentHealthPoints) { this.currentHealthPoints = currentHealthPoints; }
 
     public double getBasicStrength() {
         return basicStrength;
@@ -131,11 +142,22 @@ public abstract class Character {
     }
 
     public void getDamage(double amount, AttackResistanceType attackResistanceType) {
-        healthPoints -= 1.0 * (amount - amount * basicResistance.get(attackResistanceType));
+        currentHealthPoints -= amount * basicResistance.get(attackResistanceType);
     }
 
+    public boolean checkIfCritical() {
+        Random chance = new Random();
+        int result = chance.nextInt(100);
+        return !(result >= currentLuck);
+    }
+//This is just for Strength based (so probably only physical type) Should we create basicPhysicalAttack and basicMagicalAttack
     public void basicAttack(Character target) {
-        target.getDamage(1.0 * currentStrength, basicAttack);
+        double amount;
+        if(checkIfCritical())
+            amount = 2.0 * (level * currentStrength);
+        else
+            amount = level * currentStrength;
+        target.getDamage(amount, basicAttack);
     }
 
     /*
