@@ -5,12 +5,12 @@ import java.awt.*;
 
 public class TargetingPanel   extends JPanel {
 
-    private final BattlePanel battle;
+    private final BattlePanel battlePanel;
     private JLabel panelTitle;
     private JLabel basicInfo;
 
-    public TargetingPanel(BattlePanel battle) {
-        this.battle = battle;
+    public TargetingPanel(BattlePanel battlePanel) {
+        this.battlePanel = battlePanel;
         //TODO rework menu graphics
         setBounds(200, 400, 600, 200);
         setBackground(Color.GREEN);

@@ -5,10 +5,10 @@ import java.awt.*;
 
 public class AnalyzePanel extends JPanel {
 
-    private final BattlePanel battle;
+    private final BattlePanel battlePanel;
 
     public AnalyzePanel(BattlePanel battle) {
-        this.battle = battle;
+        this.battlePanel = battle;
         //TODO rework menu graphics
         setBounds(200, 400, 600, 200);
         setBackground(Color.BLUE);

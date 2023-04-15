@@ -1,4 +1,4 @@
-package game;
+package src.main.java.game;
 
 public enum AttackResistanceType {
     PHYSICAL,

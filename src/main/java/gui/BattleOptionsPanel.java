@@ -5,10 +5,10 @@ import java.awt.*;
 
 public class BattleOptionsPanel extends JPanel {
 
-    private final BattlePanel battle;
+    private final BattlePanel battlePanel;
 
-    public BattleOptionsPanel(BattlePanel battle) {
-        this.battle = battle;
+    public BattleOptionsPanel(BattlePanel battlePanel) {
+        this.battlePanel = battlePanel;
         //TODO rework menu graphics
         setBounds(0, 400, 200, 200);
         setBackground(Color.GRAY);
@@ -28,9 +28,9 @@ public class BattleOptionsPanel extends JPanel {
         add(addAttackButton);
         addAttackButton.addActionListener(e -> {
             //TODO change action to basic attack
-            battle.changePanel(BattlePanel.Panel.Targeting);
-            battle.getTargeting().changeInformationPanel("Using basic attack");
-            battle.getCharacters().addEnemyTargeting();
+            battlePanel.changePanel(BattlePanel.Panel.Targeting);
+            battlePanel.getTargeting().changeInformationPanel("Using basic attack");
+            battlePanel.getCharacters().addEnemyTargeting();
         });
     }
 
@@ -43,7 +43,7 @@ public class BattleOptionsPanel extends JPanel {
         addSkillsButton.addActionListener(e -> {
             //TODO change action to skill
             //TODO show current character skills
-            battle.changePanel(BattlePanel.Panel.Skills);
+            battlePanel.changePanel(BattlePanel.Panel.Skills);
         });
     }
 
@@ -66,9 +66,9 @@ public class BattleOptionsPanel extends JPanel {
         addAnalyzeButton.setForeground(Color.RED);
         add(addAnalyzeButton);
         addAnalyzeButton.addActionListener(e -> {
-            battle.changePanel(BattlePanel.Panel.Targeting);
-            battle.getTargeting().changeInformationPanel("Using analyze");
-            battle.getCharacters().addEnemyTargeting();
+            battlePanel.changePanel(BattlePanel.Panel.Targeting);
+            battlePanel.getTargeting().changeInformationPanel("Using analyze");
+            battlePanel.getCharacters().addEnemyTargeting();
             //TODO make analyze work
         });
     }

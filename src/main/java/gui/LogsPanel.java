@@ -5,10 +5,10 @@ import java.awt.*;
 
 public class LogsPanel  extends JPanel {
 
-    private final BattlePanel battle;
+    private final BattlePanel battlePanel;
 
-    public LogsPanel(BattlePanel battle) {
-        this.battle = battle;
+    public LogsPanel(BattlePanel battlePanel) {
+        this.battlePanel = battlePanel;
         //TODO rework menu graphics
         setBounds(0, 0, 800, 600);
         setBackground(Color.WHITE);
@@ -25,7 +25,7 @@ public class LogsPanel  extends JPanel {
         exitButton.setForeground(Color.RED);
         add(exitButton);
         exitButton.addActionListener(e -> {
-            battle.changePanel(BattlePanel.Panel.Skills);
+            battlePanel.changePanel(BattlePanel.Panel.Skills);
         });
     }
 }

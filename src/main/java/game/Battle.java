@@ -1,4 +1,4 @@
-package game;
+package src.main.java.game;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,17 +6,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Battle {
-    protected List<Hero> heroArrayList = new ArrayList<>();
+    //protected List<Hero> heroArrayList = new ArrayList<>();
     protected List<Enemy> enemyArrayList = new ArrayList<>();
     protected Character activeCharacter;
     Map<Character, Double> turnOrder = new HashMap<>();
-    protected ArrayList<Item> itemArrayList = new ArrayList<>();
+    //protected ArrayList<Item> itemArrayList = new ArrayList<>();
     protected List<Character> targetsArrayList = new ArrayList<>();
 
+    /*
     public Battle(List<Hero> heroArrayList, List<Enemy> enemyArrayList) {
-        this.heroArrayList = heroArrayList;
+    //    this.heroArrayList = heroArrayList;
         this.enemyArrayList = enemyArrayList;
     }
+
 
     public List<Hero> getHeroArrayList() {
         return heroArrayList;
@@ -25,6 +27,7 @@ public class Battle {
     public void setHeroArrayList(List<Hero> heroArrayList) {
         this.heroArrayList = heroArrayList;
     }
+    */
 
     public List<Enemy> getEnemyArrayList() {
         return enemyArrayList;
@@ -42,6 +45,7 @@ public class Battle {
         this.activeCharacter = activeCharacter;
     }
 
+    /*
     public ArrayList<Item> getItemArrayList() {
         return itemArrayList;
     }
@@ -49,6 +53,7 @@ public class Battle {
     public void setItemArrayList(ArrayList<Item> itemArrayList) {
         this.itemArrayList = itemArrayList;
     }
+     */
 
     public Map<Character, Double> getTurnOrder() {
         return turnOrder;
@@ -67,10 +72,13 @@ public class Battle {
         return map.entrySet().iterator().next();
     }
 
-    public void initializeTurnOrder(List<Hero> heroArrayList, List<Enemy> enemyArrayList) {
+    public void initializeTurnOrder(List<Enemy> enemyArrayList) {
+    //public void initializeTurnOrder(List<Hero> heroArrayList, List<Enemy> enemyArrayList) {
+        /*
         for(int i = 0;i < heroArrayList.size();i++) {
             turnOrder.put(heroArrayList.get(i),heroArrayList.get(i).basicSpeed);
         }
+        */
 
         for(int i = 0;i < enemyArrayList.size();i++) {
             turnOrder.put(enemyArrayList.get(i),enemyArrayList.get(i).basicSpeed);

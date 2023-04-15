@@ -5,11 +5,11 @@ import java.awt.*;
 
 public class ConfirmationPanel extends JPanel {
 
-    private final BattlePanel battle;
+    private final BattlePanel battlePanel;
     private JLabel ActionInfo;
 
-    public ConfirmationPanel(BattlePanel battle) {
-        this.battle = battle;
+    public ConfirmationPanel(BattlePanel battlePanel) {
+        this.battlePanel = battlePanel;
         //TODO rework menu graphics
         setBounds(200, 400, 600, 200);
         setBackground(Color.CYAN);
@@ -43,7 +43,7 @@ public class ConfirmationPanel extends JPanel {
         add(cancelButton);
         cancelButton.addActionListener(e -> {
             //TODO cancel action and character
-            battle.changePanel(BattlePanel.Panel.Skills);
+            battlePanel.changePanel(BattlePanel.Panel.Skills);
         });
     }
 
@@ -55,11 +55,16 @@ public class ConfirmationPanel extends JPanel {
         add(confirmButton);
         confirmButton.addActionListener(e -> {
             //TODO do chosen action
-            battle.changePanel(BattlePanel.Panel.Skills);
+            battlePanel.changePanel(BattlePanel.Panel.Skills);
 
-            //TODO change gif animation to correct character
-            battle.getCharacters().showSingleGif(battle.getCharacters().getEnemyButton(2),"unknown-hit.gif" );
-        });
+            //TODO change gif animation to correct character and place function to animate in correct place
+            //example of showing gif: search for correct button by targetedCharacter (hit) or by currentCharacter(attack)
+            //afterwards if character dies use correct dying animation
+            battlePanel.getCharacters().showSingleGif(battlePanel.getCharacters().getButton(battlePanel.getCharacters().knightCharacter),"attack" );
+            if(battlePanel.getCharacters().getButton(battlePanel.getCharacters().skeletonCharacter) != null){
+                battlePanel.getCharacters().showSingleGif(battlePanel.getCharacters().getButton(battlePanel.getCharacters().skeletonCharacter),"hit" );
+            }
+            });
     }
 
 }

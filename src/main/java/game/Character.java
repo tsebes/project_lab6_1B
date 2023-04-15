@@ -1,4 +1,4 @@
-package game;
+package src.main.java.game;
 
 import javax.swing.*;
 import java.util.Map;
