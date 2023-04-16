@@ -151,15 +151,6 @@ public abstract class Character {
         int result = chance.nextInt(100);
         return !(result >= currentLuck);
     }
-//This is just for Strength based (so probably only physical type) Should we create basicPhysicalAttack and basicMagicalAttack
-    public void basicAttack(Character target) {
-        double amount;
-        if(checkIfCritical())
-            amount = 2.0 * (level * currentStrength);
-        else
-            amount = level * currentStrength;
-        target.getDamage(amount, basicAttack);
-    }
 
     public void basicAttack(List<Character> targets) {
         double amount;
