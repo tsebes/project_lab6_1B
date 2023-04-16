@@ -1,5 +1,5 @@
 package game;
-/*
+
 import java.util.*;
 
 public class Battle {
@@ -145,4 +145,3 @@ public class Battle {
         //TBC
     }
 }
-*/
