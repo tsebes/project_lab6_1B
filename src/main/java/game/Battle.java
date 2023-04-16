@@ -105,12 +105,12 @@ public class Battle {
     }
 
     public void initializeTurnOrder(List<Hero> heroArrayList, List<Enemy> enemyArrayList) {
-        for(int i = 0;i < heroArrayList.size();i++) {
-            turnOrder.put(heroArrayList.get(i),heroArrayList.get(i).basicSpeed);
+        for (Hero hero : heroArrayList) {
+            turnOrder.put(hero, hero.basicSpeed);
         }
 
-        for(int i = 0;i < enemyArrayList.size();i++) {
-            turnOrder.put(enemyArrayList.get(i),enemyArrayList.get(i).basicSpeed);
+        for (Enemy enemy : enemyArrayList) {
+            turnOrder.put(enemy, enemy.basicSpeed);
         }
     //needs test
         turnOrder.entrySet().stream().sorted(Map.Entry.<Character,Double>comparingByValue());
