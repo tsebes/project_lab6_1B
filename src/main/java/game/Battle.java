@@ -1,17 +1,23 @@
 package game;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
+/*
+import java.util.*;
 
 public class Battle {
     protected List<Hero> heroArrayList = new ArrayList<>();
     protected List<Enemy> enemyArrayList = new ArrayList<>();
     protected Character activeCharacter;
     Map<Character, Double> turnOrder = new HashMap<>();
-    protected ArrayList<Item> itemArrayList = new ArrayList<>();
+    protected List<Item> itemArrayList = new ArrayList<>();
     protected List<Character> targetsArrayList = new ArrayList<>();
+    protected Action currentAction;
+
+    public enum Action {
+        BASICATTACK,
+        SKILL,
+        GUARD,
+        ITEM,
+        ANALYZE
+    }
 
     public Battle(List<Hero> heroArrayList, List<Enemy> enemyArrayList) {
         this.heroArrayList = heroArrayList;
@@ -42,11 +48,11 @@ public class Battle {
         this.activeCharacter = activeCharacter;
     }
 
-    public ArrayList<Item> getItemArrayList() {
+    public List<Item> getItemArrayList() {
         return itemArrayList;
     }
 
-    public void setItemArrayList(ArrayList<Item> itemArrayList) {
+    public void setItemArrayList(List<Item> itemArrayList) {
         this.itemArrayList = itemArrayList;
     }
 
@@ -57,9 +63,40 @@ public class Battle {
     public List<Character> getTargetsArrayList() {
         return targetsArrayList;
     }
-//set target
+    //set target
     public void setTarget(Character target) {
         this.targetsArrayList.add(target);
+    }
+
+    public Enum<Action> getCurrentAction() {
+        return currentAction;
+    }
+
+    //set action
+    public void setCurrentAction(Action action) {
+        this.currentAction = action;
+    }
+    //used when cancelling an action
+    public void clearCurrentAction() {
+        this.targetsArrayList.clear();
+        this.currentAction = null;
+    }
+
+    public void doCurrentAction() {
+        switch(this.currentAction) {
+            case BASICATTACK:
+                activeCharacter.basicAttack(this.targetsArrayList);
+                turnOrder.put(activeCharacter,turnOrder.get(activeCharacter)+(10.0*(activeCharacter.currentSpeed/100)));
+                clearCurrentAction();
+            case SKILL:
+                //
+            case GUARD:
+                //
+            case ITEM:
+                //
+            case ANALYZE:
+                //
+        }
     }
 
     public static <Character, Double> Map.Entry<Character, Double> getFirst(Map<Character, Double> map) {
@@ -81,18 +118,31 @@ public class Battle {
         activeCharacter = getFirst(turnOrder).getKey();
     }
 
-    // setAction,doAction,cleanAction do implementacji
     public void endTurn() {
         Double timePassed = getFirst(turnOrder).getValue();
         for (Map.Entry<Character, Double> e : turnOrder.entrySet()) {
             Double value = e.getValue();
             value -= timePassed;
         }
+        clearCurrentAction();
 
         turnOrder.entrySet().stream().sorted(Map.Entry.<Character,Double>comparingByValue());
 
         activeCharacter = getFirst(turnOrder).getKey();
 
+        if(activeCharacter instanceof Enemy) {
+            setCurrentAction(Action.BASICATTACK);
+
+            Random chance = new Random();
+            int result = chance.nextInt(heroArrayList.size());
+            setTarget(heroArrayList.get(result));
+
+            doCurrentAction();
+
+            endTurn();
+        }
+
         //TBC
     }
 }
+*/

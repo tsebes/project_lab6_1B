@@ -1,6 +1,7 @@
 package game;
 
 import javax.swing.*;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -150,14 +151,25 @@ public abstract class Character {
         int result = chance.nextInt(100);
         return !(result >= currentLuck);
     }
-//This is just for Strength based (so probably only physical type) Should we create basicPhysicalAttack and basicMagicalAttack
-    public void basicAttack(Character target) {
+
+    public void basicAttack(List<Character> targets) {
         double amount;
-        if(checkIfCritical())
-            amount = 2.0 * (level * currentStrength);
-        else
-            amount = level * currentStrength;
-        target.getDamage(amount, basicAttack);
+
+        if(this.basicAttack.equals(AttackResistanceType.PHYSICAL)) {
+            if (checkIfCritical())
+                amount = 2.0 * (level * currentStrength);
+            else
+                amount = level * currentStrength;
+        } else {
+            if (checkIfCritical())
+                amount = 2.0 * (level * currentIntelligence);
+            else
+                amount = level * currentIntelligence;
+        }
+
+        for (Character target : targets) {
+            target.getDamage(amount, basicAttack);
+        }
     }
 
     /*
