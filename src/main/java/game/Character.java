@@ -1,6 +1,7 @@
 package src.main.java.game;
 
 import javax.swing.*;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -158,6 +159,26 @@ public abstract class Character {
         else
             amount = level * currentStrength;
         target.getDamage(amount, basicAttack);
+    }
+
+    public void basicAttack(List<Character> targets) {
+        double amount;
+
+        if(this.basicAttack.equals(AttackResistanceType.PHYSICAL)) {
+            if (checkIfCritical())
+                amount = 2.0 * (level * currentStrength);
+            else
+                amount = level * currentStrength;
+        } else {
+            if (checkIfCritical())
+                amount = 2.0 * (level * currentIntelligence);
+            else
+                amount = level * currentIntelligence;
+        }
+
+        for (Character target : targets) {
+            target.getDamage(amount, basicAttack);
+        }
     }
 
     /*
