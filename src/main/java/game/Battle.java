@@ -22,6 +22,13 @@ public class Battle {
         this.battlePanel = battlePanel;
         battlePanel.getCharacters().setUpCharacters(this);
         initializeTurnOrder(heroArrayList, enemyArrayList);
+        if (activeCharacter instanceof Enemy){
+            setCurrentAction(Action.BASICATTACK);
+            Random chance = new Random();
+            int result = chance.nextInt(heroArrayList.size());
+            setTarget(heroArrayList.get(result));
+            doCurrentAction();
+        }
     }
 
     public List<Hero> getHeroArrayList() {

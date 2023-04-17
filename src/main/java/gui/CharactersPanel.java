@@ -96,8 +96,8 @@ public class CharactersPanel extends JPanel {
     }
 
     public void showSingleGif(CharacterButton button, String action){
-        ImageIcon idleImage = new ImageIcon(getClass().getResource("images//" + button.getButtonCharacter().getName() + ".gif"));
-        ImageIcon characterImage = new ImageIcon(getClass().getResource("images//" + button.getButtonCharacter().getName() + "-" + action + ".gif"));
+        ImageIcon idleImage = new ImageIcon(getClass().getResource("/" + button.getButtonCharacter().getName() + ".gif"));
+        ImageIcon characterImage = new ImageIcon(getClass().getResource("/" + button.getButtonCharacter().getName() + "-" + action + ".gif"));
         button.setIcon(characterImage);
         Timer timer = new Timer(1000, new ActionListener() {
             @Override
@@ -111,7 +111,7 @@ public class CharactersPanel extends JPanel {
                     }
                 }
                 else{
-                    button.setIcon(new ImageIcon(getClass().getResource("images//" + button.getButtonCharacter().getName() + "-die" + ".gif")));
+                    button.setIcon(new ImageIcon(getClass().getResource("/" + button.getButtonCharacter().getName() + "-die" + ".gif")));
                     Timer timer2 = new Timer(1000, new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent arg0) {
@@ -153,7 +153,7 @@ public class CharactersPanel extends JPanel {
     }
 
     private void addEnemyButton(int location, Character character) {
-        ImageIcon characterImage = new ImageIcon(getClass().getResource("images//"+ character.getName() +".gif"));
+        ImageIcon characterImage = new ImageIcon(getClass().getResource("/"+ character.getName() +".gif"));
         CharacterButton characterButton = new CharacterButton(characterImage);
         characterButton.setCharacter(character);
         switch(location){
@@ -178,7 +178,7 @@ public class CharactersPanel extends JPanel {
     }
 
     private void addAllyButton(int location, Character character) {
-        ImageIcon characterImage = new ImageIcon(getClass().getResource("images//"+ character.getName() +".gif"));
+        ImageIcon characterImage = new ImageIcon(getClass().getResource("/"+ character.getName() +".gif"));
         CharacterButton characterButton = new CharacterButton(characterImage);
         characterButton.setCharacter(character);
         switch(location){

@@ -29,6 +29,7 @@ public class BattleOptionsPanel extends JPanel {
         add(addAttackButton);
         addAttackButton.addActionListener(e -> {
             //TODO change action to basic attack
+            battlePanel.getBattle().clearCurrentAction();
             battlePanel.getBattle().setCurrentAction(Action.BASICATTACK);
             battlePanel.changePanel(BattlePanel.Panel.Targeting);
             battlePanel.getTargeting().changeInformationPanel("Using basic attack");
@@ -43,6 +44,7 @@ public class BattleOptionsPanel extends JPanel {
         addSkillsButton.setForeground(Color.RED);
         add(addSkillsButton);
         addSkillsButton.addActionListener(e -> {
+            battlePanel.getBattle().clearCurrentAction();
             battlePanel.getBattle().setCurrentAction(Action.SKILL);
             //TODO show current character skills
             battlePanel.changePanel(BattlePanel.Panel.Skills);
@@ -56,6 +58,7 @@ public class BattleOptionsPanel extends JPanel {
         addGuardButton.setForeground(Color.RED);
         add(addGuardButton);
         addGuardButton.addActionListener(e -> {
+            battlePanel.getBattle().clearCurrentAction();
             battlePanel.getBattle().setCurrentAction(Action.GUARD);
             //TODO show confirmation screen
         });
@@ -68,6 +71,7 @@ public class BattleOptionsPanel extends JPanel {
         addAnalyzeButton.setForeground(Color.RED);
         add(addAnalyzeButton);
         addAnalyzeButton.addActionListener(e -> {
+            battlePanel.getBattle().clearCurrentAction();
             battlePanel.getBattle().setCurrentAction(Action.ANALYZE);
             battlePanel.changePanel(BattlePanel.Panel.Targeting);
             battlePanel.getTargeting().changeInformationPanel("Using analyze");
@@ -83,6 +87,7 @@ public class BattleOptionsPanel extends JPanel {
         addItemButton.setForeground(Color.RED);
         add(addItemButton);
         addItemButton.addActionListener(e -> {
+            battlePanel.getBattle().clearCurrentAction();
             battlePanel.getBattle().setCurrentAction(Action.ITEM);
             //TODO show items panel
         });
