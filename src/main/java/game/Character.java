@@ -1,4 +1,4 @@
-package src.main.java.game;
+package game;
 
 import javax.swing.*;
 import java.util.List;
@@ -144,6 +144,10 @@ public abstract class Character {
 
     public void getDamage(double amount, AttackResistanceType attackResistanceType) {
         currentHealthPoints -= amount * basicResistance.get(attackResistanceType);
+        System.out.println(this.getName() + " was attacked for " + amount * basicResistance.get(attackResistanceType) + " damage" );
+        if(currentHealthPoints <= 0){
+            System.out.println(this.getName() + " died");
+        }
     }
 
     public boolean checkIfCritical() {

@@ -1,6 +1,6 @@
-package src.main.java.gui;
+package gui;
 
-import src.main.java.game.Character;
+import game.Character;
 
 import javax.swing.*;
 

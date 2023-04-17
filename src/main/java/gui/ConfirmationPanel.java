@@ -1,4 +1,4 @@
-package src.main.java.gui;
+package gui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,14 +56,7 @@ public class ConfirmationPanel extends JPanel {
         confirmButton.addActionListener(e -> {
             //TODO do chosen action
             battlePanel.changePanel(BattlePanel.Panel.Skills);
-
-            //TODO change gif animation to correct character and place function to animate in correct place
-            //example of showing gif: search for correct button by targetedCharacter (hit) or by currentCharacter(attack)
-            //afterwards if character dies use correct dying animation
-            battlePanel.getCharacters().showSingleGif(battlePanel.getCharacters().getButton(battlePanel.getCharacters().knightCharacter),"attack" );
-            if(battlePanel.getCharacters().getButton(battlePanel.getCharacters().skeletonCharacter) != null){
-                battlePanel.getCharacters().showSingleGif(battlePanel.getCharacters().getButton(battlePanel.getCharacters().skeletonCharacter),"hit" );
-            }
+            battlePanel.getBattle().doCurrentAction();
             });
     }
 

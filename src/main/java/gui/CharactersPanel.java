@@ -1,8 +1,10 @@
-package src.main.java.gui;
+package gui;
 
-import src.main.java.game.AttackResistanceType;
-import src.main.java.game.Character;
-import src.main.java.game.Enemy;
+
+import game.Battle;
+import game.Character;
+import game.Enemy;
+import game.Hero;
 
 import javax.swing.*;
 import javax.swing.Timer;
@@ -18,9 +20,7 @@ public class CharactersPanel extends JPanel {
     private final BattlePanel battlePanel;
     private List<CharacterButton> enemyButtons = new ArrayList<>();
     private List<CharacterButton> allyButtons = new ArrayList<>();
-    //TODO delete public knightCharacter and skeletonCharacter - used to test showing single gif
-    public Character knightCharacter;
-    public Character skeletonCharacter;
+    private Battle battle;
 
     public CharactersPanel(BattlePanel battlePanel) {
         this.battlePanel = battlePanel;
@@ -28,10 +28,6 @@ public class CharactersPanel extends JPanel {
         setBounds(0, 0, 600, 400);
         setBackground(Color.WHITE);
         setLayout(null);
-
-        //TODO call this function when battle starts not in constructor
-        setUpCharacters();
-
 
         //TODO delete temporary buttons
         //temporary button to test targeting
@@ -60,32 +56,27 @@ public class CharactersPanel extends JPanel {
         //end of temporary button
     }
 
-    public void setUpCharacters(){
+    public void setUpCharacters(Battle battle){
         //TODO rework function to get characters from battle
-        Map<AttackResistanceType, Double> tempMap = null;
-        Character unknownCharacter = new Enemy("unknown", 1, AttackResistanceType.PHYSICAL, 10, 10,10,10,10, tempMap);
-        knightCharacter = new Enemy("knight", 1, AttackResistanceType.PHYSICAL, 10, 10,10,10,10, tempMap);
-        skeletonCharacter = new Enemy("skeleton", 1, AttackResistanceType.PHYSICAL, -1, 10,10,10,10, tempMap);
-        addEnemyButton(1, unknownCharacter);
-        addEnemyButton(2, skeletonCharacter);
-        addEnemyButton(3, unknownCharacter);
-        addEnemyButton(4, unknownCharacter);
-        addAllyButton(1, knightCharacter);
-        addAllyButton(2, unknownCharacter);
-        addAllyButton(3, unknownCharacter);
-        addAllyButton(4, unknownCharacter);
+        this.battle = battle;
+        int i = 1;
+        for(Hero currentHero: battle.getHeroArrayList()){
+            addAllyButton(i, currentHero);
+        }
+        i = 1;
+        for(Enemy currentEnemy: battle.getEnemyArrayList()){
+            addEnemyButton(i, currentEnemy);
+        }
     }
 
     public void addAllyTargeting(){
         for(CharacterButton allyButton: allyButtons){
             if(allyButton!=null){
                 allyButton.addActionListener(e -> {
-                    //TODO delete information popup
-                    System.out.println("Clicked ally");
                     battlePanel.getConfirmation().changeActionInfo();
                     battlePanel.changePanel(BattlePanel.Panel.Confirmation);
                     clearTargetingAll();
-                    //TODO change target to this enemy/ally
+                    battle.setTarget(allyButton.getButtonCharacter());
                 });
             }
         }
@@ -95,26 +86,29 @@ public class CharactersPanel extends JPanel {
         for(CharacterButton enemyButton: enemyButtons) {
             if (enemyButton != null) {
                 enemyButton.addActionListener(e -> {
-                    //TODO delete information popup
-                    System.out.println("Clicked enemy");
                     battlePanel.getConfirmation().changeActionInfo();
                     battlePanel.changePanel(BattlePanel.Panel.Confirmation);
                     clearTargetingAll();
-                    //TODO change target to this enemy/ally
+                    battle.setTarget(enemyButton.getButtonCharacter());
                 });
             }
         }
     }
 
     public void showSingleGif(CharacterButton button, String action){
-        Icon priorIcon = button.getIcon();
+        ImageIcon idleImage = new ImageIcon(getClass().getResource("images//" + button.getButtonCharacter().getName() + ".gif"));
         ImageIcon characterImage = new ImageIcon(getClass().getResource("images//" + button.getButtonCharacter().getName() + "-" + action + ".gif"));
         button.setIcon(characterImage);
         Timer timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 if(button.getButtonCharacter().getCurrentHealthPoints() > 0){
-                    button.setIcon(priorIcon);
+                    if(button.getIcon()==characterImage){
+                        button.setIcon(idleImage);
+                    }
+                    if(action == "attack"){
+                        battle.endTurn();
+                    }
                 }
                 else{
                     button.setIcon(new ImageIcon(getClass().getResource("images//" + button.getButtonCharacter().getName() + "-die" + ".gif")));
@@ -164,16 +158,16 @@ public class CharactersPanel extends JPanel {
         characterButton.setCharacter(character);
         switch(location){
             case 1:
-                characterButton.setBounds(180, 50, 100, 100);
-                break;
-            case 2:
                 characterButton.setBounds(320, 50, 100, 100);
                 break;
+            case 2:
+                characterButton.setBounds(180, 50, 100, 100);
+                break;
             case 3:
-                characterButton.setBounds(40, 50, 100, 100);
+                characterButton.setBounds(460, 50, 100, 100);
                 break;
             case 4:
-                characterButton.setBounds(460, 50, 100, 100);
+                characterButton.setBounds(40, 50, 100, 100);
                 break;
         }
         characterButton.setOpaque(false);
@@ -224,4 +218,7 @@ public class CharactersPanel extends JPanel {
         return null;
     }
 
+    public Battle getBattle() {
+        return battle;
+    }
 }

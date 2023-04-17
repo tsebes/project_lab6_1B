@@ -1,4 +1,4 @@
-package src.main.java.gui;
+package gui;
 
 import javax.swing.*;
 
@@ -52,6 +52,10 @@ public class GUI extends JFrame{
                 battlePanel.setVisible(true);
             }
         }
+    }
+
+    public BattlePanel getBattlePanel() {
+        return battlePanel;
     }
 
     public enum Panel {

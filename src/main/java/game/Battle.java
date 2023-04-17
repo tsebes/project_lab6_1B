@@ -1,6 +1,9 @@
-package src.main.java.game;
+package game;
 
 
+import gui.BattlePanel;
+
+import javax.naming.InitialContext;
 import java.util.*;
 
 public class Battle {
@@ -11,18 +14,14 @@ public class Battle {
     protected List<Item> itemArrayList = new ArrayList<>();
     protected List<Character> targetsArrayList = new ArrayList<>();
     protected Action currentAction;
+    protected BattlePanel battlePanel;
 
-    public enum Action {
-        BASICATTACK,
-        SKILL,
-        GUARD,
-        ITEM,
-        ANALYZE
-    }
-
-    public Battle(List<Hero> heroArrayList, List<Enemy> enemyArrayList) {
+    public Battle(List<Hero> heroArrayList, List<Enemy> enemyArrayList, BattlePanel battlePanel) {
         this.heroArrayList = heroArrayList;
         this.enemyArrayList = enemyArrayList;
+        this.battlePanel = battlePanel;
+        battlePanel.getCharacters().setUpCharacters(this);
+        initializeTurnOrder(heroArrayList, enemyArrayList);
     }
 
     public List<Hero> getHeroArrayList() {
@@ -84,10 +83,16 @@ public class Battle {
     }
 
     public void doCurrentAction() {
+        //TODO move this information to logs
+        System.out.println("\nAction of " + activeCharacter.getName());
         switch(this.currentAction) {
             case BASICATTACK:
                 activeCharacter.basicAttack(this.targetsArrayList);
                 turnOrder.put(activeCharacter,turnOrder.get(activeCharacter)+(10.0*(activeCharacter.currentSpeed/100)));
+                battlePanel.getCharacters().showSingleGif(battlePanel.getCharacters().getButton(activeCharacter),"attack" );
+                for(Character character: targetsArrayList){
+                    battlePanel.getCharacters().showSingleGif(battlePanel.getCharacters().getButton(character),"hit" );
+                }
                 clearCurrentAction();
             case SKILL:
                 //
@@ -98,6 +103,9 @@ public class Battle {
             case ANALYZE:
                 //
         }
+
+        //TODO move this after animation
+        //this.endTurn();
     }
 
     public static <Character, Double> Map.Entry<Character, Double> getFirst(Map<Character, Double> map) {
@@ -120,29 +128,36 @@ public class Battle {
     }
 
     public void endTurn() {
-        Double timePassed = getFirst(turnOrder).getValue();
-        for (Map.Entry<Character, Double> e : turnOrder.entrySet()) {
-            Double value = e.getValue();
-            value -= timePassed;
+
+        //TODO change getFirst to work - fragment of code below might help
+        Map.Entry<Character, Double> minEntry = null;
+        for (Map.Entry<Character, Double> entry : turnOrder.entrySet()) {
+                if (minEntry == null || entry.getValue().compareTo(minEntry.getValue()) < 0) {
+                    minEntry = entry;
+                }
+            }
+
+            Double timePassed = minEntry.getValue();
+            activeCharacter = minEntry.getKey();
+
+            for (Map.Entry<Character, Double> e : turnOrder.entrySet()) {
+                Double value = e.getValue();
+                value -= timePassed;
+                e.setValue(value);
+            }
+            clearCurrentAction();
+
+            //TODO move below fragment of code to enemy
+            if (activeCharacter instanceof Enemy) {
+                setCurrentAction(Action.BASICATTACK);
+
+                Random chance = new Random();
+                int result = chance.nextInt(heroArrayList.size());
+                setTarget(heroArrayList.get(result));
+
+                doCurrentAction();
+            }
+
+            //TBC
         }
-        clearCurrentAction();
-
-        turnOrder.entrySet().stream().sorted(Map.Entry.<Character,Double>comparingByValue());
-
-        activeCharacter = getFirst(turnOrder).getKey();
-
-        if(activeCharacter instanceof Enemy) {
-            setCurrentAction(Action.BASICATTACK);
-
-            Random chance = new Random();
-            int result = chance.nextInt(heroArrayList.size());
-            setTarget(heroArrayList.get(result));
-
-            doCurrentAction();
-
-            endTurn();
-        }
-
-        //TBC
-    }
 }

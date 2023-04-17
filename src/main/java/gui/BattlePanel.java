@@ -1,4 +1,6 @@
-package src.main.java.gui;
+package gui;
+
+import game.Battle;
 
 import javax.swing.*;
 import java.awt.*;
@@ -128,6 +130,10 @@ public class BattlePanel extends JPanel {
 
     public ConfirmationPanel getConfirmation() {
         return confirmation;
+    }
+
+    public Battle getBattle(){
+        return characters.getBattle();
     }
 
     public enum Panel {
