@@ -28,32 +28,6 @@ public class CharactersPanel extends JPanel {
         setBounds(0, 0, 600, 400);
         setBackground(Color.WHITE);
         setLayout(null);
-
-        //TODO delete temporary buttons
-        //temporary button to test targeting
-        JButton targetingAllyStartButton = new JButton("t a start");
-        targetingAllyStartButton.setBounds(100, 10, 100, 20);
-        targetingAllyStartButton.setOpaque(false);
-        targetingAllyStartButton.setContentAreaFilled(false);
-        targetingAllyStartButton.setBorderPainted(false);
-        targetingAllyStartButton.addActionListener(e -> {
-            clearTargetingAll();
-            addAllyTargeting();
-        });
-        add(targetingAllyStartButton);
-        //end of temporary button
-        //temporary button to test targeting
-        JButton targetingEnemyStartButton = new JButton("t e start");
-        targetingEnemyStartButton.setBounds(200, 10, 100, 20);
-        targetingEnemyStartButton.setOpaque(false);
-        targetingEnemyStartButton.setContentAreaFilled(false);
-        targetingEnemyStartButton.setBorderPainted(false);
-        targetingEnemyStartButton.addActionListener(e -> {
-            clearTargetingAll();
-            addEnemyTargeting();
-        });
-        add(targetingEnemyStartButton);
-        //end of temporary button
     }
 
     public void setUpCharacters(Battle battle){
@@ -70,26 +44,28 @@ public class CharactersPanel extends JPanel {
     }
 
     public void addAllyTargeting(){
+        clearTargetingAll();
         for(CharacterButton allyButton: allyButtons){
             if(allyButton!=null){
                 allyButton.addActionListener(e -> {
                     battlePanel.getConfirmation().changeActionInfo();
                     battlePanel.changePanel(BattlePanel.Panel.Confirmation);
-                    clearTargetingAll();
                     battle.setTarget(allyButton.getButtonCharacter());
+                    clearTargetingAll();
                 });
             }
         }
     }
 
     public void addEnemyTargeting(){
+        clearTargetingAll();
         for(CharacterButton enemyButton: enemyButtons) {
             if (enemyButton != null) {
                 enemyButton.addActionListener(e -> {
                     battlePanel.getConfirmation().changeActionInfo();
                     battlePanel.changePanel(BattlePanel.Panel.Confirmation);
-                    clearTargetingAll();
                     battle.setTarget(enemyButton.getButtonCharacter());
+                    clearTargetingAll();
                 });
             }
         }
