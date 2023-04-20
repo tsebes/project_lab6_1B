@@ -1,4 +1,6 @@
 package game;
 
-public class Item {
+public abstract class Item {
+
+    public abstract void use(Character target);
 }
