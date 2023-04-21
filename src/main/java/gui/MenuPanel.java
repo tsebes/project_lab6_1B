@@ -81,7 +81,31 @@ public class MenuPanel extends JPanel {
         add(lvl5Button);
         lvl5Button.addActionListener(e -> {
             //TODO set up battle and start it
-            //gui.changePanel(GUI.Panel.Battle);
+            Map<AttackResistanceType, Double> tempMap = new HashMap<>();
+
+            tempMap.put(AttackResistanceType.PHYSICAL, 100.0);
+            tempMap.put(AttackResistanceType.FIRE, 100.0);
+            tempMap.put(AttackResistanceType.WATER, 100.0);
+            tempMap.put(AttackResistanceType.EARTH, 100.0);
+            tempMap.put(AttackResistanceType.AIR, 100.0);
+            tempMap.put(AttackResistanceType.ENERGY, 100.0);
+            tempMap.put(AttackResistanceType.DARK, 100.0);
+            tempMap.put(AttackResistanceType.LIGHT, 100.0);
+
+            List<Hero> heroArrayList = new ArrayList<>();
+            List<Enemy> enemyArrayList = new ArrayList<>();
+
+            heroArrayList.add(new Hero("knight", 1, AttackResistanceType.PHYSICAL, 2000, 2,2,2,2, tempMap));
+            heroArrayList.add(new Hero("knight", 1, AttackResistanceType.PHYSICAL, 2000, 2,2,2,2, tempMap));
+            heroArrayList.add(new Hero("knight", 1, AttackResistanceType.PHYSICAL, 2000, 2,2,2,2, tempMap));
+            enemyArrayList.add(new Enemy("skeleton", 1, AttackResistanceType.PHYSICAL, 1000, 2,2,2,2, tempMap));
+            enemyArrayList.add(new Enemy("skeleton", 1, AttackResistanceType.PHYSICAL, 1000, 2,2,2,2, tempMap));
+            enemyArrayList.add(new Enemy("skeleton", 1, AttackResistanceType.PHYSICAL, 1000, 2,2,2,2, tempMap));
+
+
+            battle = new Battle(heroArrayList, enemyArrayList, gui.getBattlePanel());
+
+            gui.changePanel(GUI.Panel.Battle);
         });
     }
 
@@ -92,8 +116,35 @@ public class MenuPanel extends JPanel {
         lvl10Button.setForeground(Color.WHITE);
         add(lvl10Button);
         lvl10Button.addActionListener(e -> {
+
             //TODO set up battle and start it
-            //gui.changePanel(GUI.Panel.Battle);
+            Map<AttackResistanceType, Double> tempMap = new HashMap<>();
+
+            tempMap.put(AttackResistanceType.PHYSICAL, 100.0);
+            tempMap.put(AttackResistanceType.FIRE, 100.0);
+            tempMap.put(AttackResistanceType.WATER, 100.0);
+            tempMap.put(AttackResistanceType.EARTH, 100.0);
+            tempMap.put(AttackResistanceType.AIR, 100.0);
+            tempMap.put(AttackResistanceType.ENERGY, 100.0);
+            tempMap.put(AttackResistanceType.DARK, 100.0);
+            tempMap.put(AttackResistanceType.LIGHT, 100.0);
+
+            List<Hero> heroArrayList = new ArrayList<>();
+            List<Enemy> enemyArrayList = new ArrayList<>();
+
+            heroArrayList.add(new Hero("knight", 1, AttackResistanceType.PHYSICAL, 2000, 2,2,2,2, tempMap));
+            heroArrayList.add(new Hero("knight", 1, AttackResistanceType.PHYSICAL, 2000, 2,2,2,2, tempMap));
+            heroArrayList.add(new Hero("knight", 1, AttackResistanceType.PHYSICAL, 2000, 2,2,2,2, tempMap));
+            heroArrayList.add(new Hero("knight", 1, AttackResistanceType.PHYSICAL, 2000, 2,2,2,2, tempMap));
+            enemyArrayList.add(new Enemy("skeleton", 1, AttackResistanceType.PHYSICAL, 1000, 2,2,2,2, tempMap));
+            enemyArrayList.add(new Enemy("skeleton", 1, AttackResistanceType.PHYSICAL, 1000, 2,2,2,2, tempMap));
+            enemyArrayList.add(new Enemy("skeleton", 1, AttackResistanceType.PHYSICAL, 1000, 2,2,2,2, tempMap));
+            enemyArrayList.add(new Enemy("skeleton", 1, AttackResistanceType.PHYSICAL, 1000, 2,2,2,2, tempMap));
+
+
+            battle = new Battle(heroArrayList, enemyArrayList, gui.getBattlePanel());
+
+            gui.changePanel(GUI.Panel.Battle);
         });
     }
 

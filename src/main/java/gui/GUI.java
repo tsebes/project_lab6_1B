@@ -50,6 +50,7 @@ public class GUI extends JFrame{
                 setContentPane(battlePanel);
                 pack();
                 battlePanel.setVisible(true);
+                battlePanel.changePanel(BattlePanel.Panel.Skills);
             }
         }
     }
