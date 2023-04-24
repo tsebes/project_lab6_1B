@@ -28,68 +28,56 @@ public class CharactersPanel extends JPanel {
         setBounds(0, 0, 600, 400);
         setBackground(Color.WHITE);
         setLayout(null);
-
-        //TODO delete temporary buttons
-        //temporary button to test targeting
-        JButton targetingAllyStartButton = new JButton("t a start");
-        targetingAllyStartButton.setBounds(100, 10, 100, 20);
-        targetingAllyStartButton.setOpaque(false);
-        targetingAllyStartButton.setContentAreaFilled(false);
-        targetingAllyStartButton.setBorderPainted(false);
-        targetingAllyStartButton.addActionListener(e -> {
-            clearTargetingAll();
-            addAllyTargeting();
-        });
-        add(targetingAllyStartButton);
-        //end of temporary button
-        //temporary button to test targeting
-        JButton targetingEnemyStartButton = new JButton("t e start");
-        targetingEnemyStartButton.setBounds(200, 10, 100, 20);
-        targetingEnemyStartButton.setOpaque(false);
-        targetingEnemyStartButton.setContentAreaFilled(false);
-        targetingEnemyStartButton.setBorderPainted(false);
-        targetingEnemyStartButton.addActionListener(e -> {
-            clearTargetingAll();
-            addEnemyTargeting();
-        });
-        add(targetingEnemyStartButton);
-        //end of temporary button
     }
 
     public void setUpCharacters(Battle battle){
         //TODO rework function to get characters from battle
+
+        //Removing everything from previous fight
+        Component[] components = this.getComponents();
+        for (Component component : components) {
+            this.remove(component);
+        }
+        enemyButtons.clear();
+        allyButtons.clear();
+
+        //Creating new fight
         this.battle = battle;
         int i = 1;
         for(Hero currentHero: battle.getHeroArrayList()){
             addAllyButton(i, currentHero);
+            i++;
         }
         i = 1;
         for(Enemy currentEnemy: battle.getEnemyArrayList()){
             addEnemyButton(i, currentEnemy);
+            i++;
         }
     }
 
     public void addAllyTargeting(){
+        clearTargetingAll();
         for(CharacterButton allyButton: allyButtons){
             if(allyButton!=null){
                 allyButton.addActionListener(e -> {
                     battlePanel.getConfirmation().changeActionInfo();
                     battlePanel.changePanel(BattlePanel.Panel.Confirmation);
-                    clearTargetingAll();
                     battle.setTarget(allyButton.getButtonCharacter());
+                    clearTargetingAll();
                 });
             }
         }
     }
 
     public void addEnemyTargeting(){
+        clearTargetingAll();
         for(CharacterButton enemyButton: enemyButtons) {
             if (enemyButton != null) {
                 enemyButton.addActionListener(e -> {
                     battlePanel.getConfirmation().changeActionInfo();
                     battlePanel.changePanel(BattlePanel.Panel.Confirmation);
-                    clearTargetingAll();
                     battle.setTarget(enemyButton.getButtonCharacter());
+                    clearTargetingAll();
                 });
             }
         }
@@ -158,16 +146,16 @@ public class CharactersPanel extends JPanel {
         characterButton.setCharacter(character);
         switch(location){
             case 1:
-                characterButton.setBounds(320, 50, 100, 100);
+                characterButton.setBounds(350, 275, 100, 100);
                 break;
             case 2:
-                characterButton.setBounds(180, 50, 100, 100);
+                characterButton.setBounds(350, 125, 100, 100);
                 break;
             case 3:
-                characterButton.setBounds(460, 50, 100, 100);
+                characterButton.setBounds(475, 250, 100, 100);
                 break;
             case 4:
-                characterButton.setBounds(40, 50, 100, 100);
+                characterButton.setBounds(475, 100, 100, 100);
                 break;
         }
         characterButton.setOpaque(false);
@@ -183,16 +171,16 @@ public class CharactersPanel extends JPanel {
         characterButton.setCharacter(character);
         switch(location){
             case 1:
-                characterButton.setBounds(180, 250, 100, 100);
+                characterButton.setBounds(150, 275, 100, 100);
                 break;
             case 2:
-                characterButton.setBounds(320, 250, 100, 100);
+                characterButton.setBounds(150, 125, 100, 100);
                 break;
             case 3:
-                characterButton.setBounds(40, 250, 100, 100);
+                characterButton.setBounds(25, 250, 100, 100);
                 break;
             case 4:
-                characterButton.setBounds(460, 250, 100, 100);
+                characterButton.setBounds(25, 100, 100, 100);
                 break;
         }
         characterButton.setOpaque(false);
