@@ -9,12 +9,15 @@ import java.util.*;
 public class Battle {
     protected List<Hero> heroArrayList = new ArrayList<>();
     protected List<Enemy> enemyArrayList = new ArrayList<>();
+    protected List<Character> graveyardList = new ArrayList<>();
     protected Character activeCharacter;
-    Map<Character, Double> turnOrder = new HashMap<>();
+    protected Map<Character, Double> turnOrder = new HashMap<>();
     protected List<Item> itemArrayList = new ArrayList<>();
     protected List<Character> targetsArrayList = new ArrayList<>();
     protected Action currentAction;
     protected BattlePanel battlePanel;
+    protected Double timePassed;
+
 
     public Battle(List<Hero> heroArrayList, List<Enemy> enemyArrayList, BattlePanel battlePanel) {
         this.heroArrayList = heroArrayList;
@@ -22,6 +25,7 @@ public class Battle {
         this.battlePanel = battlePanel;
         battlePanel.getCharacters().setUpCharacters(this);
         initializeTurnOrder(heroArrayList, enemyArrayList);
+
         if (activeCharacter instanceof Enemy){
             setCurrentAction(Action.BASICATTACK);
             Random chance = new Random();
@@ -67,6 +71,14 @@ public class Battle {
         return turnOrder;
     }
 
+    public Double getTimePassed() {
+        return timePassed;
+    }
+
+    public void setTimePassed(Double timePassed) {
+        this.timePassed = timePassed;
+    }
+
     public List<Character> getTargetsArrayList() {
         return targetsArrayList;
     }
@@ -95,12 +107,16 @@ public class Battle {
         switch(this.currentAction) {
             case BASICATTACK:
                 activeCharacter.basicAttack(this.targetsArrayList);
-                turnOrder.put(activeCharacter,turnOrder.get(activeCharacter)+(10.0*(activeCharacter.currentSpeed/100)));
+                setTimePassed(turnOrder.get(activeCharacter));
+                turnOrder.put(activeCharacter,turnOrder.get(activeCharacter)+10.0*(activeCharacter.currentSpeed));
                 battlePanel.getCharacters().showSingleGif(battlePanel.getCharacters().getButton(activeCharacter),"attack" );
                 for(Character character: targetsArrayList){
                     battlePanel.getCharacters().showSingleGif(battlePanel.getCharacters().getButton(character),"hit" );
+                    if(activeCharacter.currentHealthPoints <= 0) {
+                        turnOrder.remove(activeCharacter);
+                        graveyardList.add(activeCharacter);
+                    }
                 }
-                clearCurrentAction();
             case SKILL:
                 //
             case GUARD:
@@ -135,8 +151,14 @@ public class Battle {
     }
 
     public void endTurn() {
+        for (Map.Entry<Character, Double> e : turnOrder.entrySet()) {
+            Double value = e.getValue();
+            value -= timePassed;
+            turnOrder.put(e.getKey(),value);
+        }
 
         //TODO change getFirst to work - fragment of code below might help
+
         Map.Entry<Character, Double> minEntry = null;
         for (Map.Entry<Character, Double> entry : turnOrder.entrySet()) {
                 if (minEntry == null || entry.getValue().compareTo(minEntry.getValue()) < 0) {
@@ -144,18 +166,10 @@ public class Battle {
                 }
             }
 
-            Double timePassed = minEntry.getValue();
             activeCharacter = minEntry.getKey();
-
-            for (Map.Entry<Character, Double> e : turnOrder.entrySet()) {
-                Double value = e.getValue();
-                value -= timePassed;
-                e.setValue(value);
-            }
             clearCurrentAction();
-
             //TODO move below fragment of code to enemy
-            if (activeCharacter instanceof Enemy) {
+            if (activeCharacter instanceof Enemy && activeCharacter.currentHealthPoints > 0) {
                 setCurrentAction(Action.BASICATTACK);
 
                 Random chance = new Random();
@@ -163,7 +177,16 @@ public class Battle {
                 setTarget(heroArrayList.get(result));
 
                 doCurrentAction();
+                clearCurrentAction();
+
+                for (Map.Entry<Character, Double> e : turnOrder.entrySet()) {
+                    Double value = e.getValue();
+                    value -= timePassed;
+                    turnOrder.put(e.getKey(),value);
+                }
+                setTimePassed(0.0);
             }
+            setTimePassed(0.0);
 
             //TBC
         }
