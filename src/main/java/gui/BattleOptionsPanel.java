@@ -60,6 +60,7 @@ public class BattleOptionsPanel extends JPanel {
         addGuardButton.addActionListener(e -> {
             battlePanel.getBattle().clearCurrentAction();
             battlePanel.getBattle().setCurrentAction(Action.GUARD);
+            battlePanel.changePanel(BattlePanel.Panel.Confirmation);
             //TODO show confirmation screen
         });
     }

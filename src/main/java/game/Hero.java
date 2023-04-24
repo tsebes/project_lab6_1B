@@ -35,6 +35,8 @@ public class Hero extends Character{
     }
 
     public void enableGuard() {
+        //TODO move this to logHandler
+        System.out.println("Started guarding");
         this.isGuardEnable = true;
     }
 

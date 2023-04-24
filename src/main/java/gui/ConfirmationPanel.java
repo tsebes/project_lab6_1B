@@ -25,12 +25,12 @@ public class ConfirmationPanel extends JPanel {
         ActionInfo = information;
         information.setFont(new Font("Serif", Font.PLAIN, 30));
         information.setForeground(Color.WHITE);
-        information.setBounds(200, 0, 200, 40);
+        information.setBounds(150, 0, 300, 40);
         add(information);
     }
 
     public void changeActionInfo(){
-        String actionDescription = "Attack/Analyze enemy ?";
+        String actionDescription = battlePanel.getBattle().getCurrentAction().toString();
         //TODO getting information about action and target
         ActionInfo.setText(actionDescription);
     }

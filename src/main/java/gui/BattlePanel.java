@@ -19,8 +19,17 @@ public class BattlePanel extends JPanel {
     private JButton exitButton;
 
     public BattlePanel(GUI gui) {
+        ImageIcon image = new ImageIcon(getClass().getResource("/background.png"));
+
         turns = new TurnPanel(this);
-        characters = new CharactersPanel(this);
+        characters = new CharactersPanel(this) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(image.getImage(), 0, 0, null);
+            }
+        };
+
         skills = new SkillsPanel(this);
         bOptions = new BattleOptionsPanel(this);
         targeting = new TargetingPanel(this);
@@ -91,6 +100,7 @@ public class BattlePanel extends JPanel {
                     targeting.setVisible(true);
                 }
                 case Confirmation -> {
+                    confirmation.changeActionInfo();
                     analyze.setVisible(false);
                     skills.setVisible(false);
                     targeting.setVisible(false);

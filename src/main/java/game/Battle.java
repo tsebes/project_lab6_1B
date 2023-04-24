@@ -3,7 +3,9 @@ package game;
 
 import gui.BattlePanel;
 
-import javax.naming.InitialContext;
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 
 public class Battle {
@@ -25,6 +27,9 @@ public class Battle {
         this.battlePanel = battlePanel;
         battlePanel.getCharacters().setUpCharacters(this);
         initializeTurnOrder(heroArrayList, enemyArrayList);
+
+        //adding border to current character
+        battlePanel.getCharacters().addActiveBorder();
 
         if (activeCharacter instanceof Enemy){
             setCurrentAction(Action.BASICATTACK);
@@ -102,33 +107,64 @@ public class Battle {
     }
 
     public void doCurrentAction() {
+
+
+        //Ending possible guard
+        if(activeCharacter instanceof Hero){
+            Hero activeHero = (Hero) activeCharacter;
+            activeHero.disableGuard();
+        }
+
         //TODO move this information to logs
         System.out.println("\nAction of " + activeCharacter.getName());
+
+        battlePanel.getCharacters().deleteBorder();
+
+        int delay = 1;
+
+
         switch(this.currentAction) {
             case BASICATTACK:
+                delay += 2000;
                 activeCharacter.basicAttack(this.targetsArrayList);
                 setTimePassed(turnOrder.get(activeCharacter));
                 turnOrder.put(activeCharacter,turnOrder.get(activeCharacter)+10.0*(activeCharacter.currentSpeed));
-                battlePanel.getCharacters().showSingleGif(battlePanel.getCharacters().getButton(activeCharacter),"attack" );
-                for(Character character: targetsArrayList){
-                    battlePanel.getCharacters().showSingleGif(battlePanel.getCharacters().getButton(character),"hit" );
-                    if(activeCharacter.currentHealthPoints <= 0) {
-                        turnOrder.remove(activeCharacter);
-                        graveyardList.add(activeCharacter);
-                    }
-                }
+                battlePanel.getCharacters().animate();
+                break;
             case SKILL:
-                //
+                break;
             case GUARD:
-                //
+                Hero activeHero = (Hero) activeCharacter;
+                activeHero.enableGuard();
+                setTimePassed(turnOrder.get(activeCharacter));
+                //TODO update changing turnOrder to make it work better
+                turnOrder.put(activeCharacter,turnOrder.get(activeCharacter) + 5.0*(activeCharacter.currentSpeed));
+                break;
             case ITEM:
-                //
+                break;
             case ANALYZE:
-                //
+                break;
         }
 
-        //TODO move this after animation
-        //this.endTurn();
+        //deleting any character who died
+        for(Character character: targetsArrayList) {
+            if (character.currentHealthPoints <= 0) {
+                if (delay < 3000) {
+                    delay += 1000;
+                }
+                turnOrder.remove(character);
+                graveyardList.add(character);
+            }
+        }
+
+            Timer endTurnTimer = new Timer(delay, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent arg0) {
+                    endTurn();
+                }
+            });
+            endTurnTimer.setRepeats(false);
+            endTurnTimer.start();
     }
 
     public static <Character, Double> Map.Entry<Character, Double> getFirst(Map<Character, Double> map) {
@@ -144,7 +180,8 @@ public class Battle {
         for(int i = 0;i < enemyArrayList.size();i++) {
             turnOrder.put(enemyArrayList.get(i),enemyArrayList.get(i).basicSpeed);
         }
-    //needs test
+
+        //needs test
         turnOrder.entrySet().stream().sorted(Map.Entry.<Character,Double>comparingByValue());
 
         activeCharacter = getFirst(turnOrder).getKey();
@@ -167,9 +204,13 @@ public class Battle {
             }
 
             activeCharacter = minEntry.getKey();
+
+            //showing which character has its turn
+            battlePanel.getCharacters().addActiveBorder();
+
             clearCurrentAction();
             //TODO move below fragment of code to enemy
-            if (activeCharacter instanceof Enemy && activeCharacter.currentHealthPoints > 0) {
+            if (activeCharacter instanceof Enemy) {
                 setCurrentAction(Action.BASICATTACK);
 
                 Random chance = new Random();
@@ -177,7 +218,6 @@ public class Battle {
                 setTarget(heroArrayList.get(result));
 
                 doCurrentAction();
-                clearCurrentAction();
 
                 for (Map.Entry<Character, Double> e : turnOrder.entrySet()) {
                     Double value = e.getValue();
