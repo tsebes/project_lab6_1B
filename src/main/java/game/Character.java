@@ -100,7 +100,7 @@ public abstract class Character {
     }
 
     public Map<AttackResistanceType, Double> getBasicResistance() {
-        return this.getCharacterClass().getBasicResistance();
+        return this.getCharacterClass().getBasicResistances();
     }
 
     public double getBasicStrength() {
