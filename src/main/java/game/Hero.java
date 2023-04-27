@@ -5,8 +5,9 @@ import java.util.Map;
 public class Hero extends Character{
 
     protected boolean isGuardEnable = false;
-    public Hero(String name, int level, AttackResistanceType basicAttack, double maxHealthPoints, double basicStrength, double basicIntelligence, double basicSpeed, double basicLuck, Map<AttackResistanceType, Double> basicResistance) {
-        super(name, level, basicAttack, maxHealthPoints, basicStrength, basicIntelligence, basicSpeed, basicLuck, basicResistance);
+
+    public Hero(CharacterClass characterClass, String name, int level, double maxHealthPoints) {
+        super(characterClass, name, level, maxHealthPoints);
     }
 
     public void useItem(Item item, Character[] targets) {
@@ -21,12 +22,12 @@ public class Hero extends Character{
             amount *= 0.5;
         }
 
-        currentHealthPoints -= amount * basicResistance.get(attackResistanceType);
+        currentHealthPoints -= amount * this.getBasicResistance().get(attackResistanceType);
 
         if (isGuardEnable) {
-            System.out.println(this.getName() + " was attacked for " + amount * basicResistance.get(attackResistanceType) + " damage (" + this.getName() + " is guarded)" );
+            System.out.println(this.getName() + " was attacked for " + amount * this.getBasicResistance().get(attackResistanceType) + " damage (" + this.getName() + " is guarded)" );
         } else {
-            System.out.println(this.getName() + " was attacked for " + amount * basicResistance.get(attackResistanceType) + " damage" );
+            System.out.println(this.getName() + " was attacked for " + amount * this.getBasicResistance().get(attackResistanceType) + " damage" );
         }
 
         if(currentHealthPoints <= 0){
