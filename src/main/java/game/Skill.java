@@ -55,4 +55,6 @@ public abstract class Skill {
     public double getCoolDownTime() {
         return coolDownTime;
     }
+
+    public abstract void use(Character target);
 }
