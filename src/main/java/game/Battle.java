@@ -174,11 +174,11 @@ public class Battle {
 
     public void initializeTurnOrder(List<Hero> heroArrayList, List<Enemy> enemyArrayList) {
         for(int i = 0;i < heroArrayList.size();i++) {
-            turnOrder.put(heroArrayList.get(i),heroArrayList.get(i).basicSpeed);
+            turnOrder.put(heroArrayList.get(i),heroArrayList.get(i).getBasicSpeed());
         }
 
         for(int i = 0;i < enemyArrayList.size();i++) {
-            turnOrder.put(enemyArrayList.get(i),enemyArrayList.get(i).basicSpeed);
+            turnOrder.put(enemyArrayList.get(i),enemyArrayList.get(i).getBasicSpeed());
         }
 
         //needs test

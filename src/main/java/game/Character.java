@@ -1,81 +1,62 @@
 package game;
 
-import javax.swing.*;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public abstract class Character {
 
+    protected final CharacterClass characterClass;
     protected final String name;
     protected final int level;
-    protected AttackResistanceType basicAttack;
     protected double maxHealthPoints;
     protected double currentHealthPoints;
-    protected double basicStrength;
     protected double currentStrength;
-    protected double basicIntelligence;
     protected double currentIntelligence;
-    protected double basicSpeed;
     protected double currentSpeed;
-    protected double basicLuck;
     protected double currentLuck;
-    protected Map<AttackResistanceType, Double> basicResistance;
 
     // TODO: add buffs, debuffs, skills
     //protected ArrayList<Buff> buffs;
     //protected ArrayList<Debuff> debuffs;
     //protected ArrayList<Skill> skills;
 
-    public Character(String name, int level, AttackResistanceType basicAttack, double maxHealthPoints, double basicStrength, double basicIntelligence, double basicSpeed, double basicLuck, Map<AttackResistanceType, Double> basicResistance) {
+    public Character(CharacterClass characterClass, String name, int level, double maxHealthPoints) {
+        this.characterClass = characterClass;
         this.name = name;
         this.level = level;
-        this.basicAttack = basicAttack;
         this.maxHealthPoints = maxHealthPoints;
         this.currentHealthPoints = maxHealthPoints;
-        this.basicStrength = basicStrength;
-        this.currentStrength = basicStrength;
-        this.basicIntelligence = basicIntelligence;
-        this.currentIntelligence = basicIntelligence;
-        this.basicSpeed = basicSpeed;
-        this.currentSpeed = basicSpeed;
-        this.basicLuck = basicLuck;
-        this.currentLuck = basicLuck;
-        this.basicResistance = basicResistance;
+        this.currentStrength = characterClass.getBasicStrength();
+        this.currentIntelligence = characterClass.getBasicIntelligence();
+        this.currentSpeed = characterClass.getBasicSpeed();
+        this.currentLuck = characterClass.getBasicLuck();
     }
 
     public String getName() {
         return name;
     }
 
-    public int getLevel() { return level; }
+    public CharacterClass getCharacterClass() {
+        return characterClass;
+    }
+
+    public int getLevel() {
+        return level;
+    }
 
     public double getMaxHealthPoints() {
         return maxHealthPoints;
-    }
-
-    public AttackResistanceType getBasicAttack() {
-        return basicAttack;
-    }
-
-    public void setBasicAttack(AttackResistanceType basicAttack) {
-        this.basicAttack = basicAttack;
     }
 
     public void setMaxHealthPoints(double maxHealthPoints) {
         this.maxHealthPoints = maxHealthPoints;
     }
 
-    public double getCurrentHealthPoints() { return currentHealthPoints; }
-
-    public void setCurrentHealthPoints(double currentHealthPoints) { this.currentHealthPoints = currentHealthPoints; }
-
-    public double getBasicStrength() {
-        return basicStrength;
+    public double getCurrentHealthPoints() {
+        return currentHealthPoints;
     }
 
-    public void setBasicStrength(double basicStrength) {
-        this.basicStrength = basicStrength;
+    public void setCurrentHealthPoints(double currentHealthPoints) {
+        this.currentHealthPoints = currentHealthPoints;
     }
 
     public double getCurrentStrength() {
@@ -86,28 +67,12 @@ public abstract class Character {
         this.currentStrength = currentStrength;
     }
 
-    public double getBasicIntelligence() {
-        return basicIntelligence;
-    }
-
-    public void setBasicIntelligence(double basicIntelligence) {
-        this.basicIntelligence = basicIntelligence;
-    }
-
     public double getCurrentIntelligence() {
         return currentIntelligence;
     }
 
     public void setCurrentIntelligence(double currentIntelligence) {
         this.currentIntelligence = currentIntelligence;
-    }
-
-    public double getBasicSpeed() {
-        return basicSpeed;
-    }
-
-    public void setBasicSpeed(double basicSpeed) {
-        this.basicSpeed = basicSpeed;
     }
 
     public double getCurrentSpeed() {
@@ -118,14 +83,6 @@ public abstract class Character {
         this.currentSpeed = currentSpeed;
     }
 
-    public double getBasicLuck() {
-        return basicLuck;
-    }
-
-    public void setBasicLuck(double basicLuck) {
-        this.basicLuck = basicLuck;
-    }
-
     public double getCurrentLuck() {
         return currentLuck;
     }
@@ -134,17 +91,41 @@ public abstract class Character {
         this.currentLuck = currentLuck;
     }
 
-    public Map<AttackResistanceType, Double> getBasicResistance() {
-        return basicResistance;
+    public CharacterClassType getCharacterClassType() {
+        return this.getCharacterClass().getCharacterClassType();
     }
 
-    public void setBasicResistance(Map<AttackResistanceType, Double> basicResistance) {
-        this.basicResistance = basicResistance;
+    public ArrayList<Skill> getAvailableSkills() {
+        return this.getCharacterClass().getAvailableSkills();
+    }
+
+    public Map<AttackResistanceType, Double> getBasicResistance() {
+        return this.getCharacterClass().getBasicResistances();
+    }
+
+    public double getBasicStrength() {
+        return this.getCharacterClass().getBasicStrength();
+    }
+
+    public double getBasicIntelligence() {
+        return this.getCharacterClass().getBasicIntelligence();
+    }
+
+    public double getBasicSpeed() {
+        return this.getCharacterClass().getBasicSpeed();
+    }
+
+    public double getBasicLuck() {
+        return this.getCharacterClass().getBasicLuck();
+    }
+
+    public AttackResistanceType getBasicAttack() {
+        return this.getCharacterClass().getBasicAttack();
     }
 
     public void getDamage(double amount, AttackResistanceType attackResistanceType) {
-        currentHealthPoints -= amount * basicResistance.get(attackResistanceType);
-        System.out.println(this.getName() + " was attacked for " + amount * basicResistance.get(attackResistanceType) + " damage" );
+        currentHealthPoints -= amount * this.getBasicResistance().get(attackResistanceType);
+        System.out.println(this.getName() + " was attacked for " + amount * this.getBasicResistance().get(attackResistanceType) + " damage" );
         if(currentHealthPoints <= 0){
             System.out.println(this.getName() + " died");
         }
@@ -159,7 +140,7 @@ public abstract class Character {
     public void basicAttack(List<Character> targets) {
         double amount;
 
-        if(this.basicAttack.equals(AttackResistanceType.PHYSICAL)) {
+        if(this.getBasicAttack().equals(AttackResistanceType.PHYSICAL)) {
             if (checkIfCritical())
                 amount = 2.0 * (level * currentStrength);
             else
@@ -172,7 +153,7 @@ public abstract class Character {
         }
 
         for (Character target : targets) {
-            target.getDamage(amount, basicAttack);
+            target.getDamage(amount, this.getBasicAttack());
         }
     }
 

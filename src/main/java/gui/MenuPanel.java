@@ -1,9 +1,6 @@
 package gui;
 
-import game.Battle;
-import game.AttackResistanceType;
-import game.Enemy;
-import game.Hero;
+import game.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -64,8 +61,13 @@ public class MenuPanel extends JPanel {
             List<Hero> heroArrayList = new ArrayList<>();
             List<Enemy> enemyArrayList = new ArrayList<>();
 
-            heroArrayList.add(new Hero("knight", 1, AttackResistanceType.PHYSICAL, 2000, 2,2,2,2, tempMap));
-            enemyArrayList.add(new Enemy("skeleton", 1, AttackResistanceType.PHYSICAL, 1000, 2,2,2,2, tempMap));
+            // character classes will be provided by CharacterClassDataProvider
+            CharacterClass exampleHeroCharacterClass = new CharacterClass(CharacterClassType.SWORDSMAN, new ArrayList<Skill>(), tempMap, 2, 2, 2, 2, AttackResistanceType.PHYSICAL);
+            CharacterClass exampleEnemyCharacterClass = new CharacterClass(CharacterClassType.SKELETON, new ArrayList<Skill>(), tempMap, 2, 2, 2, 2, AttackResistanceType.PHYSICAL);
+
+            heroArrayList.add(new Hero(exampleHeroCharacterClass, "knight", 1, 2000));
+            enemyArrayList.add(new Enemy(exampleEnemyCharacterClass, "skeleton", 1, 1000));
+
 
             battle = new Battle(heroArrayList, enemyArrayList, gui.getBattlePanel());
 
@@ -95,12 +97,16 @@ public class MenuPanel extends JPanel {
             List<Hero> heroArrayList = new ArrayList<>();
             List<Enemy> enemyArrayList = new ArrayList<>();
 
-            heroArrayList.add(new Hero("knight", 1, AttackResistanceType.PHYSICAL, 2000, 2,2,2,2, tempMap));
-            heroArrayList.add(new Hero("knight", 1, AttackResistanceType.PHYSICAL, 2000, 2,2,2,2, tempMap));
-            heroArrayList.add(new Hero("knight", 1, AttackResistanceType.PHYSICAL, 2000, 2,2,2,2, tempMap));
-            enemyArrayList.add(new Enemy("skeleton", 1, AttackResistanceType.PHYSICAL, 1000, 2,2,2,2, tempMap));
-            enemyArrayList.add(new Enemy("skeleton", 1, AttackResistanceType.PHYSICAL, 1000, 2,2,2,2, tempMap));
-            enemyArrayList.add(new Enemy("skeleton", 1, AttackResistanceType.PHYSICAL, 1000, 2,2,2,2, tempMap));
+            // character classes will be provided by CharacterClassDataProvider
+            CharacterClass exampleHeroCharacterClass = new CharacterClass(CharacterClassType.SWORDSMAN, new ArrayList<Skill>(), tempMap, 2, 2, 2, 2, AttackResistanceType.PHYSICAL);
+            CharacterClass exampleEnemyCharacterClass = new CharacterClass(CharacterClassType.SKELETON, new ArrayList<Skill>(), tempMap, 2, 2, 2, 2, AttackResistanceType.PHYSICAL);
+
+            heroArrayList.add(new Hero(exampleHeroCharacterClass, "knight", 1, 2000));
+            heroArrayList.add(new Hero(exampleHeroCharacterClass, "knight", 1, 2000));
+            heroArrayList.add(new Hero(exampleHeroCharacterClass, "knight", 1, 2000));
+            enemyArrayList.add(new Enemy(exampleEnemyCharacterClass, "skeleton", 1, 1000));
+            enemyArrayList.add(new Enemy(exampleEnemyCharacterClass, "skeleton", 1, 1000));
+            enemyArrayList.add(new Enemy(exampleEnemyCharacterClass, "skeleton", 1, 1000));
 
 
             battle = new Battle(heroArrayList, enemyArrayList, gui.getBattlePanel());
@@ -132,15 +138,18 @@ public class MenuPanel extends JPanel {
             List<Hero> heroArrayList = new ArrayList<>();
             List<Enemy> enemyArrayList = new ArrayList<>();
 
-            heroArrayList.add(new Hero("knight", 1, AttackResistanceType.PHYSICAL, 2000, 2,2,2,2, tempMap));
-            heroArrayList.add(new Hero("knight", 1, AttackResistanceType.PHYSICAL, 2000, 2,2,2,2, tempMap));
-            heroArrayList.add(new Hero("knight", 1, AttackResistanceType.PHYSICAL, 2000, 2,2,2,2, tempMap));
-            heroArrayList.add(new Hero("knight", 1, AttackResistanceType.PHYSICAL, 2000, 2,2,2,2, tempMap));
-            enemyArrayList.add(new Enemy("skeleton", 1, AttackResistanceType.PHYSICAL, 1000, 2,2,2,2, tempMap));
-            enemyArrayList.add(new Enemy("skeleton", 1, AttackResistanceType.PHYSICAL, 1000, 2,2,2,2, tempMap));
-            enemyArrayList.add(new Enemy("skeleton", 1, AttackResistanceType.PHYSICAL, 1000, 2,2,2,2, tempMap));
-            enemyArrayList.add(new Enemy("skeleton", 1, AttackResistanceType.PHYSICAL, 1000, 2,2,2,2, tempMap));
+            // character classes will be provided by CharacterClassDataProvider
+            CharacterClass exampleHeroCharacterClass = new CharacterClass(CharacterClassType.SWORDSMAN, new ArrayList<Skill>(), tempMap, 2, 2, 2, 2, AttackResistanceType.PHYSICAL);
+            CharacterClass exampleEnemyCharacterClass = new CharacterClass(CharacterClassType.SKELETON, new ArrayList<Skill>(), tempMap, 2, 2, 2, 2, AttackResistanceType.PHYSICAL);
 
+            heroArrayList.add(new Hero(exampleHeroCharacterClass, "knight", 1, 2000));
+            heroArrayList.add(new Hero(exampleHeroCharacterClass, "knight", 1, 2000));
+            heroArrayList.add(new Hero(exampleHeroCharacterClass, "knight", 1, 2000));
+            heroArrayList.add(new Hero(exampleHeroCharacterClass, "knight", 1, 2000));
+            enemyArrayList.add(new Enemy(exampleEnemyCharacterClass, "skeleton", 1, 1000));
+            enemyArrayList.add(new Enemy(exampleEnemyCharacterClass, "skeleton", 1, 1000));
+            enemyArrayList.add(new Enemy(exampleEnemyCharacterClass, "skeleton", 1, 1000));
+            enemyArrayList.add(new Enemy(exampleEnemyCharacterClass, "skeleton", 1, 1000));
 
             battle = new Battle(heroArrayList, enemyArrayList, gui.getBattlePanel());
 
