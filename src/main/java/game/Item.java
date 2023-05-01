@@ -2,21 +2,21 @@ package game;
 
 import java.util.ArrayList;
 
-public abstract class Item {
+public class Item {
 
     protected final String name;
     protected final Boolean isAOE;
-    protected final TargetType targetType;
+    protected final Boolean targetingEnemies;
     protected final AttackResistanceType attackType;
     protected final double itemPoints;
     protected final ArrayList<Buff> buffs;
     protected final ArrayList<DeBuff> deBuffs;
     protected final double coolDownTime;
 
-    public Item(String name, Boolean isAOE, TargetType targetType, AttackResistanceType attackType, double itemPoints, ArrayList<Buff> buffs, ArrayList<DeBuff> deBuffs, double coolDownTime) {
+    public Item(String name, Boolean isAOE, Boolean targetingEnemies, AttackResistanceType attackType, double itemPoints, ArrayList<Buff> buffs, ArrayList<DeBuff> deBuffs, double coolDownTime) {
         this.name = name;
         this.isAOE = isAOE;
-        this.targetType = targetType;
+        this.targetingEnemies = targetingEnemies;
         this.attackType = attackType;
         this.itemPoints = itemPoints;
         this.buffs = buffs;
@@ -32,8 +32,8 @@ public abstract class Item {
         return isAOE;
     }
 
-    public TargetType getTargetType() {
-        return targetType;
+    public Boolean isTargetingEnemies() {
+        return targetingEnemies;
     }
 
     public AttackResistanceType getAttackType() {
@@ -56,5 +56,13 @@ public abstract class Item {
         return coolDownTime;
     }
 
-    public abstract void use(Character target);
+    public void use(Character target) {
+        if (targetingEnemies) {
+            target.getDamage(itemPoints, attackType);
+            target.addDeBuffs(deBuffs);
+        } else {
+            target.restoreHealth(itemPoints);
+            target.addBuffs(buffs);
+        }
+    }
 }

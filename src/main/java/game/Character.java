@@ -15,8 +15,8 @@ public abstract class Character {
     protected double currentLuck;
 
     // TODO: add buffs, debuffs, skills
-    //protected ArrayList<Buff> buffs;
-    //protected ArrayList<Debuff> debuffs;
+    protected ArrayList<Buff> buffs;
+    protected ArrayList<DeBuff> deBuffs;
     //protected ArrayList<Skill> skills;
 
     public Character(CharacterClass characterClass, String name, int level, double maxHealthPoints) {
@@ -137,6 +137,12 @@ public abstract class Character {
         return !(result >= currentLuck);
     }
 
+    public void restoreHealth(double amount) {
+        currentHealthPoints += amount;
+        //TODO: move this to log
+        System.out.println(this.getName() + " was healed for " + amount + " points");
+    }
+
     public void basicAttack(List<Character> targets) {
         double amount;
 
@@ -155,6 +161,14 @@ public abstract class Character {
         for (Character target : targets) {
             target.getDamage(amount, this.getBasicAttack());
         }
+    }
+
+    public void addBuffs(ArrayList<Buff> newBuffs) {
+        buffs.addAll(newBuffs);
+    }
+
+    public void addDeBuffs(ArrayList<DeBuff> newDeBuffs) {
+        deBuffs.addAll(newDeBuffs);
     }
 
     /*
