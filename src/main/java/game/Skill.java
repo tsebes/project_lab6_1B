@@ -79,6 +79,7 @@ public class Skill {
     }
 
     public void use(Character executor, Character target) {
+
         double amount;
 
         if(executor.getBasicAttack().equals(AttackResistanceType.PHYSICAL)) {
@@ -93,8 +94,12 @@ public class Skill {
                 amount = executor.getLevel() * executor.getCurrentIntelligence();
         }
 
+        amount *= skillPoints;
+
         if (targetingEnemies) {
-            target.getDamage(amount, attackType);
+            if (amount > 0) {
+                target.getDamage(amount, attackType);
+            }
             target.addDeBuffs(deBuffs);
         } else {
             target.restoreHealth(amount);
