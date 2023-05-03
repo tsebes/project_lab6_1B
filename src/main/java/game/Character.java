@@ -15,8 +15,8 @@ public abstract class Character {
     protected double currentLuck;
 
     // TODO: add buffs, debuffs, skills
-    protected ArrayList<Buff> buffs;
-    protected ArrayList<DeBuff> deBuffs;
+    protected Map<Buff, Integer> buffs;
+    protected Map<DeBuff, Integer> deBuffs;
     //protected ArrayList<Skill> skills;
 
     public Character(CharacterClass characterClass, String name, int level, double maxHealthPoints) {
@@ -91,8 +91,8 @@ public abstract class Character {
         this.currentLuck = currentLuck;
     }
 
-    public CharacterClassType getCharacterClassType() {
-        return this.getCharacterClass().getCharacterClassType();
+    public String getCharacterClassName() {
+        return this.getCharacterClass().getCharacterClassName();
     }
 
     public ArrayList<Skill> getAvailableSkills() {
@@ -163,12 +163,20 @@ public abstract class Character {
         }
     }
 
-    public void addBuffs(ArrayList<Buff> newBuffs) {
-        buffs.addAll(newBuffs);
+    public void addBuffs(Map<Buff, Integer> newBuffs) {
+        for(Map.Entry<Buff,Integer> entry: newBuffs.entrySet()){
+            if(!buffs.containsKey(entry.getKey())||buffs.get(entry.getKey())<entry.getValue()){
+                buffs.put(entry.getKey(), entry.getValue());
+            }
+        }
     }
 
-    public void addDeBuffs(ArrayList<DeBuff> newDeBuffs) {
-        deBuffs.addAll(newDeBuffs);
+    public void addDeBuffs(Map<DeBuff, Integer> newDeBuffs) {
+        for(Map.Entry<DeBuff,Integer> entry: newDeBuffs.entrySet()){
+            if(!deBuffs.containsKey(entry.getKey())||deBuffs.get(entry.getKey())<entry.getValue()){
+                deBuffs.put(entry.getKey(), entry.getValue());
+            }
+        }
     }
 
     /*

@@ -14,6 +14,7 @@ public class MenuPanel extends JPanel {
 
     private final GUI gui;
     private Battle battle;
+    private DataProvider dataProvider;
 
     public MenuPanel(GUI gui) {
         this.gui = gui;
@@ -46,29 +47,12 @@ public class MenuPanel extends JPanel {
         lvl1Button.setForeground(Color.WHITE);
         add(lvl1Button);
         lvl1Button.addActionListener(e -> {
-            //TODO set up battle and start it
-
-            Map<AttackResistanceType, Double> tempMap = new HashMap<>();
-            tempMap.put(AttackResistanceType.PHYSICAL, 100.0);
-            tempMap.put(AttackResistanceType.FIRE, 100.0);
-            tempMap.put(AttackResistanceType.WATER, 100.0);
-            tempMap.put(AttackResistanceType.EARTH, 100.0);
-            tempMap.put(AttackResistanceType.AIR, 100.0);
-            tempMap.put(AttackResistanceType.ENERGY, 100.0);
-            tempMap.put(AttackResistanceType.DARK, 100.0);
-            tempMap.put(AttackResistanceType.LIGHT, 100.0);
+            //TODO move below to BattleDataProvider
 
             List<Hero> heroArrayList = new ArrayList<>();
             List<Enemy> enemyArrayList = new ArrayList<>();
-
-            // character classes will be provided by CharacterClassDataProvider
-            CharacterClass exampleHeroCharacterClass = new CharacterClass(CharacterClassType.SWORDSMAN, new ArrayList<Skill>(), tempMap, 2, 2, 2, 2, AttackResistanceType.PHYSICAL);
-            CharacterClass exampleEnemyCharacterClass = new CharacterClass(CharacterClassType.SKELETON, new ArrayList<Skill>(), tempMap, 2, 2, 2, 2, AttackResistanceType.PHYSICAL);
-
-            heroArrayList.add(new Hero(exampleHeroCharacterClass, "knight", 1, 2000));
-            enemyArrayList.add(new Enemy(exampleEnemyCharacterClass, "skeleton", 1, 1000));
-
-
+            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 1", 1, 2000));
+            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 1", 1, 1000));
             battle = new Battle(heroArrayList, enemyArrayList, gui.getBattlePanel());
 
             gui.changePanel(GUI.Panel.Battle);
@@ -82,31 +66,18 @@ public class MenuPanel extends JPanel {
         lvl5Button.setForeground(Color.WHITE);
         add(lvl5Button);
         lvl5Button.addActionListener(e -> {
-            //TODO set up battle and start it
-            Map<AttackResistanceType, Double> tempMap = new HashMap<>();
-
-            tempMap.put(AttackResistanceType.PHYSICAL, 100.0);
-            tempMap.put(AttackResistanceType.FIRE, 100.0);
-            tempMap.put(AttackResistanceType.WATER, 100.0);
-            tempMap.put(AttackResistanceType.EARTH, 100.0);
-            tempMap.put(AttackResistanceType.AIR, 100.0);
-            tempMap.put(AttackResistanceType.ENERGY, 100.0);
-            tempMap.put(AttackResistanceType.DARK, 100.0);
-            tempMap.put(AttackResistanceType.LIGHT, 100.0);
+            //TODO move below to BattleDataProvider
 
             List<Hero> heroArrayList = new ArrayList<>();
             List<Enemy> enemyArrayList = new ArrayList<>();
 
-            // character classes will be provided by CharacterClassDataProvider
-            CharacterClass exampleHeroCharacterClass = new CharacterClass(CharacterClassType.SWORDSMAN, new ArrayList<Skill>(), tempMap, 2, 2, 2, 2, AttackResistanceType.PHYSICAL);
-            CharacterClass exampleEnemyCharacterClass = new CharacterClass(CharacterClassType.SKELETON, new ArrayList<Skill>(), tempMap, 2, 2, 2, 2, AttackResistanceType.PHYSICAL);
 
-            heroArrayList.add(new Hero(exampleHeroCharacterClass, "knight", 1, 2000));
-            heroArrayList.add(new Hero(exampleHeroCharacterClass, "knight", 1, 2000));
-            heroArrayList.add(new Hero(exampleHeroCharacterClass, "knight", 1, 2000));
-            enemyArrayList.add(new Enemy(exampleEnemyCharacterClass, "skeleton", 1, 1000));
-            enemyArrayList.add(new Enemy(exampleEnemyCharacterClass, "skeleton", 1, 1000));
-            enemyArrayList.add(new Enemy(exampleEnemyCharacterClass, "skeleton", 1, 1000));
+            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 1", 1, 2000));
+            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 2", 1, 2000));
+            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 3", 1, 2000));
+            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 1", 1, 1000));
+            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 2", 1, 1000));
+            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 3", 1, 1000));
 
 
             battle = new Battle(heroArrayList, enemyArrayList, gui.getBattlePanel());
@@ -122,34 +93,19 @@ public class MenuPanel extends JPanel {
         lvl10Button.setForeground(Color.WHITE);
         add(lvl10Button);
         lvl10Button.addActionListener(e -> {
-
-            //TODO set up battle and start it
-            Map<AttackResistanceType, Double> tempMap = new HashMap<>();
-
-            tempMap.put(AttackResistanceType.PHYSICAL, 100.0);
-            tempMap.put(AttackResistanceType.FIRE, 100.0);
-            tempMap.put(AttackResistanceType.WATER, 100.0);
-            tempMap.put(AttackResistanceType.EARTH, 100.0);
-            tempMap.put(AttackResistanceType.AIR, 100.0);
-            tempMap.put(AttackResistanceType.ENERGY, 100.0);
-            tempMap.put(AttackResistanceType.DARK, 100.0);
-            tempMap.put(AttackResistanceType.LIGHT, 100.0);
+            //TODO move below to BattleDataProvider
 
             List<Hero> heroArrayList = new ArrayList<>();
             List<Enemy> enemyArrayList = new ArrayList<>();
 
-            // character classes will be provided by CharacterClassDataProvider
-            CharacterClass exampleHeroCharacterClass = new CharacterClass(CharacterClassType.SWORDSMAN, new ArrayList<Skill>(), tempMap, 2, 2, 2, 2, AttackResistanceType.PHYSICAL);
-            CharacterClass exampleEnemyCharacterClass = new CharacterClass(CharacterClassType.SKELETON, new ArrayList<Skill>(), tempMap, 2, 2, 2, 2, AttackResistanceType.PHYSICAL);
-
-            heroArrayList.add(new Hero(exampleHeroCharacterClass, "knight", 1, 2000));
-            heroArrayList.add(new Hero(exampleHeroCharacterClass, "knight", 1, 2000));
-            heroArrayList.add(new Hero(exampleHeroCharacterClass, "knight", 1, 2000));
-            heroArrayList.add(new Hero(exampleHeroCharacterClass, "knight", 1, 2000));
-            enemyArrayList.add(new Enemy(exampleEnemyCharacterClass, "skeleton", 1, 1000));
-            enemyArrayList.add(new Enemy(exampleEnemyCharacterClass, "skeleton", 1, 1000));
-            enemyArrayList.add(new Enemy(exampleEnemyCharacterClass, "skeleton", 1, 1000));
-            enemyArrayList.add(new Enemy(exampleEnemyCharacterClass, "skeleton", 1, 1000));
+            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 1", 1, 2000));
+            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 2", 1, 2000));
+            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 3", 1, 2000));
+            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 4", 1, 2000));
+            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 1", 1, 1000));
+            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 2", 1, 1000));
+            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 3", 1, 1000));
+            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 4", 1, 1000));
 
             battle = new Battle(heroArrayList, enemyArrayList, gui.getBattlePanel());
 

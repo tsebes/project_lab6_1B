@@ -113,8 +113,8 @@ public class CharactersPanel extends JPanel {
     public void animate(){
         Character aCharacter = battle.getActiveCharacter();
         CharacterButton button = getButton(aCharacter);
-        ImageIcon idleImage = new ImageIcon(getClass().getResource("/" + aCharacter.getName() + ".gif"));
-        ImageIcon attackImage = new ImageIcon(getClass().getResource("/" + aCharacter.getName() + "-attack.gif"));
+        ImageIcon idleImage = new ImageIcon(getClass().getResource("/" + aCharacter.getCharacterClassName() + ".gif"));
+        ImageIcon attackImage = new ImageIcon(getClass().getResource("/" + aCharacter.getCharacterClassName()+ "-attack.gif"));
         button.setIcon(null);
         attackerButton.setIcon(attackImage);
 
@@ -125,8 +125,8 @@ public class CharactersPanel extends JPanel {
                 attackerButton.setIcon(null);
                 //TODO check here if action actually attacks anyone
                 for(Character character: battle.getTargetsArrayList()){
-                    ImageIcon characterIdleImage = new ImageIcon(getClass().getResource("/" +character.getName() + ".gif"));
-                    ImageIcon characterHitImage = new ImageIcon(getClass().getResource("/" + character.getName() + "-hit.gif"));
+                    ImageIcon characterIdleImage = new ImageIcon(getClass().getResource("/" +character.getCharacterClassName() + ".gif"));
+                    ImageIcon characterHitImage = new ImageIcon(getClass().getResource("/" + character.getCharacterClassName() + "-hit.gif"));
                     getButton(character).setIcon(characterHitImage);
                     if(character.getCurrentHealthPoints() > 0){
                         Timer returnToIdleTimer = new Timer(1000, new ActionListener() {
@@ -144,7 +144,7 @@ public class CharactersPanel extends JPanel {
                         Timer showDieTimer = new Timer(1000, new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent arg0) {
-                                ImageIcon characterDieImage = new ImageIcon(getClass().getResource("/" + character.getName() + "-die.gif"));
+                                ImageIcon characterDieImage = new ImageIcon(getClass().getResource("/" + character.getCharacterClassName() + "-die.gif"));
                                 getButton(character).setIcon(characterDieImage);
                                 Timer deleteButtonTimer = new Timer(1000, new ActionListener() {
                                     @Override
@@ -192,7 +192,7 @@ public class CharactersPanel extends JPanel {
     }
 
     private void addEnemyButton(int location, Character character) {
-        ImageIcon characterImage = new ImageIcon(getClass().getResource("/"+ character.getName() +".gif"));
+        ImageIcon characterImage = new ImageIcon(getClass().getResource("/"+ character.getCharacterClassName() +".gif"));
         CharacterButton characterButton = new CharacterButton(characterImage);
         characterButton.setCharacter(character);
         switch(location){
@@ -203,7 +203,7 @@ public class CharactersPanel extends JPanel {
                 characterButton.setBounds(350, 125, 100, 100);
                 break;
             case 3:
-                characterButton.setBounds(475, 250, 100, 100);
+                characterButton.setBounds(475, 225, 100, 100);
                 break;
             case 4:
                 characterButton.setBounds(475, 100, 100, 100);
@@ -217,7 +217,7 @@ public class CharactersPanel extends JPanel {
     }
 
     private void addAllyButton(int location, Character character) {
-        ImageIcon characterImage = new ImageIcon(getClass().getResource("/"+ character.getName() +".gif"));
+        ImageIcon characterImage = new ImageIcon(getClass().getResource("/"+ character.getCharacterClassName() +".gif"));
         CharacterButton characterButton = new CharacterButton(characterImage);
         characterButton.setCharacter(character);
         switch(location){
@@ -228,7 +228,7 @@ public class CharactersPanel extends JPanel {
                 characterButton.setBounds(150, 125, 100, 100);
                 break;
             case 3:
-                characterButton.setBounds(25, 250, 100, 100);
+                characterButton.setBounds(25, 225, 100, 100);
                 break;
             case 4:
                 characterButton.setBounds(25, 100, 100, 100);

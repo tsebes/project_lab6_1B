@@ -106,6 +106,16 @@ public class Battle {
         this.currentAction = null;
     }
 
+
+    //TODO delete this function once skillPanel is implemented
+    public void showActiveCharacterSkills(){
+        System.out.println("\n" + activeCharacter.getName() + " skills are: ");
+        for(Skill skill :activeCharacter.getAvailableSkills()){
+            System.out.print(skill.getName() + ",\t");
+        }
+        System.out.print("\n");
+    }
+
     public void doCurrentAction() {
 
 

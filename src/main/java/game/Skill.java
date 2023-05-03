@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Skill {
 
@@ -9,12 +10,12 @@ public class Skill {
     protected final Boolean targetingEnemies;
     protected final AttackResistanceType attackType;
     protected final double skillPoints;
-    protected final ArrayList<Buff> buffs;
-    protected final ArrayList<DeBuff> deBuffs;
+    protected final Map<Buff, Integer> buffs;
+    protected final Map<DeBuff, Integer> deBuffs;
     protected ArrayList<SpecialEffect> specialEffects;
     protected final double coolDownTime;
 
-    public Skill(String name, Boolean isAOE, Boolean targetingEnemies, AttackResistanceType attackType, double skillPoints, ArrayList<Buff> buffs, ArrayList<DeBuff> deBuffs, double coolDownTime) {
+    public Skill(String name, Boolean isAOE, Boolean targetingEnemies, AttackResistanceType attackType, double skillPoints, Map<Buff, Integer> buffs, Map<DeBuff, Integer> deBuffs, double coolDownTime) {
         this.name = name;
         this.isAOE = isAOE;
         this.targetingEnemies = targetingEnemies;
@@ -45,11 +46,11 @@ public class Skill {
         return skillPoints;
     }
 
-    public ArrayList<Buff> getBuffs() {
+    public Map<Buff, Integer> getBuffs() {
         return buffs;
     }
 
-    public ArrayList<DeBuff> getDeBuffs() {
+    public Map<DeBuff, Integer> getDeBuffs() {
         return deBuffs;
     }
 

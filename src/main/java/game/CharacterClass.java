@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class CharacterClass {
 
-    protected final CharacterClassType characterClassType;
+    protected final String characterClassName;
     protected final ArrayList<Skill> availableSkills;
     protected final Map<AttackResistanceType, Double> basicResistances;
     protected Map<AttackResistanceType, Boolean> discoveredResistances;
@@ -16,8 +16,8 @@ public class CharacterClass {
     protected final double basicLuck;
     protected final AttackResistanceType basicAttack;
 
-    public CharacterClass(CharacterClassType characterClassType, ArrayList<Skill> availableSkills, Map<AttackResistanceType, Double> basicResistances, double basicStrength, double basicIntelligence, double basicSpeed, double basicLuck, AttackResistanceType basicAttack) {
-        this.characterClassType = characterClassType;
+    public CharacterClass(String characterClassName, ArrayList<Skill> availableSkills, Map<AttackResistanceType, Double> basicResistances, double basicStrength, double basicIntelligence, double basicSpeed, double basicLuck, AttackResistanceType basicAttack) {
+        this.characterClassName = characterClassName;
         this.availableSkills = availableSkills;
         this.basicResistances = basicResistances;
         this.basicStrength = basicStrength;
@@ -33,8 +33,8 @@ public class CharacterClass {
         }
     }
 
-    public CharacterClassType getCharacterClassType() {
-        return characterClassType;
+    public String getCharacterClassName() {
+        return characterClassName;
     }
 
     public ArrayList<Skill> getAvailableSkills() {

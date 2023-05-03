@@ -44,6 +44,7 @@ public class BattleOptionsPanel extends JPanel {
         addSkillsButton.setForeground(Color.RED);
         add(addSkillsButton);
         addSkillsButton.addActionListener(e -> {
+            battlePanel.getBattle().showActiveCharacterSkills();
             battlePanel.getBattle().clearCurrentAction();
             battlePanel.getBattle().setCurrentAction(Action.SKILL);
             //TODO show current character skills
