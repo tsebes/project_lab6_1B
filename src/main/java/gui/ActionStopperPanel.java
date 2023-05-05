@@ -11,7 +11,7 @@ public class ActionStopperPanel extends JPanel {
         this.battlePanel = battle;
         //TODO rework menu graphics
         setBounds(0, 400, 800, 200);
-        setBackground(Color.WHITE);
+        setBackground(Color.CYAN);
         setVisible(false);
         setLayout(null);
         //TODO add label with known chosen enemy information

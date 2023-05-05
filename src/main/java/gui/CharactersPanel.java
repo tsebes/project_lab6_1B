@@ -87,9 +87,8 @@ public class CharactersPanel extends JPanel {
         for(CharacterButton allyButton: allyButtons){
             if(allyButton!=null){
                 allyButton.addActionListener(e -> {
-                    battlePanel.getConfirmation().changeActionInfo();
-                    battlePanel.changePanel(BattlePanel.Panel.Confirmation);
                     battle.setTarget(allyButton.getButtonCharacter());
+                    battlePanel.changePanel(BattlePanel.Panel.Confirmation);
                     clearTargetingAll();
                 });
             }
@@ -101,16 +100,15 @@ public class CharactersPanel extends JPanel {
         for(CharacterButton enemyButton: enemyButtons) {
             if (enemyButton != null) {
                 enemyButton.addActionListener(e -> {
-                    battlePanel.getConfirmation().changeActionInfo();
-                    battlePanel.changePanel(BattlePanel.Panel.Confirmation);
                     battle.setTarget(enemyButton.getButtonCharacter());
+                    battlePanel.changePanel(BattlePanel.Panel.Confirmation);
                     clearTargetingAll();
                 });
             }
         }
     }
 
-    public void animate(){
+    public void animate(boolean dealsDamage){
         Character aCharacter = battle.getActiveCharacter();
         CharacterButton button = getButton(aCharacter);
         ImageIcon idleImage = new ImageIcon(getClass().getResource("/" + aCharacter.getCharacterClassName() + ".gif"));
@@ -123,47 +121,48 @@ public class CharactersPanel extends JPanel {
             public void actionPerformed(ActionEvent arg0) {
                 button.setIcon(idleImage);
                 attackerButton.setIcon(null);
-                //TODO check here if action actually attacks anyone
-                for(Character character: battle.getTargetsArrayList()){
-                    ImageIcon characterIdleImage = new ImageIcon(getClass().getResource("/" +character.getCharacterClassName() + ".gif"));
-                    ImageIcon characterHitImage = new ImageIcon(getClass().getResource("/" + character.getCharacterClassName() + "-hit.gif"));
-                    getButton(character).setIcon(characterHitImage);
-                    if(character.getCurrentHealthPoints() > 0){
-                        Timer returnToIdleTimer = new Timer(1000, new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent arg0) {
-                                if(getButton(character).getIcon()!=null){
-                                    getButton(character).setIcon(characterIdleImage);
-                                }
-                            }
-                        });
-                        returnToIdleTimer.setRepeats(false);
-                        returnToIdleTimer.start();
-                    }
-                    else{
-                        Timer showDieTimer = new Timer(1000, new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent arg0) {
-                                ImageIcon characterDieImage = new ImageIcon(getClass().getResource("/" + character.getCharacterClassName() + "-die.gif"));
-                                getButton(character).setIcon(characterDieImage);
-                                Timer deleteButtonTimer = new Timer(1000, new ActionListener() {
-                                    @Override
-                                    public void actionPerformed(ActionEvent arg0) {
-                                        getButton(character).setIcon(null);
-                                        if(enemyButtons.contains(getButton(character))){
-                                            enemyButtons.remove(getButton(character));
-                                        }
-                                        if(allyButtons.contains(getButton(character))){
-                                            allyButtons.remove(getButton(character));
-                                        }
+                if(dealsDamage){
+                    for(Character character: battle.getTargetsArrayList()){
+                        ImageIcon characterIdleImage = new ImageIcon(getClass().getResource("/" +character.getCharacterClassName() + ".gif"));
+                        ImageIcon characterHitImage = new ImageIcon(getClass().getResource("/" + character.getCharacterClassName() + "-hit.gif"));
+                        getButton(character).setIcon(characterHitImage);
+                        if(character.getCurrentHealthPoints() > 0){
+                            Timer returnToIdleTimer = new Timer(1000, new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent arg0) {
+                                    if(getButton(character).getIcon()!=null){
+                                        getButton(character).setIcon(characterIdleImage);
                                     }
-                                });
-                                deleteButtonTimer.setRepeats(false);
-                                deleteButtonTimer.start();
-                            }
-                        });
-                        showDieTimer.setRepeats(false);
-                        showDieTimer.start();
+                                }
+                            });
+                            returnToIdleTimer.setRepeats(false);
+                            returnToIdleTimer.start();
+                        }
+                        else{
+                            Timer showDieTimer = new Timer(1000, new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent arg0) {
+                                    ImageIcon characterDieImage = new ImageIcon(getClass().getResource("/" + character.getCharacterClassName() + "-die.gif"));
+                                    getButton(character).setIcon(characterDieImage);
+                                    Timer deleteButtonTimer = new Timer(1000, new ActionListener() {
+                                        @Override
+                                        public void actionPerformed(ActionEvent arg0) {
+                                            getButton(character).setIcon(null);
+                                            if(enemyButtons.contains(getButton(character))){
+                                                enemyButtons.remove(getButton(character));
+                                            }
+                                            if(allyButtons.contains(getButton(character))){
+                                                allyButtons.remove(getButton(character));
+                                            }
+                                        }
+                                    });
+                                    deleteButtonTimer.setRepeats(false);
+                                    deleteButtonTimer.start();
+                                }
+                            });
+                            showDieTimer.setRepeats(false);
+                            showDieTimer.start();
+                        }
                     }
                 }
             }

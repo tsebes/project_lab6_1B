@@ -2,6 +2,7 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class TurnPanel extends JPanel {
 
@@ -30,7 +31,20 @@ public class TurnPanel extends JPanel {
         });
     }
 
-    public JButton getLogsButton() {
-        return logsButton;
+    public void deleteLogActionListener(){
+        ActionListener[] listeners = logsButton.getActionListeners();
+        if (listeners == null) {
+            return;
+        }
+        for (ActionListener listener : listeners) {
+            logsButton.removeActionListener(listener);
+        }
+    }
+
+    public void addLogActionListener(){
+        deleteLogActionListener();
+        logsButton.addActionListener(e -> {
+            battlePanel.changePanel(BattlePanel.Panel.Logs);
+        });
     }
 }

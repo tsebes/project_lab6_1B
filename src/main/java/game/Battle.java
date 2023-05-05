@@ -9,14 +9,15 @@ import java.awt.event.ActionListener;
 import java.util.*;
 
 public class Battle {
-    protected List<Hero> heroArrayList = new ArrayList<>();
-    protected List<Enemy> enemyArrayList = new ArrayList<>();
+    protected List<Hero> heroArrayList;
+    protected List<Enemy> enemyArrayList;
     protected List<Character> graveyardList = new ArrayList<>();
     protected Character activeCharacter;
     protected Map<Character, Double> turnOrder = new HashMap<>();
     protected List<Item> itemArrayList = new ArrayList<>();
     protected List<Character> targetsArrayList = new ArrayList<>();
     protected Action currentAction;
+    protected Skill currentSkill;
     protected BattlePanel battlePanel;
     protected Double timePassed;
 
@@ -85,12 +86,25 @@ public class Battle {
         this.timePassed = timePassed;
     }
 
+    public Skill getCurrentSkill() {
+        return currentSkill;
+    }
+
+    public void setCurrentSkill(Skill currentSkill) {
+        this.currentSkill = currentSkill;
+    }
+
     public List<Character> getTargetsArrayList() {
         return targetsArrayList;
     }
+
     //set target
     public void setTarget(Character target) {
         this.targetsArrayList.add(target);
+    }
+
+    public <T extends Character> void setTarget(List<T> targetList) {
+        this.targetsArrayList.addAll(targetList);
     }
 
     public Enum<Action> getCurrentAction() {
@@ -101,21 +115,14 @@ public class Battle {
     public void setCurrentAction(Action action) {
         this.currentAction = action;
     }
+
     //used when cancelling an action
     public void clearCurrentAction() {
         this.targetsArrayList.clear();
         this.currentAction = null;
+        this.currentSkill = null;
     }
 
-
-    //TODO delete this function once skillPanel is implemented
-    public void showActiveCharacterSkills(){
-        System.out.println("\n" + activeCharacter.getName() + " skills are: ");
-        for(Skill skill :activeCharacter.getAvailableSkills()){
-            System.out.print(skill.getName() + ",\t");
-        }
-        System.out.print("\n");
-    }
 
     public void doCurrentAction() {
 
@@ -133,27 +140,40 @@ public class Battle {
 
         int delay = 1;
 
-
+        setTimePassed(turnOrder.get(activeCharacter));
         switch(this.currentAction) {
             case BASICATTACK:
+                //TODO move this information to logs
+                System.out.println("Using Basic Attack on: ");
+
                 delay += 2000;
                 activeCharacter.basicAttack(this.targetsArrayList);
-                setTimePassed(turnOrder.get(activeCharacter));
-                turnOrder.put(activeCharacter,turnOrder.get(activeCharacter)+10.0*(activeCharacter.currentSpeed));
-                battlePanel.getCharacters().animate();
+                turnOrder.put(activeCharacter,turnOrder.get(activeCharacter)+10.0*(50 - activeCharacter.currentSpeed));
+                battlePanel.getCharacters().animate(true);
                 break;
             case SKILL:
+                //TODO move this information to logs
+                System.out.println("Using Skill: " + currentSkill.getName());
+
+                delay += 1000;
+                boolean dealingDamage = currentSkill.use(activeCharacter, targetsArrayList) > 0;
+                if(currentSkill.targetingEnemies && dealingDamage){
+                    delay += 1000;
+                }
+                turnOrder.put(activeCharacter,turnOrder.get(activeCharacter)+currentSkill.getCoolDownTime()*(50 - activeCharacter.currentSpeed));
+                battlePanel.getCharacters().animate(dealingDamage);
                 break;
             case GUARD:
+                //TODO move this information to logs
+                System.out.println("Using Guard");
+
                 Hero activeHero = (Hero) activeCharacter;
                 activeHero.enableGuard();
-                setTimePassed(turnOrder.get(activeCharacter));
-                //TODO update changing turnOrder to make it work better
-                turnOrder.put(activeCharacter,turnOrder.get(activeCharacter) + 5.0*(activeCharacter.currentSpeed));
+                turnOrder.put(activeCharacter,turnOrder.get(activeCharacter) + 5.0*(50 - activeCharacter.currentSpeed));
                 break;
             case ITEM:
-                break;
-            case ANALYZE:
+                //TODO move this information to logs
+                System.out.println("Using Item");
                 break;
         }
 
@@ -167,6 +187,11 @@ public class Battle {
                     delay += 1000;
                 }
                 turnOrder.remove(character);
+                if(character instanceof Hero){
+                    heroArrayList.remove(character);
+                }else{
+                    enemyArrayList.remove(character);
+                }
                 graveyardList.add(character);
             }
         }

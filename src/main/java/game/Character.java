@@ -13,11 +13,9 @@ public abstract class Character {
     protected double currentIntelligence;
     protected double currentSpeed;
     protected double currentLuck;
-
     // TODO: add buffs, debuffs, skills
     protected Map<Buff, Integer> buffs;
     protected Map<DeBuff, Integer> deBuffs;
-    //protected ArrayList<Skill> skills;
 
     public Character(CharacterClass characterClass, String name, int level, double maxHealthPoints) {
         this.characterClass = characterClass;
@@ -124,8 +122,25 @@ public abstract class Character {
     }
 
     public void getDamage(double amount, AttackResistanceType attackResistanceType) {
-        currentHealthPoints -= amount * this.getBasicResistance().get(attackResistanceType);
-        System.out.println(this.getName() + " was attacked for " + amount * this.getBasicResistance().get(attackResistanceType) + " damage" );
+
+        //changing damage by attackResistanceType
+        amount -= amount * (this.getBasicResistance().get(attackResistanceType) / 100);
+
+        //making sure amount is ?.?? format
+        amount*=100;
+        amount = Math.round(amount);
+        amount/=100;
+
+        //lowering health by amount
+        currentHealthPoints -= amount;
+
+        //making sure currentHealthPoints is ?.?? format
+        currentHealthPoints*=100;
+        currentHealthPoints = Math.round(currentHealthPoints);
+        currentHealthPoints/=100;
+
+        //TODO move this to log
+        System.out.println(this.getName() + " was attacked for " + amount + " damage" );
         if(currentHealthPoints <= 0){
             System.out.println(this.getName() + " died");
         }
@@ -139,6 +154,9 @@ public abstract class Character {
 
     public void restoreHealth(double amount) {
         currentHealthPoints += amount;
+        if(currentHealthPoints > maxHealthPoints){
+            currentHealthPoints = maxHealthPoints;
+        }
         //TODO: move this to log
         System.out.println(this.getName() + " was healed for " + amount + " points");
     }
@@ -178,19 +196,4 @@ public abstract class Character {
             }
         }
     }
-
-    /*
-    public void useSkill(Character target, Skill skill) {
-        target.applySkill(skill);
-    }
-
-    public void useSkill(Character[] targets, Skill skill) {
-        for (Character target : targets) {
-            useSkill(target, skill);
-        }
-    }
-
-    // abstract class to be overridden in subclass
-    abstract public void applySkill(Skill skill);
-    */
 }

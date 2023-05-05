@@ -78,7 +78,7 @@ public class BattlePanel extends JPanel {
             confirmation.setVisible(false);
             logs.setVisible(true);
         }else{
-            turns.getLogsButton().setVisible(true);
+            turns.addLogActionListener();
             logs.setVisible(false);
             characters.setVisible(true);
             turns.setVisible(true);
@@ -90,6 +90,7 @@ public class BattlePanel extends JPanel {
                     analyze.setVisible(false);
                     targeting.setVisible(false);
                     actionStopper.setVisible(false);
+                    skills.refresh();
                     skills.setVisible(true);
                 }
                 case Analyze -> {
@@ -121,7 +122,7 @@ public class BattlePanel extends JPanel {
                     targeting.setVisible(false);
                     confirmation.setVisible(false);
                     actionStopper.setVisible(true);
-                    turns.getLogsButton().setVisible(false);
+                    turns.deleteLogActionListener();
                 }
             }
         }

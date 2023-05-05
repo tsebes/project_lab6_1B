@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Skill {
@@ -71,15 +72,17 @@ public class Skill {
     }
 
     private void executeSpecialEffects() {
-        for (SpecialEffect specialEffect : specialEffects) {
-            // TODO: add special effects actions
-            switch (specialEffect) {
-                default -> {}
+        if(specialEffects!=null){
+            for (SpecialEffect specialEffect : specialEffects) {
+                // TODO: add special effects actions
+                switch (specialEffect) {
+                    default -> {}
+                }
             }
         }
     }
 
-    public void use(Character executor, Character target) {
+    public double use(Character executor, List<Character> targets) {
 
         double amount;
 
@@ -97,16 +100,18 @@ public class Skill {
 
         amount *= skillPoints;
 
-        if (targetingEnemies) {
-            if (amount > 0) {
-                target.getDamage(amount, attackType);
+        for(Character target: targets){
+            if (targetingEnemies) {
+                if (amount > 0) {
+                    target.getDamage(amount, attackType);
+                }
+                target.addDeBuffs(deBuffs);
+            } else {
+                target.restoreHealth(amount);
+                target.addBuffs(buffs);
             }
-            target.addDeBuffs(deBuffs);
-        } else {
-            target.restoreHealth(amount);
-            target.addBuffs(buffs);
+            executeSpecialEffects();
         }
-
-        executeSpecialEffects();
+        return amount;
     }
 }

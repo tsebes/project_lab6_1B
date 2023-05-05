@@ -1,6 +1,6 @@
 package game;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Item {
@@ -57,13 +57,15 @@ public class Item {
         return coolDownTime;
     }
 
-    public void use(Character target) {
-        if (targetingEnemies) {
-            target.getDamage(itemPoints, attackType);
-            target.addDeBuffs(deBuffs);
-        } else {
-            target.restoreHealth(itemPoints);
-            target.addBuffs(buffs);
+    public void use(List<Character> targets) {
+        for(Character target: targets){
+            if (targetingEnemies) {
+                target.getDamage(itemPoints, attackType);
+                target.addDeBuffs(deBuffs);
+            } else {
+                target.restoreHealth(itemPoints);
+                target.addBuffs(buffs);
+            }
         }
     }
 }
