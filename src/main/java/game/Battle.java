@@ -143,8 +143,7 @@ public class Battle {
         setTimePassed(turnOrder.get(activeCharacter));
         switch(this.currentAction) {
             case BASICATTACK:
-                //TODO move this information to logs
-                System.out.println("Using Basic Attack on: ");
+
 
                 delay += 2000;
                 activeCharacter.basicAttack(this.targetsArrayList);
@@ -169,6 +168,7 @@ public class Battle {
 
                 Hero activeHero = (Hero) activeCharacter;
                 activeHero.enableGuard();
+                //TODO update changing turnOrder to make it work better
                 turnOrder.put(activeCharacter,turnOrder.get(activeCharacter) + 5.0*(50 - activeCharacter.currentSpeed));
                 break;
             case ITEM:
@@ -187,11 +187,6 @@ public class Battle {
                     delay += 1000;
                 }
                 turnOrder.remove(character);
-                if(character instanceof Hero){
-                    heroArrayList.remove(character);
-                }else{
-                    enemyArrayList.remove(character);
-                }
                 graveyardList.add(character);
             }
         }
@@ -227,6 +222,7 @@ public class Battle {
     }
 
     public void endTurn() {
+        battlePanel.getCharacters().refresh();
         for (Map.Entry<Character, Double> e : turnOrder.entrySet()) {
             Double value = e.getValue();
             value -= timePassed;

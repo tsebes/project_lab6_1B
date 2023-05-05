@@ -23,7 +23,7 @@ public class BattlePanel extends JPanel {
         ImageIcon image = new ImageIcon(getClass().getResource("/background.png"));
 
         turns = new TurnPanel(this);
-        characters = new CharactersPanel(this) {
+        characters = new CharactersPanel(this){
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -78,6 +78,7 @@ public class BattlePanel extends JPanel {
             confirmation.setVisible(false);
             logs.setVisible(true);
         }else{
+            exitButton.setVisible(true);
             turns.addLogActionListener();
             logs.setVisible(false);
             characters.setVisible(true);
@@ -116,6 +117,7 @@ public class BattlePanel extends JPanel {
                     confirmation.setVisible(true);
                 }
                 case ActionStopper -> {
+                    exitButton.setVisible(false);
                     bOptions.setVisible(false);
                     analyze.setVisible(false);
                     skills.setVisible(false);
