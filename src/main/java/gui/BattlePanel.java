@@ -16,6 +16,7 @@ public class BattlePanel extends JPanel {
     private final AnalyzePanel analyze;
     private final LogsPanel logs;
     private final ConfirmationPanel confirmation;
+    private final ActionStopperPanel actionStopper;
     private JButton exitButton;
 
     public BattlePanel(GUI gui) {
@@ -36,6 +37,7 @@ public class BattlePanel extends JPanel {
         analyze = new AnalyzePanel(this);
         logs = new LogsPanel(this);
         confirmation = new ConfirmationPanel(this);
+        actionStopper = new ActionStopperPanel(this);
         this.gui = gui;
         //TODO rework menu graphics
         setPreferredSize(new Dimension(800, 600));
@@ -50,6 +52,7 @@ public class BattlePanel extends JPanel {
         add(analyze);
         add(logs);
         add(confirmation);
+        add(actionStopper);
     }
 
     private void addExitButton() {
@@ -75,6 +78,7 @@ public class BattlePanel extends JPanel {
             confirmation.setVisible(false);
             logs.setVisible(true);
         }else{
+            turns.getLogsButton().setVisible(true);
             logs.setVisible(false);
             characters.setVisible(true);
             turns.setVisible(true);
@@ -85,18 +89,21 @@ public class BattlePanel extends JPanel {
                     confirmation.setVisible(false);
                     analyze.setVisible(false);
                     targeting.setVisible(false);
+                    actionStopper.setVisible(false);
                     skills.setVisible(true);
                 }
                 case Analyze -> {
                     confirmation.setVisible(false);
                     targeting.setVisible(false);
                     skills.setVisible(false);
+                    actionStopper.setVisible(false);
                     analyze.setVisible(true);
                 }
                 case Targeting -> {
                     confirmation.setVisible(false);
                     analyze.setVisible(false);
                     skills.setVisible(false);
+                    actionStopper.setVisible(false);
                     targeting.setVisible(true);
                 }
                 case Confirmation -> {
@@ -104,7 +111,17 @@ public class BattlePanel extends JPanel {
                     analyze.setVisible(false);
                     skills.setVisible(false);
                     targeting.setVisible(false);
+                    actionStopper.setVisible(false);
                     confirmation.setVisible(true);
+                }
+                case ActionStopper -> {
+                    bOptions.setVisible(false);
+                    analyze.setVisible(false);
+                    skills.setVisible(false);
+                    targeting.setVisible(false);
+                    confirmation.setVisible(false);
+                    actionStopper.setVisible(true);
+                    turns.getLogsButton().setVisible(false);
                 }
             }
         }
@@ -118,7 +135,7 @@ public class BattlePanel extends JPanel {
         return characters;
     }
 
-    public BattleOptionsPanel getbOptions() {
+    public BattleOptionsPanel getBOptions() {
         return bOptions;
     }
 
@@ -151,7 +168,8 @@ public class BattlePanel extends JPanel {
         Analyze,
         Targeting,
         Logs,
-        Confirmation
+        Confirmation,
+        ActionStopper
     }
 
 }

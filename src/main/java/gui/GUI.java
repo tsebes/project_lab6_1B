@@ -1,5 +1,7 @@
 package gui;
 
+import game.Enemy;
+
 import javax.swing.*;
 
 public class GUI extends JFrame{
@@ -50,7 +52,12 @@ public class GUI extends JFrame{
                 setContentPane(battlePanel);
                 pack();
                 battlePanel.setVisible(true);
-                battlePanel.changePanel(BattlePanel.Panel.Skills);
+                if(battlePanel.getBattle().getActiveCharacter() instanceof Enemy){
+                    battlePanel.changePanel(BattlePanel.Panel.ActionStopper);
+                }
+                else{
+                    battlePanel.changePanel(BattlePanel.Panel.Skills);
+                }
             }
         }
     }

@@ -32,6 +32,7 @@ public class Battle {
         battlePanel.getCharacters().addActiveBorder();
 
         if (activeCharacter instanceof Enemy){
+            //Random action of enemy
             setCurrentAction(Action.BASICATTACK);
             Random chance = new Random();
             int result = chance.nextInt(heroArrayList.size());
@@ -156,6 +157,9 @@ public class Battle {
                 break;
         }
 
+        //Stopping any action until next player turn
+        battlePanel.changePanel(BattlePanel.Panel.ActionStopper);
+
         //deleting any character who died
         for(Character character: targetsArrayList) {
             if (character.currentHealthPoints <= 0) {
@@ -221,20 +225,23 @@ public class Battle {
             clearCurrentAction();
             //TODO move below fragment of code to enemy
             if (activeCharacter instanceof Enemy) {
-                setCurrentAction(Action.BASICATTACK);
 
+                //Random action of enemy
+                setCurrentAction(Action.BASICATTACK);
                 Random chance = new Random();
                 int result = chance.nextInt(heroArrayList.size());
                 setTarget(heroArrayList.get(result));
-
                 doCurrentAction();
-
                 for (Map.Entry<Character, Double> e : turnOrder.entrySet()) {
                     Double value = e.getValue();
                     value -= timePassed;
                     turnOrder.put(e.getKey(),value);
                 }
                 setTimePassed(0.0);
+            }
+            else{
+                //Making choosing action possible again
+                battlePanel.changePanel(BattlePanel.Panel.Skills);
             }
             setTimePassed(0.0);
 
