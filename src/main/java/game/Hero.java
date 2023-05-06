@@ -1,7 +1,5 @@
 package game;
 
-import java.util.Map;
-
 public class Hero extends Character{
 
     protected boolean isGuardEnable = false;
@@ -10,26 +8,36 @@ public class Hero extends Character{
         super(characterClass, name, level, maxHealthPoints);
     }
 
-    public void useItem(Item item, Character[] targets) {
-        for (Character target : targets) {
-            item.use(target);
-        }
-    }
-
     @Override
     public void getDamage(double amount, AttackResistanceType attackResistanceType) {
+
+        //changing damage by attackResistanceType
+        amount -= amount * (this.getBasicResistance().get(attackResistanceType) / 100);
+
+        //changing damage if guarding
         if (isGuardEnable) {
             amount *= 0.5;
         }
 
-        currentHealthPoints -= amount * this.getBasicResistance().get(attackResistanceType);
+        //making sure amount is ?.?? format
+        amount*=100;
+        amount = Math.round(amount);
+        amount/=100;
 
+        //lowering health by amount
+        currentHealthPoints -= amount;
+
+        //making sure currentHealthPoints is ?.?? format
+        currentHealthPoints*=100;
+        currentHealthPoints = Math.round(currentHealthPoints);
+        currentHealthPoints/=100;
+
+        //TODO move this to logHandler
         if (isGuardEnable) {
-            System.out.println(this.getName() + " was attacked for " + amount * this.getBasicResistance().get(attackResistanceType) + " damage (" + this.getName() + " is guarded)" );
+            System.out.println(this.getName() + " was attacked for " + amount + " damage (" + this.getName() + " is guarded)" );
         } else {
-            System.out.println(this.getName() + " was attacked for " + amount * this.getBasicResistance().get(attackResistanceType) + " damage" );
+            System.out.println(this.getName() + " was attacked for " + amount + " damage" );
         }
-
         if(currentHealthPoints <= 0){
             System.out.println(this.getName() + " died");
         }

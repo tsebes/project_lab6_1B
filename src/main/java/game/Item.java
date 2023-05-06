@@ -1,6 +1,7 @@
 package game;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class Item {
 
@@ -9,11 +10,11 @@ public class Item {
     protected final Boolean targetingEnemies;
     protected final AttackResistanceType attackType;
     protected final double itemPoints;
-    protected final ArrayList<Buff> buffs;
-    protected final ArrayList<DeBuff> deBuffs;
+    protected final Map<Buff, Integer> buffs;
+    protected final Map<DeBuff, Integer> deBuffs;
     protected final double coolDownTime;
 
-    public Item(String name, Boolean isAOE, Boolean targetingEnemies, AttackResistanceType attackType, double itemPoints, ArrayList<Buff> buffs, ArrayList<DeBuff> deBuffs, double coolDownTime) {
+    public Item(String name, Boolean isAOE, Boolean targetingEnemies, AttackResistanceType attackType, double itemPoints, Map<Buff, Integer> buffs, Map<DeBuff, Integer> deBuffs, double coolDownTime) {
         this.name = name;
         this.isAOE = isAOE;
         this.targetingEnemies = targetingEnemies;
@@ -44,11 +45,11 @@ public class Item {
         return itemPoints;
     }
 
-    public ArrayList<Buff> getBuffs() {
+    public Map<Buff, Integer> getBuffs() {
         return buffs;
     }
 
-    public ArrayList<DeBuff> getDeBuffs() {
+    public Map<DeBuff, Integer> getDeBuffs() {
         return deBuffs;
     }
 
@@ -56,13 +57,15 @@ public class Item {
         return coolDownTime;
     }
 
-    public void use(Character target) {
-        if (targetingEnemies) {
-            target.getDamage(itemPoints, attackType);
-            target.addDeBuffs(deBuffs);
-        } else {
-            target.restoreHealth(itemPoints);
-            target.addBuffs(buffs);
+    public void use(List<Character> targets) {
+        for(Character target: targets){
+            if (targetingEnemies) {
+                target.getDamage(itemPoints, attackType);
+                target.addDeBuffs(deBuffs);
+            } else {
+                target.restoreHealth(itemPoints);
+                target.addBuffs(buffs);
+            }
         }
     }
 }

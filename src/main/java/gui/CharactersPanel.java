@@ -19,7 +19,9 @@ public class CharactersPanel extends JPanel {
 
     private final BattlePanel battlePanel;
     private List<CharacterButton> enemyButtons = new ArrayList<>();
+    private List<CharacterLabel> enemyButtonsInfo = new ArrayList<>();
     private List<CharacterButton> allyButtons = new ArrayList<>();
+    private List<CharacterLabel> allyButtonsInfo = new ArrayList<>();
     private Battle battle;
     private JButton attackerButton;
     private Image bgImage;
@@ -33,8 +35,6 @@ public class CharactersPanel extends JPanel {
     }
 
     public void setUpCharacters(Battle battle){
-        //TODO rework function to get characters from battle
-
         //Removing everything from previous fight
         Component[] components = this.getComponents();
         for (Component component : components) {
@@ -62,6 +62,7 @@ public class CharactersPanel extends JPanel {
         attackerButton.setBorderPainted(false);
         attackerButton.setBounds(250, 200, 100, 100);
         add(attackerButton);
+        refresh();
     }
 
     public void addActiveBorder(){
@@ -87,9 +88,8 @@ public class CharactersPanel extends JPanel {
         for(CharacterButton allyButton: allyButtons){
             if(allyButton!=null){
                 allyButton.addActionListener(e -> {
-                    battlePanel.getConfirmation().changeActionInfo();
-                    battlePanel.changePanel(BattlePanel.Panel.Confirmation);
                     battle.setTarget(allyButton.getButtonCharacter());
+                    battlePanel.changePanel(BattlePanel.Panel.Confirmation);
                     clearTargetingAll();
                 });
             }
@@ -101,20 +101,19 @@ public class CharactersPanel extends JPanel {
         for(CharacterButton enemyButton: enemyButtons) {
             if (enemyButton != null) {
                 enemyButton.addActionListener(e -> {
-                    battlePanel.getConfirmation().changeActionInfo();
-                    battlePanel.changePanel(BattlePanel.Panel.Confirmation);
                     battle.setTarget(enemyButton.getButtonCharacter());
+                    battlePanel.changePanel(BattlePanel.Panel.Confirmation);
                     clearTargetingAll();
                 });
             }
         }
     }
 
-    public void animate(){
+    public void animate(boolean dealsDamage){
         Character aCharacter = battle.getActiveCharacter();
         CharacterButton button = getButton(aCharacter);
-        ImageIcon idleImage = new ImageIcon(getClass().getResource("/" + aCharacter.getName() + ".gif"));
-        ImageIcon attackImage = new ImageIcon(getClass().getResource("/" + aCharacter.getName() + "-attack.gif"));
+        ImageIcon idleImage = new ImageIcon(getClass().getResource("/" + aCharacter.getCharacterClassName() + ".gif"));
+        ImageIcon attackImage = new ImageIcon(getClass().getResource("/" + aCharacter.getCharacterClassName()+ "-attack.gif"));
         button.setIcon(null);
         attackerButton.setIcon(attackImage);
 
@@ -123,47 +122,53 @@ public class CharactersPanel extends JPanel {
             public void actionPerformed(ActionEvent arg0) {
                 button.setIcon(idleImage);
                 attackerButton.setIcon(null);
-                //TODO check here if action actually attacks anyone
-                for(Character character: battle.getTargetsArrayList()){
-                    ImageIcon characterIdleImage = new ImageIcon(getClass().getResource("/" +character.getName() + ".gif"));
-                    ImageIcon characterHitImage = new ImageIcon(getClass().getResource("/" + character.getName() + "-hit.gif"));
-                    getButton(character).setIcon(characterHitImage);
-                    if(character.getCurrentHealthPoints() > 0){
-                        Timer returnToIdleTimer = new Timer(1000, new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent arg0) {
-                                if(getButton(character).getIcon()!=null){
-                                    getButton(character).setIcon(characterIdleImage);
-                                }
-                            }
-                        });
-                        returnToIdleTimer.setRepeats(false);
-                        returnToIdleTimer.start();
-                    }
-                    else{
-                        Timer showDieTimer = new Timer(1000, new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent arg0) {
-                                ImageIcon characterDieImage = new ImageIcon(getClass().getResource("/" + character.getName() + "-die.gif"));
-                                getButton(character).setIcon(characterDieImage);
-                                Timer deleteButtonTimer = new Timer(1000, new ActionListener() {
-                                    @Override
-                                    public void actionPerformed(ActionEvent arg0) {
-                                        getButton(character).setIcon(null);
-                                        if(enemyButtons.contains(getButton(character))){
-                                            enemyButtons.remove(getButton(character));
-                                        }
-                                        if(allyButtons.contains(getButton(character))){
-                                            allyButtons.remove(getButton(character));
-                                        }
+                if(dealsDamage){
+                    for(Character character: battle.getTargetsArrayList()){
+                        ImageIcon characterIdleImage = new ImageIcon(getClass().getResource("/" +character.getCharacterClassName() + ".gif"));
+                        ImageIcon characterHitImage = new ImageIcon(getClass().getResource("/" + character.getCharacterClassName() + "-hit.gif"));
+                        getButton(character).setIcon(characterHitImage);
+                        if(character.getCurrentHealthPoints() > 0){
+                            Timer returnToIdleTimer = new Timer(1000, new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent arg0) {
+                                    if(getButton(character).getIcon()!=null){
+                                        getButton(character).setIcon(characterIdleImage);
                                     }
-                                });
-                                deleteButtonTimer.setRepeats(false);
-                                deleteButtonTimer.start();
-                            }
-                        });
-                        showDieTimer.setRepeats(false);
-                        showDieTimer.start();
+                                }
+                            });
+                            returnToIdleTimer.setRepeats(false);
+                            returnToIdleTimer.start();
+                        }
+                        else{
+                            Timer showDieTimer = new Timer(1000, new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent arg0) {
+                                    ImageIcon characterDieImage = new ImageIcon(getClass().getResource("/" + character.getCharacterClassName() + "-die.gif"));
+                                    getButton(character).setIcon(characterDieImage);
+                                    Timer deleteButtonTimer = new Timer(1000, new ActionListener() {
+                                        @Override
+                                        public void actionPerformed(ActionEvent arg0) {
+                                            getButton(character).setIcon(null);
+                                            getLabel(character).setVisible(false);
+                                            if(enemyButtons.contains(getButton(character))){
+                                                enemyButtons.remove(getButton(character));
+                                            }else if(allyButtons.contains(getButton(character))){
+                                                allyButtons.remove(getButton(character));
+                                            }
+                                            if(enemyButtonsInfo.contains(getLabel(character))){
+                                                enemyButtonsInfo.remove(getLabel(character));
+                                            }else if(allyButtonsInfo.contains(getLabel(character))){
+                                                allyButtonsInfo.remove(getLabel(character));
+                                            }
+                                        }
+                                    });
+                                    deleteButtonTimer.setRepeats(false);
+                                    deleteButtonTimer.start();
+                                }
+                            });
+                            showDieTimer.setRepeats(false);
+                            showDieTimer.start();
+                        }
                     }
                 }
             }
@@ -192,52 +197,72 @@ public class CharactersPanel extends JPanel {
     }
 
     private void addEnemyButton(int location, Character character) {
-        ImageIcon characterImage = new ImageIcon(getClass().getResource("/"+ character.getName() +".gif"));
+        ImageIcon characterImage = new ImageIcon(getClass().getResource("/"+ character.getCharacterClassName() +".gif"));
         CharacterButton characterButton = new CharacterButton(characterImage);
         characterButton.setCharacter(character);
+        CharacterLabel characterLabel = new CharacterLabel("", SwingConstants.CENTER);
+        characterLabel.setLabelCharacter(character);
+        characterLabel.setFont(new Font("Serif", Font.BOLD, 10));
+        characterLabel.setForeground(Color.WHITE);
         switch(location){
             case 1:
                 characterButton.setBounds(350, 275, 100, 100);
+                characterLabel.setBounds(350, 375, 100, 10);
                 break;
             case 2:
                 characterButton.setBounds(350, 125, 100, 100);
+                characterLabel.setBounds(350, 225, 100, 10);
                 break;
             case 3:
-                characterButton.setBounds(475, 250, 100, 100);
+                characterButton.setBounds(475, 225, 100, 100);
+                characterLabel.setBounds(475, 325, 100, 10);
                 break;
             case 4:
                 characterButton.setBounds(475, 100, 100, 100);
+                characterLabel.setBounds(475, 200, 100, 10);
                 break;
         }
         characterButton.setOpaque(false);
         characterButton.setContentAreaFilled(false);
         characterButton.setBorderPainted(false);
         enemyButtons.add(characterButton);
+        enemyButtonsInfo.add(characterLabel);
+        add(characterLabel);
         add(characterButton);
     }
 
     private void addAllyButton(int location, Character character) {
-        ImageIcon characterImage = new ImageIcon(getClass().getResource("/"+ character.getName() +".gif"));
+        ImageIcon characterImage = new ImageIcon(getClass().getResource("/"+ character.getCharacterClassName() +".gif"));
         CharacterButton characterButton = new CharacterButton(characterImage);
         characterButton.setCharacter(character);
+        CharacterLabel characterLabel = new CharacterLabel("", SwingConstants.CENTER);
+        characterLabel.setLabelCharacter(character);
+        characterLabel.setFont(new Font("Serif", Font.BOLD, 10));
+        characterLabel.setForeground(Color.WHITE);
         switch(location){
             case 1:
                 characterButton.setBounds(150, 275, 100, 100);
+                characterLabel.setBounds(150, 375, 100, 10);
                 break;
             case 2:
                 characterButton.setBounds(150, 125, 100, 100);
+                characterLabel.setBounds(150, 225, 100, 10);
                 break;
             case 3:
-                characterButton.setBounds(25, 250, 100, 100);
+                characterButton.setBounds(25, 225, 100, 100);
+                characterLabel.setBounds(25, 325, 100, 10);
                 break;
             case 4:
                 characterButton.setBounds(25, 100, 100, 100);
+                characterLabel.setBounds(25, 200, 100, 10);
                 break;
         }
         characterButton.setOpaque(false);
         characterButton.setContentAreaFilled(false);
         characterButton.setBorderPainted(false);
         allyButtons.add(characterButton);
+        allyButtonsInfo.add(characterLabel);
+        add(characterLabel);
         add(characterButton);
     }
 
@@ -255,6 +280,31 @@ public class CharactersPanel extends JPanel {
         //TODO delete error information popup
         System.out.println("failed to find button");
         return null;
+    }
+
+    public CharacterLabel getLabel(Character character) {
+        for(CharacterLabel label: enemyButtonsInfo){
+            if(label.getLabelCharacter() == character){
+                return label;
+            }
+        }
+        for(CharacterLabel label: allyButtonsInfo){
+            if(label.getLabelCharacter() == character){
+                return label;
+            }
+        }
+        //TODO delete error information popup
+        System.out.println("failed to find label");
+        return null;
+    }
+
+    public void refresh(){
+        for(CharacterLabel characterLabel: enemyButtonsInfo){
+            characterLabel.refresh();
+        }
+        for(CharacterLabel characterLabel: allyButtonsInfo){
+            characterLabel.refresh();
+        }
     }
 
     public Battle getBattle() {

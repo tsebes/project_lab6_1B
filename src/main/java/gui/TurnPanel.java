@@ -2,10 +2,12 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class TurnPanel extends JPanel {
 
     private final BattlePanel battlePanel;
+    private JButton logsButton;
 
     public TurnPanel(BattlePanel battlePanel) {
         this.battlePanel = battlePanel;
@@ -18,12 +20,30 @@ public class TurnPanel extends JPanel {
     }
 
     private void addLogsButton() {
-        JButton addLogsButton = new JButton("Logs");
-        addLogsButton.setBackground(Color.DARK_GRAY);
-        addLogsButton.setBounds(0, 350, 200, 50);
-        addLogsButton.setForeground(Color.RED);
-        add(addLogsButton);
-        addLogsButton.addActionListener(e -> {
+        JButton logsButton = new JButton("Logs");
+        logsButton.setBackground(Color.DARK_GRAY);
+        logsButton.setBounds(0, 350, 200, 50);
+        logsButton.setForeground(Color.RED);
+        this.logsButton=logsButton;
+        add(logsButton);
+        logsButton.addActionListener(e -> {
+            battlePanel.changePanel(BattlePanel.Panel.Logs);
+        });
+    }
+
+    public void deleteLogActionListener(){
+        ActionListener[] listeners = logsButton.getActionListeners();
+        if (listeners == null) {
+            return;
+        }
+        for (ActionListener listener : listeners) {
+            logsButton.removeActionListener(listener);
+        }
+    }
+
+    public void addLogActionListener(){
+        deleteLogActionListener();
+        logsButton.addActionListener(e -> {
             battlePanel.changePanel(BattlePanel.Panel.Logs);
         });
     }

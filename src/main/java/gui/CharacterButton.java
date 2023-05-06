@@ -13,18 +13,6 @@ public class CharacterButton extends JButton {
         super(icon);
     }
 
-    public CharacterButton(String text) {
-        super(text);
-    }
-
-    public CharacterButton(Action a) {
-        super(a);
-    }
-
-    public CharacterButton(String text, Icon icon) {
-        super(text, icon);
-    }
-
     public void setCharacter(Character character){
         buttonCharacter = character;
     }
