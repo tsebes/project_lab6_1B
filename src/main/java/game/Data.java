@@ -20,7 +20,7 @@ public class Data {
             "Air Blade,false,true,AIR,1.2,,,15.0",
             "Earth Blade,false,true,EARTH,1.2,,,15.0",
             "Healing aura,true,false,ENERGY,1.0,,,20.0",
-            "Undead charge,false,true,PHYSICAL,1.3,,,21.0",
+            "Undead charge,false,true,PHYSICAL,1.3,,,12.0",
             // Creating skill tutorial:
             // String name,
             // Boolean isAOE,
