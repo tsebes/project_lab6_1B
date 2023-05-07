@@ -4,8 +4,8 @@ public class Hero extends Character{
 
     protected boolean isGuardEnable = false;
 
-    public Hero(CharacterClass characterClass, String name, int level, double maxHealthPoints) {
-        super(characterClass, name, level, maxHealthPoints);
+    public Hero(CharacterClass characterClass, String name, int level) {
+        super(characterClass, name, level);
     }
 
     @Override

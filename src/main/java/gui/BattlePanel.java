@@ -15,6 +15,9 @@ public class BattlePanel extends JPanel {
     private final TargetingPanel targeting;
     private final AnalyzePanel analyze;
     private final LogsPanel logs;
+    private final ItemPanel items;
+    private final SkillsInfoPanel skillInfo;
+    private final ItemsInfoPanel itemInfo;
     private final ConfirmationPanel confirmation;
     private final ActionStopperPanel actionStopper;
     private JButton exitButton;
@@ -38,6 +41,9 @@ public class BattlePanel extends JPanel {
         logs = new LogsPanel(this);
         confirmation = new ConfirmationPanel(this);
         actionStopper = new ActionStopperPanel(this);
+        items = new ItemPanel(this);
+        skillInfo = new SkillsInfoPanel(this);
+        itemInfo = new ItemsInfoPanel(this);
         this.gui = gui;
         //TODO rework menu graphics
         setPreferredSize(new Dimension(800, 600));
@@ -53,6 +59,9 @@ public class BattlePanel extends JPanel {
         add(logs);
         add(confirmation);
         add(actionStopper);
+        add(items);
+        add(skillInfo);
+        add(itemInfo);
     }
 
     private void addExitButton() {
@@ -85,44 +94,42 @@ public class BattlePanel extends JPanel {
             turns.setVisible(true);
             bOptions.setVisible(true);
             exitButton.setVisible(true);
+            confirmation.setVisible(false);
+            analyze.setVisible(false);
+            targeting.setVisible(false);
+            actionStopper.setVisible(false);
+            skills.setVisible(false);
+            items.setVisible(false);
+            skillInfo.setVisible(false);
+            itemInfo.setVisible(false);
             switch (panel) {
                 case Skills -> {
-                    confirmation.setVisible(false);
-                    analyze.setVisible(false);
-                    targeting.setVisible(false);
-                    actionStopper.setVisible(false);
                     skills.refresh();
                     skills.setVisible(true);
                 }
                 case Analyze -> {
-                    confirmation.setVisible(false);
-                    targeting.setVisible(false);
-                    skills.setVisible(false);
-                    actionStopper.setVisible(false);
                     analyze.setVisible(true);
                 }
                 case Targeting -> {
-                    confirmation.setVisible(false);
-                    analyze.setVisible(false);
-                    skills.setVisible(false);
-                    actionStopper.setVisible(false);
                     targeting.setVisible(true);
+                }
+                case Items -> {
+                    items.refresh();
+                    items.setVisible(true);
+                }
+                case SkillInfo -> {
+                    skillInfo.setVisible(true);
+                }
+                case ItemInfo -> {
+                    itemInfo.setVisible(true);
                 }
                 case Confirmation -> {
                     confirmation.changeActionInfo();
-                    analyze.setVisible(false);
-                    skills.setVisible(false);
-                    targeting.setVisible(false);
-                    actionStopper.setVisible(false);
                     confirmation.setVisible(true);
                 }
                 case ActionStopper -> {
                     exitButton.setVisible(false);
                     bOptions.setVisible(false);
-                    analyze.setVisible(false);
-                    skills.setVisible(false);
-                    targeting.setVisible(false);
-                    confirmation.setVisible(false);
                     actionStopper.setVisible(true);
                     turns.deleteLogActionListener();
                 }
@@ -172,7 +179,10 @@ public class BattlePanel extends JPanel {
         Targeting,
         Logs,
         Confirmation,
-        ActionStopper
+        ActionStopper,
+        SkillInfo,
+        Items,
+        ItemInfo
     }
 
 }

@@ -187,6 +187,11 @@ public class Battle {
                     delay += 1000;
                 }
                 turnOrder.remove(character);
+                if(character instanceof Enemy){
+                    enemyArrayList.remove(character);
+                }else{
+                    heroArrayList.remove(character);
+                }
                 graveyardList.add(character);
             }
         }
@@ -222,7 +227,9 @@ public class Battle {
     }
 
     public void endTurn() {
+        //Changing info (health) in labels under characters
         battlePanel.getCharacters().refresh();
+
         for (Map.Entry<Character, Double> e : turnOrder.entrySet()) {
             Double value = e.getValue();
             value -= timePassed;

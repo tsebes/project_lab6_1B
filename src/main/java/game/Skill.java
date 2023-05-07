@@ -88,14 +88,14 @@ public class Skill {
 
         if(executor.getBasicAttack().equals(AttackResistanceType.PHYSICAL)) {
             if (executor.checkIfCritical())
-                amount = 2.0 * (executor.getLevel() * executor.getCurrentStrength());
+                amount = 2.0 * (executor.getCurrentStrength()/10);
             else
-                amount = executor.getLevel() * executor.getCurrentStrength();
+                amount = executor.getCurrentStrength()/10;
         } else {
             if (executor.checkIfCritical())
-                amount = 2.0 * (executor.getLevel() * executor.getCurrentIntelligence());
+                amount = 2.0 * (executor.getCurrentIntelligence()/10);
             else
-                amount = executor.getLevel() * executor.getCurrentIntelligence();
+                amount = executor.getCurrentIntelligence()/10;
         }
 
         amount *= skillPoints;

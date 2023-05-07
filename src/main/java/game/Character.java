@@ -13,20 +13,28 @@ public abstract class Character {
     protected double currentIntelligence;
     protected double currentSpeed;
     protected double currentLuck;
+    protected double basicStrength;
+    protected double basicIntelligence;
+    protected double basicSpeed;
+    protected double basicLuck;
     // TODO: add buffs, debuffs, skills
     protected Map<Buff, Integer> buffs;
     protected Map<DeBuff, Integer> deBuffs;
 
-    public Character(CharacterClass characterClass, String name, int level, double maxHealthPoints) {
+    public Character(CharacterClass characterClass, String name, int level) {
         this.characterClass = characterClass;
         this.name = name;
         this.level = level;
-        this.maxHealthPoints = maxHealthPoints;
+        this.maxHealthPoints = characterClass.getLvl1HP() + characterClass.getGrowthHP() * (level - 1);
         this.currentHealthPoints = maxHealthPoints;
-        this.currentStrength = characterClass.getBasicStrength();
-        this.currentIntelligence = characterClass.getBasicIntelligence();
-        this.currentSpeed = characterClass.getBasicSpeed();
-        this.currentLuck = characterClass.getBasicLuck();
+        this.basicStrength = characterClass.getLvl1Strength() + characterClass.getGrowthStrength() * (level - 1);
+        this.currentStrength = this.basicStrength;
+        this.basicIntelligence = characterClass.getLvl1Intelligence() + characterClass.getGrowthIntelligence() * (level - 1);
+        this.currentIntelligence = this.basicIntelligence;
+        this.basicSpeed = characterClass.getLvl1Speed() + characterClass.getGrowthSpeed() * (level - 1);
+        this.currentSpeed = this.basicSpeed;
+        this.basicLuck = characterClass.getLvl1Luck() + characterClass.getGrowthLuck() * (level - 1);
+        this.currentLuck = this.basicLuck;
     }
 
     public String getName() {
@@ -102,19 +110,19 @@ public abstract class Character {
     }
 
     public double getBasicStrength() {
-        return this.getCharacterClass().getBasicStrength();
+        return this.getCharacterClass().getLvl1Strength();
     }
 
     public double getBasicIntelligence() {
-        return this.getCharacterClass().getBasicIntelligence();
+        return this.getCharacterClass().getLvl1Intelligence();
     }
 
     public double getBasicSpeed() {
-        return this.getCharacterClass().getBasicSpeed();
+        return this.getCharacterClass().getLvl1Speed();
     }
 
     public double getBasicLuck() {
-        return this.getCharacterClass().getBasicLuck();
+        return this.getCharacterClass().getLvl1Luck();
     }
 
     public AttackResistanceType getBasicAttack() {
@@ -166,14 +174,14 @@ public abstract class Character {
 
         if(this.getBasicAttack().equals(AttackResistanceType.PHYSICAL)) {
             if (checkIfCritical())
-                amount = 2.0 * (level * currentStrength);
+                amount = 2.0 * (currentStrength/10);
             else
-                amount = level * currentStrength;
+                amount = currentStrength/10;
         } else {
             if (checkIfCritical())
-                amount = 2.0 * (level * currentIntelligence);
+                amount = 2.0 * (currentIntelligence/10);
             else
-                amount = level * currentIntelligence;
+                amount = currentIntelligence/10;
         }
 
         for (Character target : targets) {

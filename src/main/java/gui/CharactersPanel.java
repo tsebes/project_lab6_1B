@@ -1,5 +1,6 @@
 package gui;
 
+import game.Action;
 import game.Battle;
 import game.Character;
 import game.Enemy;
@@ -88,6 +89,9 @@ public class CharactersPanel extends JPanel {
         for(CharacterButton allyButton: allyButtons){
             if(allyButton!=null){
                 allyButton.addActionListener(e -> {
+                    if(battle.getCurrentAction() == Action.ANALYZE){
+
+                    }
                     battle.setTarget(allyButton.getButtonCharacter());
                     battlePanel.changePanel(BattlePanel.Panel.Confirmation);
                     clearTargetingAll();
@@ -103,6 +107,36 @@ public class CharactersPanel extends JPanel {
                 enemyButton.addActionListener(e -> {
                     battle.setTarget(enemyButton.getButtonCharacter());
                     battlePanel.changePanel(BattlePanel.Panel.Confirmation);
+                    clearTargetingAll();
+                });
+            }
+        }
+    }
+
+    public void addTargetingAll(){
+        clearTargetingAll();
+        for(CharacterButton allyButton: allyButtons){
+            if(allyButton!=null){
+                allyButton.addActionListener(e -> {
+                    if(battle.getCurrentAction() == Action.ANALYZE){
+                        battlePanel.changePanel(BattlePanel.Panel.Analyze);
+                    }else{
+                        battle.setTarget(allyButton.getButtonCharacter());
+                        battlePanel.changePanel(BattlePanel.Panel.Confirmation);
+                    }
+                    clearTargetingAll();
+                });
+            }
+        }
+        for(CharacterButton enemyButton: enemyButtons) {
+            if (enemyButton != null) {
+                enemyButton.addActionListener(e -> {
+                    if(battle.getCurrentAction() == Action.ANALYZE){
+                        battlePanel.changePanel(BattlePanel.Panel.Analyze);
+                    }else {
+                        battle.setTarget(enemyButton.getButtonCharacter());
+                        battlePanel.changePanel(BattlePanel.Panel.Confirmation);
+                    }
                     clearTargetingAll();
                 });
             }

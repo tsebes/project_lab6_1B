@@ -30,7 +30,6 @@ public class BattleOptionsPanel extends JPanel {
         attackButton.setBorder(new LineBorder(Color.BLACK));
         add(attackButton);
         attackButton.addActionListener(e -> {
-            //TODO change action to basic attack
             battlePanel.getBattle().clearCurrentAction();
             battlePanel.getBattle().setCurrentAction(Action.BASICATTACK);
             battlePanel.changePanel(BattlePanel.Panel.Targeting);
@@ -49,7 +48,6 @@ public class BattleOptionsPanel extends JPanel {
         skillsButton.addActionListener(e -> {
             battlePanel.getBattle().clearCurrentAction();
             battlePanel.getBattle().setCurrentAction(Action.SKILL);
-            //TODO show current character skills
             battlePanel.changePanel(BattlePanel.Panel.Skills);
         });
     }
@@ -65,7 +63,6 @@ public class BattleOptionsPanel extends JPanel {
             battlePanel.getBattle().clearCurrentAction();
             battlePanel.getBattle().setCurrentAction(Action.GUARD);
             battlePanel.changePanel(BattlePanel.Panel.Confirmation);
-            //TODO show confirmation screen
         });
     }
 
@@ -81,7 +78,7 @@ public class BattleOptionsPanel extends JPanel {
             battlePanel.getBattle().setCurrentAction(Action.ANALYZE);
             battlePanel.changePanel(BattlePanel.Panel.Targeting);
             battlePanel.getTargeting().changeInformationPanel("Using analyze");
-            battlePanel.getCharacters().addEnemyTargeting();
+            battlePanel.getCharacters().addTargetingAll();
             //TODO make analyze work
         });
     }
@@ -96,7 +93,7 @@ public class BattleOptionsPanel extends JPanel {
         itemButton.addActionListener(e -> {
             battlePanel.getBattle().clearCurrentAction();
             battlePanel.getBattle().setCurrentAction(Action.ITEM);
-            //TODO show items panel
+            battlePanel.changePanel(BattlePanel.Panel.Items);
         });
     }
 
