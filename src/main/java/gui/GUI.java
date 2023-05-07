@@ -7,13 +7,17 @@ import javax.swing.*;
 public class GUI extends JFrame{
 
     private final MenuPanel menuPanel;
-    private final OptionsPanel optionsPanel;
+    private final CreditsPanel creditsPanel;
     private final BattlePanel battlePanel;
+    private final TutorialPanel tutorialPanel;
+    private final CustomBattlePanel customBattlePanel;
 
     public GUI() {
         menuPanel = new MenuPanel(this);
-        optionsPanel = new OptionsPanel(this);
+        creditsPanel = new CreditsPanel(this);
         battlePanel = new BattlePanel(this);
+        tutorialPanel = new TutorialPanel(this);
+        customBattlePanel = new CustomBattlePanel(this);
 
         //TODO add other panels
         configureFrame();
@@ -31,24 +35,21 @@ public class GUI extends JFrame{
     }
 
     public void changePanel(Panel panel) {
+        creditsPanel.setVisible(false);
+        battlePanel.setVisible(false);
+        menuPanel.setVisible(false);
         switch (panel) {
             case Menu -> {
-                optionsPanel.setVisible(false);
-                battlePanel.setVisible(false);
                 setContentPane(menuPanel);
                 pack();
                 menuPanel.setVisible(true);
             }
-            case Options -> {
-                menuPanel.setVisible(false);
-                battlePanel.setVisible(false);
-                setContentPane(optionsPanel);
+            case Credits -> {
+                setContentPane(creditsPanel);
                 pack();
-                optionsPanel.setVisible(true);
+                creditsPanel.setVisible(true);
             }
             case Battle -> {
-                menuPanel.setVisible(false);
-                optionsPanel.setVisible(false);
                 setContentPane(battlePanel);
                 pack();
                 battlePanel.setVisible(true);
@@ -59,6 +60,16 @@ public class GUI extends JFrame{
                     battlePanel.changePanel(BattlePanel.Panel.Skills);
                 }
             }
+            case Tutorial -> {
+                setContentPane(tutorialPanel);
+                pack();
+                tutorialPanel.setVisible(true);
+            }
+            case CustomBattle -> {
+                setContentPane(customBattlePanel);
+                pack();
+                customBattlePanel.setVisible(true);
+            }
         }
     }
 
@@ -68,7 +79,9 @@ public class GUI extends JFrame{
 
     public enum Panel {
         Menu,
-        Options,
-        Battle
+        Credits,
+        Battle,
+        Tutorial,
+        CustomBattle
     }
 }

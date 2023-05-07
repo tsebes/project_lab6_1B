@@ -3,11 +3,11 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 
-public class OptionsPanel extends JPanel  {
+public class CustomBattlePanel extends JPanel {
 
     private final GUI gui;
 
-    public OptionsPanel(GUI gui) {
+    public CustomBattlePanel(GUI gui) {
         this.gui = gui;
         //TODO rework options graphics
         setPreferredSize(new Dimension(800, 600));
@@ -19,7 +19,7 @@ public class OptionsPanel extends JPanel  {
     }
 
     private void addTitle() {
-        JLabel title = new JLabel("Options", SwingConstants.CENTER);
+        JLabel title = new JLabel("CustomBattle", SwingConstants.CENTER);
         title.setFont(new Font("Serif", Font.PLAIN, 40));
         title.setForeground(Color.WHITE);
         title.setBounds(200, 50, 400, 50);

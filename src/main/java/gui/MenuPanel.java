@@ -27,7 +27,7 @@ public class MenuPanel extends JPanel {
         addBossBattleButton();
         addTutorialButton();
         addCustomBattleButton();
-        addOptionsButton();
+        addCreditsButton();
     }
 
     private void addTitle() {
@@ -130,7 +130,7 @@ public class MenuPanel extends JPanel {
         tutorialButton.setForeground(Color.WHITE);
         add(tutorialButton);
         tutorialButton.addActionListener(e -> {
-            //TODO show tutorial panel
+            gui.changePanel(GUI.Panel.Tutorial);
         });
     }
 
@@ -141,19 +141,18 @@ public class MenuPanel extends JPanel {
         CustomBattleButton.setForeground(Color.WHITE);
         add(CustomBattleButton);
         CustomBattleButton.addActionListener(e -> {
-            //TODO show battle creation panel
+            gui.changePanel(GUI.Panel.CustomBattle);
         });
     }
 
-    private void addOptionsButton() {
-        JButton OptionsButton = new JButton("Options");
-        OptionsButton.setBackground(new Color(178,17,17));
-        OptionsButton.setBounds(300, 450, 200, 50);
-        OptionsButton.setForeground(Color.WHITE);
-        add(OptionsButton);
-        OptionsButton.addActionListener(e -> {
-            //TODO add options or if OptionsPanel found no use delete it
-            gui.changePanel(GUI.Panel.Options);
+    private void addCreditsButton() {
+        JButton creditsButton = new JButton("Credits");
+        creditsButton.setBackground(new Color(178,17,17));
+        creditsButton.setBounds(300, 450, 200, 50);
+        creditsButton.setForeground(Color.WHITE);
+        add(creditsButton);
+        creditsButton.addActionListener(e -> {
+            gui.changePanel(GUI.Panel.Credits);
         });
     }
 

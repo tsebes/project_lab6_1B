@@ -18,6 +18,10 @@ public class SkillsPanel  extends JPanel {
     private JButton skill2;
     private JButton skill3;
     private JButton skill4;
+    private JButton skill1Info;
+    private JButton skill2Info;
+    private JButton skill3Info;
+    private JButton skill4Info;
     private JButton pageLeft;
     private JButton pageRight;
 
@@ -66,25 +70,42 @@ public class SkillsPanel  extends JPanel {
         skillButton.setBackground(new Color(178,17,17));
         skillButton.setForeground(Color.WHITE);
 
+        JButton skillInfoButton = new JButton("?");
+        skillInfoButton.setBackground(Color.BLACK);
+        skillInfoButton.setForeground(Color.WHITE);
+        skillInfoButton.setFont(new Font("Serif", Font.PLAIN, 5));
+
         switch (buttonNumber){
             case 1:
                 skillButton.setBounds(100, 25, 175, 65);
+                skillInfoButton.setBounds(275, 25, 10, 10);
                 skill1 = skillButton;
+                skill1Info = skillInfoButton;
                 break;
             case 2:
                 skillButton.setBounds(325, 25, 175, 65);
+                skillInfoButton.setBounds(500, 25, 10, 10);
                 skill2 = skillButton;
+                skill2Info = skillInfoButton;
                 break;
             case 3:
                 skillButton.setBounds(100, 110, 175, 65);
+                skillInfoButton.setBounds(275, 110, 10, 10);
                 skill3 = skillButton;
+                skill3Info = skillInfoButton;
                 break;
             case 4:
                 skillButton.setBounds(325, 110, 175, 65);
+                skillInfoButton.setBounds(500, 110, 10, 10);
                 skill4 = skillButton;
+                skill4Info = skillInfoButton;
                 break;
         }
+        skillInfoButton.addActionListener(e -> {
+            battlePanel.changePanel(BattlePanel.Panel.SkillInfo);
+        });
         add(skillButton);
+        add(skillInfoButton);
     }
 
     private void clearActionListeners(JButton button){
