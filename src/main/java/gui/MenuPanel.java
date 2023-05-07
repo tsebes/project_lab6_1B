@@ -49,8 +49,8 @@ public class MenuPanel extends JPanel {
 
             List<Hero> heroArrayList = new ArrayList<>();
             List<Enemy> enemyArrayList = new ArrayList<>();
-            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 1", 1, 50));
-            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 1", 1, 20));
+            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 1", 1));
+            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 1", 1));
             battle = new Battle(heroArrayList, enemyArrayList, gui.getBattlePanel());
 
             gui.changePanel(GUI.Panel.Battle);
@@ -70,12 +70,12 @@ public class MenuPanel extends JPanel {
             List<Enemy> enemyArrayList = new ArrayList<>();
 
 
-            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 1", 1, 50));
-            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 2", 1, 50));
-            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 3", 1, 50));
-            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 1", 1, 20));
-            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 2", 1, 20));
-            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 3", 1, 20));
+            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 1", 5));
+            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 2", 5));
+            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 3", 5));
+            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 1", 5));
+            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 2", 5));
+            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 3", 5));
 
 
             battle = new Battle(heroArrayList, enemyArrayList, gui.getBattlePanel());
@@ -96,14 +96,14 @@ public class MenuPanel extends JPanel {
             List<Hero> heroArrayList = new ArrayList<>();
             List<Enemy> enemyArrayList = new ArrayList<>();
 
-            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 1", 1, 50));
-            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 2", 1, 50));
-            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 3", 1, 50));
-            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 4", 1, 50));
-            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 1", 1, 20));
-            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 2", 1, 20));
-            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 3", 1, 20));
-            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 4", 1, 20));
+            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 1", 10));
+            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 2", 10));
+            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 3", 10));
+            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 4", 10));
+            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 1", 10));
+            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 2", 10));
+            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 3", 10));
+            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 4", 10));
 
             battle = new Battle(heroArrayList, enemyArrayList, gui.getBattlePanel());
 

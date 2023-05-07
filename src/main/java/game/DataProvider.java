@@ -34,12 +34,8 @@ public class DataProvider {
             String [] s = characterClass.trim().split("\\s*" + DATA_SEPARATOR + "\\s*");
             ArrayList<Skill> skills = getCharacterSkills(s[1]);
             Map<AttackResistanceType, Double> resistances = getCharacterResistances(s[2]);
-            double strength = Double.parseDouble(s[3]);
-            double intelligence = Double.parseDouble(s[4]);
-            double speed = Double.parseDouble(s[5]);
-            double luck = Double.parseDouble(s[6]);
-            AttackResistanceType basicAttack = Enum.valueOf(AttackResistanceType.class, s[7]);
-            charactersClassesList.add(new CharacterClass(s[0], skills, resistances, strength, intelligence, speed, luck, basicAttack));
+            AttackResistanceType basicAttack = Enum.valueOf(AttackResistanceType.class, s[13]);
+            charactersClassesList.add(new CharacterClass(s[0], skills, resistances, Double.parseDouble(s[3]), Double.parseDouble(s[4]), Double.parseDouble(s[5]), Double.parseDouble(s[6]), Double.parseDouble(s[7]), Double.parseDouble(s[8]), Double.parseDouble(s[9]), Double.parseDouble(s[10]), Double.parseDouble(s[11]), Double.parseDouble(s[12]), basicAttack));
         }
     }
 
