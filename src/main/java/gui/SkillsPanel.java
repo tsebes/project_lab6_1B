@@ -101,9 +101,6 @@ public class SkillsPanel  extends JPanel {
                 skill4Info = skillInfoButton;
                 break;
         }
-        skillInfoButton.addActionListener(e -> {
-            battlePanel.changePanel(BattlePanel.Panel.SkillInfo);
-        });
         add(skillButton);
         add(skillInfoButton);
     }
@@ -144,7 +141,13 @@ public class SkillsPanel  extends JPanel {
         });
     }
 
-
+    public void setUpSkillInfoToButton(JButton button, int number){
+        Skill skill = character.getAvailableSkills().get(currentPage*4 + number - 1);
+        button.addActionListener(e -> {
+            battlePanel.getSkillInfo().setSkill(skill);
+            battlePanel.changePanel(BattlePanel.Panel.SkillInfo);
+        });
+    }
 
     public void refresh(){
         Character activeCharacter = battlePanel.getBattle().getActiveCharacter();
@@ -163,37 +166,68 @@ public class SkillsPanel  extends JPanel {
         clearActionListeners(skill2);
         clearActionListeners(skill3);
         clearActionListeners(skill4);
+        clearActionListeners(skill1Info);
+        clearActionListeners(skill2Info);
+        clearActionListeners(skill3Info);
+        clearActionListeners(skill4Info);
 
         if(currentPage < numberOfPages - 1 || character.getAvailableSkills().size()%4 == 0){
             skill1.setVisible(true);
             setUpSkillToButton(skill1,1);
+            setUpSkillInfoToButton(skill1Info,1);
+            skill1Info.setVisible(true);
             skill2.setVisible(true);
             setUpSkillToButton(skill2,2);
+            setUpSkillInfoToButton(skill2Info,2);
+            skill2Info.setVisible(true);
             skill3.setVisible(true);
             setUpSkillToButton(skill3,3);
+            setUpSkillInfoToButton(skill3Info,3);
+            skill3Info.setVisible(true);
             skill4.setVisible(true);
             setUpSkillToButton(skill4,4);
+            setUpSkillInfoToButton(skill4Info,4);
+            skill4Info.setVisible(true);
+
         }else if(character.getAvailableSkills().size()%4 == 3){
             skill1.setVisible(true);
             setUpSkillToButton(skill1,1);
+            setUpSkillInfoToButton(skill1Info,1);
+            skill1Info.setVisible(true);
             skill2.setVisible(true);
             setUpSkillToButton(skill2,2);
+            setUpSkillInfoToButton(skill2Info,2);
+            skill2Info.setVisible(true);
             skill3.setVisible(true);
             setUpSkillToButton(skill3,3);
+            setUpSkillInfoToButton(skill3Info,3);
+            skill3Info.setVisible(true);
             skill4.setVisible(false);
+            skill4Info.setVisible(false);
         }else if(character.getAvailableSkills().size()%4 == 2){
             skill1.setVisible(true);
             setUpSkillToButton(skill1,1);
+            setUpSkillInfoToButton(skill1Info,1);
+            skill1Info.setVisible(true);
             skill2.setVisible(true);
             setUpSkillToButton(skill2,2);
+            setUpSkillInfoToButton(skill2Info,2);
+            skill2Info.setVisible(true);
             skill3.setVisible(false);
+            skill3Info.setVisible(false);
             skill4.setVisible(false);
+            skill4Info.setVisible(false);
         }else{
             skill1.setVisible(true);
             setUpSkillToButton(skill1,1);
+            setUpSkillInfoToButton(skill1Info,1);
+            skill1Info.setVisible(true);
             skill2.setVisible(false);
+            skill2Info.setVisible(false);
             skill3.setVisible(false);
+            skill3Info.setVisible(false);
             skill4.setVisible(false);
+            skill4Info.setVisible(false);
         }
     }
 

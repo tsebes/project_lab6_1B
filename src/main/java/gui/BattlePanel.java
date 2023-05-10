@@ -118,9 +118,11 @@ public class BattlePanel extends JPanel {
                     items.setVisible(true);
                 }
                 case SkillInfo -> {
+                    skillInfo.refresh();
                     skillInfo.setVisible(true);
                 }
                 case ItemInfo -> {
+                    itemInfo.refresh();
                     itemInfo.setVisible(true);
                 }
                 case Confirmation -> {
@@ -167,6 +169,18 @@ public class BattlePanel extends JPanel {
 
     public ConfirmationPanel getConfirmation() {
         return confirmation;
+    }
+
+    public ItemPanel getItems() {
+        return items;
+    }
+
+    public SkillsInfoPanel getSkillInfo() {
+        return skillInfo;
+    }
+
+    public ItemsInfoPanel getItemInfo() {
+        return itemInfo;
     }
 
     public Battle getBattle(){

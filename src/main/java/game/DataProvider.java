@@ -49,7 +49,7 @@ public class DataProvider {
             Map<Buff, Integer> buffs = getBuffs(s[5]);
             Map<DeBuff, Integer> deBuffs = getDeBuffs(s[6]);
             double coolDownTime =  Double.parseDouble(s[7]);
-            allSkillsList.add(new Skill(s[0], AOE, targetingEnemies, attackType, skillPoints, buffs, deBuffs, coolDownTime));
+            allSkillsList.add(new Skill(s[0], AOE, targetingEnemies, attackType, skillPoints, buffs, deBuffs, coolDownTime, s[8]));
         }
     }
 

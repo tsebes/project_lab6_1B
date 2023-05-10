@@ -15,8 +15,9 @@ public class Skill {
     protected final Map<DeBuff, Integer> deBuffs;
     protected ArrayList<SpecialEffect> specialEffects;
     protected final double coolDownTime;
+    protected final String description;
 
-    public Skill(String name, Boolean isAOE, Boolean targetingEnemies, AttackResistanceType attackType, double skillPoints, Map<Buff, Integer> buffs, Map<DeBuff, Integer> deBuffs, double coolDownTime) {
+    public Skill(String name, Boolean isAOE, Boolean targetingEnemies, AttackResistanceType attackType, double skillPoints, Map<Buff, Integer> buffs, Map<DeBuff, Integer> deBuffs, double coolDownTime, String description) {
         this.name = name;
         this.isAOE = isAOE;
         this.targetingEnemies = targetingEnemies;
@@ -25,6 +26,7 @@ public class Skill {
         this.buffs = buffs;
         this.deBuffs = deBuffs;
         this.coolDownTime = coolDownTime;
+        this.description = description;
     }
 
     public String getName() {
@@ -53,6 +55,10 @@ public class Skill {
 
     public Map<DeBuff, Integer> getDeBuffs() {
         return deBuffs;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public Boolean getTargetingEnemies() {

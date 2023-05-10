@@ -1,6 +1,6 @@
 package game;
 
-public abstract class DeBuff {
+public enum DeBuff {
 
-    // TODO: DeBuff class
+    // TODO: DeBuff enum
 }
