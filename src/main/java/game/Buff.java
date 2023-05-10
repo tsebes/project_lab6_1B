@@ -1,6 +1,6 @@
 package game;
 
-public abstract class Buff {
+public enum Buff {
 
-    // TODO: Buff class
+    // TODO: Buff enum
 }

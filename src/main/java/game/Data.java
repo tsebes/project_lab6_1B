@@ -14,13 +14,13 @@ public class Data {
     };
 
     static final String[] skillsArray = {
-            "Blade storm,true,true,PHYSICAL,1.2,,,30.0",
-            "Water Blade,false,true,WATER,1.2,,,15.0",
-            "Fire Blade,false,true,FIRE,1.2,,,15.0",
-            "Air Blade,false,true,AIR,1.2,,,15.0",
-            "Earth Blade,false,true,EARTH,1.2,,,15.0",
-            "Healing aura,true,false,ENERGY,1.0,,,20.0",
-            "Undead charge,false,true,PHYSICAL,1.3,,,12.0",
+            "Blade storm,true,true,PHYSICAL,1.2,,,30.0,Charges in and starts spinning with sword dealing damage to all enemies",
+            "Water Blade,false,true,WATER,1.2,,,15.0,Covers blade with water magic and attacks single enemy",
+            "Fire Blade,false,true,FIRE,1.2,,,15.0,Covers blade with fire magic and attacks single enemy",
+            "Air Blade,false,true,AIR,1.2,,,15.0,Covers blade with air magic and attacks single enemy",
+            "Earth Blade,false,true,EARTH,1.2,,,15.0,Covers blade with earth magic and attacks single enemy",
+            "Healing aura,true,false,ENERGY,1.0,,,20.0,Emits aura that heals all allies",
+            "Undead charge,false,true,PHYSICAL,1.3,,,12.0,Skeleton charges at enemy",
             // Creating skill tutorial:
             // String name,
             // Boolean isAOE,
@@ -30,6 +30,7 @@ public class Data {
             // Map<Buff,Integer> buffs (currently not working but will be divided by ; done like this: 'buff:duration'),
             // Map<DeBuff> deBuffs (currently not working but will be divided by ; done like this: 'debuff:duration'),
             // double coolDownTime
+            // String description
     };
 
 }
