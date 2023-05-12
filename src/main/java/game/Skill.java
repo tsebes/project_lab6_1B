@@ -37,10 +37,6 @@ public class Skill {
         return isAOE;
     }
 
-    public Boolean isTargetingEnemies() {
-        return targetingEnemies;
-    }
-
     public AttackResistanceType getAttackType() {
         return attackType;
     }

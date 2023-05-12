@@ -33,7 +33,7 @@ public class Item {
         return isAOE;
     }
 
-    public Boolean isTargetingEnemies() {
+    public Boolean getTargetingEnemies() {
         return targetingEnemies;
     }
 

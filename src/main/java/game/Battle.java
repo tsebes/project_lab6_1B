@@ -18,6 +18,7 @@ public class Battle {
     protected List<Character> targetsArrayList = new ArrayList<>();
     protected Action currentAction;
     protected Skill currentSkill;
+    protected Item currentItem;
     protected BattlePanel battlePanel;
     protected Double timePassed;
 
@@ -92,6 +93,14 @@ public class Battle {
 
     public void setCurrentSkill(Skill currentSkill) {
         this.currentSkill = currentSkill;
+    }
+
+    public Item getCurrentItem() {
+        return this.currentItem;
+    }
+
+    public void setCurrentItem(Item item) {
+        this.currentItem = item;
     }
 
     public List<Character> getTargetsArrayList() {
