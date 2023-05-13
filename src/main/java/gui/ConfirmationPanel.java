@@ -62,6 +62,9 @@ public class ConfirmationPanel extends JPanel {
         if(battlePanel.getBattle().getCurrentAction() == Action.SKILL){
             actionDescription += "Using skill: " + battlePanel.getBattle().getCurrentSkill().getName();
         }
+        if(battlePanel.getBattle().getCurrentAction() == Action.ITEM){
+            actionDescription += "Using item: " + battlePanel.getBattle().getCurrentItem().getName();
+        }
         if(battlePanel.getBattle().getCurrentAction() != Action.GUARD){
             actionTargets += "Targets: ";
             for(Character character: battlePanel.getBattle().getTargetsArrayList()){

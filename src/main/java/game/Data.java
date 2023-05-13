@@ -1,5 +1,7 @@
 package game;
 
+import java.util.Map;
+
 public class Data {
 
     static final String[] charactersArray = {
@@ -31,6 +33,21 @@ public class Data {
             // Map<DeBuff> deBuffs (currently not working but will be divided by ; done like this: 'debuff:duration'),
             // double coolDownTime
             // String description
+    };
+
+    static final String[] itemsArray = {
+            "Potion, false, false, PHYSICAL, 10,,,15",
+            "Great potion, false, false, PHYSICAL, 20,,,15",
+            // Creating item tutorial:
+            // String name,
+            // Boolean isAOE,
+            // Boolean targetingEnemies,
+            // AttackResistanceType attackType,
+            // double itemPoints,
+            // Map<Buff,Integer> buffs (currently not working but will be divided by ; done like this: 'buff:duration'),
+            // Map<DeBuff> deBuffs (currently not working but will be divided by ; done like this: 'debuff:duration'),
+            // double coolDownTime
+
     };
 
 }
