@@ -75,6 +75,10 @@ public class Battle {
         this.itemArrayList = itemArrayList;
     }
 
+    public void addItemToList(Item item) {
+        this.itemArrayList.add(item);
+    }
+
     public Map<Character, Double> getTurnOrder() {
         return turnOrder;
     }

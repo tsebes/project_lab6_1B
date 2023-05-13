@@ -8,11 +8,13 @@ import java.util.Map;
 public class DataProvider {
     static List<CharacterClass> charactersClassesList = new ArrayList<>();
     static List<Skill> allSkillsList = new ArrayList<>();
+    static List<Item> allItemsList = new ArrayList<>();
     private static volatile DataProvider instance;
 
     public static final String DATA_SEPARATOR = ",";
 
     private DataProvider(){
+        createItems();
         createSkills();
         createCharacterClasses();
     }
@@ -50,6 +52,20 @@ public class DataProvider {
             Map<DeBuff, Integer> deBuffs = getDeBuffs(s[6]);
             double coolDownTime =  Double.parseDouble(s[7]);
             allSkillsList.add(new Skill(s[0], AOE, targetingEnemies, attackType, skillPoints, buffs, deBuffs, coolDownTime, s[8]));
+        }
+    }
+
+    public static void createItems(){
+        for (String item : Data.itemsArray) {
+            String [] s = item.trim().split("\\s*" + DATA_SEPARATOR + "\\s*");
+            boolean AOE = Boolean.parseBoolean(s[1]);
+            boolean targetingEnemies = Boolean.parseBoolean(s[2]);
+            AttackResistanceType attackType = Enum.valueOf(AttackResistanceType.class, s[3]);
+            double skillPoints = Double.parseDouble(s[4]);
+            Map<Buff, Integer> buffs = getBuffs(s[5]);
+            Map<DeBuff, Integer> deBuffs = getDeBuffs(s[6]);
+            double coolDownTime =  Double.parseDouble(s[7]);
+            allItemsList.add(new Item(s[0], AOE, targetingEnemies, attackType, skillPoints, buffs, deBuffs, coolDownTime));
         }
     }
 
@@ -92,6 +108,15 @@ public class DataProvider {
         for(Skill skill: allSkillsList){
             if(skill.getName().equals(skillName)){
                 return skill;
+            }
+        }
+        return null;
+    }
+
+    public static Item getItemByName(String itemName) {
+        for(Item item: allItemsList){
+            if(item.getName().equals(itemName)){
+                return item;
             }
         }
         return null;

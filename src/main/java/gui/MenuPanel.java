@@ -52,6 +52,8 @@ public class MenuPanel extends JPanel {
             heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 1", 1));
             enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 1", 1));
             battle = new Battle(heroArrayList, enemyArrayList, gui.getBattlePanel());
+            battle.addItemToList(dataProvider.getInstance().getItemByName("Potion"));
+            battle.addItemToList(dataProvider.getInstance().getItemByName("Great potion"));
 
             gui.changePanel(GUI.Panel.Battle);
         });
