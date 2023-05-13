@@ -14,12 +14,15 @@ public class ItemsInfoPanel extends JPanel {
         setBackground(Color.BLUE);
         setVisible(false);
         setLayout(null);
+        addTitle();
+    }
 
-        JLabel basicInfo = new JLabel("Work in Progress", SwingConstants.CENTER);
-        basicInfo.setFont(new Font("Serif", Font.PLAIN, 20));
-        basicInfo.setForeground(Color.WHITE);
-        basicInfo.setBounds(100, 50, 400, 30);
-        add(basicInfo);
+    private void addTitle() {
+        JLabel title = new JLabel("Work in progress, here will be item info", SwingConstants.CENTER);
+        title.setFont(new Font("Serif", Font.BOLD, 20));
+        title.setForeground(Color.WHITE);
+        title.setBounds(100, 0, 400, 40);
+        add(title);
     }
 
     public void refresh(){
