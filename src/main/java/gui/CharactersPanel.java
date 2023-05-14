@@ -1,10 +1,8 @@
 package gui;
 
+import game.*;
 import game.Action;
-import game.Battle;
 import game.Character;
-import game.Enemy;
-import game.Hero;
 
 import javax.swing.*;
 import javax.swing.Timer;
@@ -29,7 +27,6 @@ public class CharactersPanel extends JPanel {
 
     public CharactersPanel(BattlePanel battlePanel) {
         this.battlePanel = battlePanel;
-        //TODO rework menu graphics
         setBounds(0, 0, 600, 400);
         setBackground(Color.WHITE);
         setLayout(null);
@@ -61,7 +58,6 @@ public class CharactersPanel extends JPanel {
         attackerButton.setOpaque(false);
         attackerButton.setContentAreaFilled(false);
         attackerButton.setBorderPainted(false);
-        attackerButton.setBounds(250, 200, 100, 100);
         add(attackerButton);
         refresh();
     }
@@ -118,11 +114,10 @@ public class CharactersPanel extends JPanel {
         for(CharacterButton allyButton: allyButtons){
             if(allyButton!=null){
                 allyButton.addActionListener(e -> {
+                    battle.setTarget(allyButton.getButtonCharacter());
                     if(battle.getCurrentAction() == Action.ANALYZE){
-                        battle.setTarget(allyButton.getButtonCharacter());
                         battlePanel.changePanel(BattlePanel.Panel.Analyze);
                     }else{
-                        battle.setTarget(allyButton.getButtonCharacter());
                         battlePanel.changePanel(BattlePanel.Panel.Confirmation);
                     }
                     clearTargetingAll();
@@ -132,11 +127,10 @@ public class CharactersPanel extends JPanel {
         for(CharacterButton enemyButton: enemyButtons) {
             if (enemyButton != null) {
                 enemyButton.addActionListener(e -> {
+                    battle.setTarget(enemyButton.getButtonCharacter());
                     if(battle.getCurrentAction() == Action.ANALYZE){
-                        battle.setTarget(enemyButton.getButtonCharacter());
                         battlePanel.changePanel(BattlePanel.Panel.Analyze);
                     }else {
-                        battle.setTarget(enemyButton.getButtonCharacter());
                         battlePanel.changePanel(BattlePanel.Panel.Confirmation);
                     }
                     clearTargetingAll();
@@ -151,6 +145,54 @@ public class CharactersPanel extends JPanel {
         ImageIcon idleImage = new ImageIcon(getClass().getResource("/" + aCharacter.getCharacterClassName() + ".gif"));
         ImageIcon attackImage = new ImageIcon(getClass().getResource("/" + aCharacter.getCharacterClassName()+ "-attack.gif"));
         button.setIcon(null);
+
+        //Setting up where active character does action
+        if(battle.getCurrentAction() == Action.SKILL){
+            //if attacks AOE does it from the middle
+            if(battle.getCurrentSkill().getAOE() && battle.getCurrentSkill().getTargetingEnemies()){
+                attackerButton.setBounds(250, 200, 100, 100);
+            //if attack single opponent goes next to him
+            }else if(!battle.getCurrentSkill().getAOE() && battle.getCurrentSkill().getTargetingEnemies()){
+                CharacterButton targetButton = getButton(battlePanel.getBattle().getTargetsArrayList().get(0));
+                Rectangle bounds = targetButton.getBounds();
+                if(battle.getActiveCharacter() instanceof Hero){
+                    attackerButton.setBounds(bounds.x - 100, bounds.y, 100, 100);
+                }else{
+                    attackerButton.setBounds(bounds.x + 100, bounds.y, 100, 100);
+                }
+            //if uses skill on allies doesn't move
+            }else{
+                CharacterButton activeCharacterButton = getButton(battlePanel.getBattle().getActiveCharacter());
+                attackerButton.setBounds(activeCharacterButton.getBounds());
+            }
+        }else if(battle.getCurrentAction() == Action.ITEM){
+            //if attacks AOE does it from the middle
+            if(battle.getCurrentItem().getAOE() && battle.getCurrentItem().getTargetingEnemies()){
+                attackerButton.setBounds(250, 200, 100, 100);
+            //if attack single opponent goes next to him
+            }else if(!battle.getCurrentItem().getAOE() && battle.getCurrentItem().getTargetingEnemies()){
+                CharacterButton targetButton = getButton(battlePanel.getBattle().getTargetsArrayList().get(0));
+                Rectangle bounds = targetButton.getBounds();
+                if(battle.getActiveCharacter() instanceof Hero){
+                    attackerButton.setBounds(bounds.x - 100, bounds.y, 100, 100);
+                }else{
+                    attackerButton.setBounds(bounds.x + 100, bounds.y, 100, 100);
+                }
+            //if uses item on allies doesn't move
+            }else{
+                CharacterButton activeCharacterButton = getButton(battlePanel.getBattle().getActiveCharacter());
+                attackerButton.setBounds(activeCharacterButton.getBounds());
+            }
+        }else{
+            //if basic attack moves next to opponent
+            CharacterButton targetButton = getButton(battlePanel.getBattle().getTargetsArrayList().get(0));
+            Rectangle bounds = targetButton.getBounds();
+            if(battle.getActiveCharacter() instanceof Hero){
+                attackerButton.setBounds(bounds.x - 100, bounds.y, 100, 100);
+            }else{
+                attackerButton.setBounds(bounds.x + 100, bounds.y, 100, 100);
+            }
+        }
         attackerButton.setIcon(attackImage);
 
         Timer activeTimer = new Timer(1000, new ActionListener() {
@@ -246,16 +288,16 @@ public class CharactersPanel extends JPanel {
                 characterLabel.setBounds(350, 375, 100, 10);
                 break;
             case 2:
-                characterButton.setBounds(350, 125, 100, 100);
-                characterLabel.setBounds(350, 225, 100, 10);
+                characterButton.setBounds(350, 115, 100, 100);
+                characterLabel.setBounds(350, 215, 100, 10);
                 break;
             case 3:
                 characterButton.setBounds(475, 225, 100, 100);
                 characterLabel.setBounds(475, 325, 100, 10);
                 break;
             case 4:
-                characterButton.setBounds(475, 100, 100, 100);
-                characterLabel.setBounds(475, 200, 100, 10);
+                characterButton.setBounds(475, 75, 100, 100);
+                characterLabel.setBounds(475, 175, 100, 10);
                 break;
         }
         characterButton.setOpaque(false);
@@ -281,16 +323,16 @@ public class CharactersPanel extends JPanel {
                 characterLabel.setBounds(150, 375, 100, 10);
                 break;
             case 2:
-                characterButton.setBounds(150, 125, 100, 100);
-                characterLabel.setBounds(150, 225, 100, 10);
+                characterButton.setBounds(150, 115, 100, 100);
+                characterLabel.setBounds(150, 215, 100, 10);
                 break;
             case 3:
                 characterButton.setBounds(25, 225, 100, 100);
                 characterLabel.setBounds(25, 325, 100, 10);
                 break;
             case 4:
-                characterButton.setBounds(25, 100, 100, 100);
-                characterLabel.setBounds(25, 200, 100, 10);
+                characterButton.setBounds(25, 75, 100, 100);
+                characterLabel.setBounds(25, 175, 100, 10);
                 break;
         }
         characterButton.setOpaque(false);
