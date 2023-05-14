@@ -17,6 +17,7 @@ public abstract class Character {
     protected double basicIntelligence;
     protected double basicSpeed;
     protected double basicLuck;
+    protected boolean gotDamaged;
     // TODO: add buffs, debuffs, skills
     protected Map<Buff, Integer> buffs;
     protected Map<DeBuff, Integer> deBuffs;
@@ -35,6 +36,7 @@ public abstract class Character {
         this.currentSpeed = this.basicSpeed;
         this.basicLuck = characterClass.getLvl1Luck() + characterClass.getGrowthLuck() * (level - 1);
         this.currentLuck = this.basicLuck;
+        this.gotDamaged = false;
     }
 
     public String getName() {
@@ -97,6 +99,14 @@ public abstract class Character {
         this.currentLuck = currentLuck;
     }
 
+    public boolean getGotDamaged() {
+        return gotDamaged;
+    }
+
+    public void setGotDamaged(boolean gotDamaged) {
+        this.gotDamaged = gotDamaged;
+    }
+
     public String getCharacterClassName() {
         return this.getCharacterClass().getCharacterClassName();
     }
@@ -138,6 +148,10 @@ public abstract class Character {
         amount*=100;
         amount = Math.round(amount);
         amount/=100;
+
+        if(amount > 0){
+            gotDamaged = true;
+        }
 
         //lowering health by amount
         currentHealthPoints -= amount;
