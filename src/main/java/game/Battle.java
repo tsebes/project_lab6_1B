@@ -154,6 +154,7 @@ public class Battle {
         int delay = 1;
 
         setTimePassed(turnOrder.get(activeCharacter));
+        boolean dealingDamage;
         switch(this.currentAction) {
             case BASICATTACK:
 
@@ -168,7 +169,7 @@ public class Battle {
                 System.out.println("Using Skill: " + currentSkill.getName());
 
                 delay += 1000;
-                boolean dealingDamage = currentSkill.use(activeCharacter, targetsArrayList) > 0;
+                dealingDamage = currentSkill.use(activeCharacter, targetsArrayList) > 0;
                 if(currentSkill.targetingEnemies && dealingDamage){
                     delay += 1000;
                 }
@@ -186,7 +187,17 @@ public class Battle {
                 break;
             case ITEM:
                 //TODO move this information to logs
-                System.out.println("Using Item");
+                System.out.println("Using Item: " + currentItem.getName());
+
+                delay += 1000;
+                dealingDamage = currentItem.use(targetsArrayList) > 0;
+                if(currentItem.targetingEnemies && dealingDamage){
+                    delay += 1000;
+                }
+                turnOrder.put(activeCharacter, turnOrder.get(activeCharacter)+currentItem.getCoolDownTime()*(50 - activeCharacter.currentSpeed));
+                battlePanel.getCharacters().animate(dealingDamage);
+                // removing used item from available items
+                this.itemArrayList.remove(currentItem);
                 break;
         }
 

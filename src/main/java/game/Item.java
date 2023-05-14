@@ -57,7 +57,7 @@ public class Item {
         return coolDownTime;
     }
 
-    public void use(List<Character> targets) {
+    public double use(List<Character> targets) {
         for(Character target: targets){
             if (targetingEnemies) {
                 target.getDamage(itemPoints, attackType);
@@ -67,5 +67,6 @@ public class Item {
                 target.addBuffs(buffs);
             }
         }
+        return itemPoints;
     }
 }
