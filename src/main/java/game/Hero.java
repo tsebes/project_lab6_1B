@@ -27,6 +27,10 @@ public class Hero extends Character{
         amount = Math.round(amount);
         amount/=100;
 
+        if(amount > 0){
+            gotDamaged = true;
+        }
+
         //lowering health by amount
         currentHealthPoints -= amount;
 
