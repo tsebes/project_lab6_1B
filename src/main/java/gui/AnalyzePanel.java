@@ -192,8 +192,5 @@ public class AnalyzePanel extends JPanel {
                 }
             }
         }
-
-        System.out.println(targetCharacterClass.getDiscoveredResistances());
-        System.out.println(targetCharacterClass.getBasicResistances());
     }
 }

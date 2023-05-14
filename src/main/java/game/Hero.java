@@ -6,6 +6,9 @@ public class Hero extends Character{
 
     public Hero(CharacterClass characterClass, String name, int level) {
         super(characterClass, name, level);
+        for (AttackResistanceType attackResistanceType : AttackResistanceType.values()) {
+            characterClass.discoveredResistances.put(attackResistanceType, true);
+        }
     }
 
     @Override
