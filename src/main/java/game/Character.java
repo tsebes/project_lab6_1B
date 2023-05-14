@@ -147,6 +147,10 @@ public abstract class Character {
         currentHealthPoints = Math.round(currentHealthPoints);
         currentHealthPoints/=100;
 
+        //revealing resistances:
+        if(!this.characterClass.discoveredResistances.get(attackResistanceType)) {
+            this.characterClass.setResistanceDiscovered(attackResistanceType);
+        }
         //TODO move this to log
         System.out.println(this.getName() + " was attacked for " + amount + " damage" );
         if(currentHealthPoints <= 0){

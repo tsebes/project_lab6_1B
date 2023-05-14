@@ -119,6 +119,7 @@ public class CharactersPanel extends JPanel {
             if(allyButton!=null){
                 allyButton.addActionListener(e -> {
                     if(battle.getCurrentAction() == Action.ANALYZE){
+                        battle.setTarget(allyButton.getButtonCharacter());
                         battlePanel.changePanel(BattlePanel.Panel.Analyze);
                     }else{
                         battle.setTarget(allyButton.getButtonCharacter());
@@ -132,6 +133,7 @@ public class CharactersPanel extends JPanel {
             if (enemyButton != null) {
                 enemyButton.addActionListener(e -> {
                     if(battle.getCurrentAction() == Action.ANALYZE){
+                        battle.setTarget(enemyButton.getButtonCharacter());
                         battlePanel.changePanel(BattlePanel.Panel.Analyze);
                     }else {
                         battle.setTarget(enemyButton.getButtonCharacter());

@@ -108,6 +108,7 @@ public class BattlePanel extends JPanel {
                     skills.setVisible(true);
                 }
                 case Analyze -> {
+                    analyze.refresh();
                     analyze.setVisible(true);
                 }
                 case Targeting -> {
