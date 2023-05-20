@@ -183,6 +183,12 @@ public abstract class Character {
         if(currentHealthPoints > maxHealthPoints){
             currentHealthPoints = maxHealthPoints;
         }
+
+        //making sure currentHealthPoints is ?.?? format
+        currentHealthPoints*=100;
+        currentHealthPoints = Math.round(currentHealthPoints);
+        currentHealthPoints/=100;
+
         //TODO: move this to log
         System.out.println(this.getName() + " was healed for " + amount + " points");
     }

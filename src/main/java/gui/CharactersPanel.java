@@ -253,9 +253,10 @@ public class CharactersPanel extends JPanel {
                         damageLabel.setVisible(true);
                         add(damageLabel);
                         setComponentZOrder(damageLabel, 1);
-                        Timer deleteDamageTypeTimer = new Timer(990, new ActionListener() {
+                        Timer deleteDamageTypeTimer = new Timer(1000, new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent arg0) {
+                                damageLabel.setVisible(false);
                                 remove(damageLabel);
                                 if(getButton(character).getIcon() != null){
                                     getButton(character).setIcon(characterIdleImage);
