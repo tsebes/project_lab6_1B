@@ -54,6 +54,9 @@ public class MenuPanel extends JPanel {
             battle = new Battle(heroArrayList, enemyArrayList, gui.getBattlePanel());
             battle.addItemToList(dataProvider.getInstance().getItemByName("Potion"));
             battle.addItemToList(dataProvider.getInstance().getItemByName("Great potion"));
+            battle.addItemToList(dataProvider.getInstance().getItemByName("Elixir"));
+            battle.addItemToList(dataProvider.getInstance().getItemByName("Throwing dagger"));
+            battle.addItemToList(dataProvider.getInstance().getItemByName("Burning dagger"));
 
             gui.changePanel(GUI.Panel.Battle);
         });
@@ -72,15 +75,20 @@ public class MenuPanel extends JPanel {
             List<Enemy> enemyArrayList = new ArrayList<>();
 
 
-            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 1", 5));
-            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 2", 5));
-            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 3", 5));
+            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight", 5));
+            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Warlock"), "warlock", 5));
+            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Mage"), "mage", 5));
             enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 1", 5));
             enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 2", 5));
             enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 3", 5));
 
-
             battle = new Battle(heroArrayList, enemyArrayList, gui.getBattlePanel());
+
+            battle.addItemToList(dataProvider.getInstance().getItemByName("Potion"));
+            battle.addItemToList(dataProvider.getInstance().getItemByName("Great potion"));
+            battle.addItemToList(dataProvider.getInstance().getItemByName("Elixir"));
+            battle.addItemToList(dataProvider.getInstance().getItemByName("Throwing dagger"));
+            battle.addItemToList(dataProvider.getInstance().getItemByName("Burning dagger"));
 
             gui.changePanel(GUI.Panel.Battle);
         });
@@ -99,15 +107,21 @@ public class MenuPanel extends JPanel {
             List<Enemy> enemyArrayList = new ArrayList<>();
 
             heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 1", 10));
+            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Warlock"), "warlock", 10));
+            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Mage"), "mage", 10));
             heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 2", 10));
-            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 3", 10));
-            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 4", 10));
             enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 1", 10));
             enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 2", 10));
             enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 3", 10));
             enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 4", 10));
 
             battle = new Battle(heroArrayList, enemyArrayList, gui.getBattlePanel());
+
+            battle.addItemToList(dataProvider.getInstance().getItemByName("Potion"));
+            battle.addItemToList(dataProvider.getInstance().getItemByName("Great potion"));
+            battle.addItemToList(dataProvider.getInstance().getItemByName("Elixir"));
+            battle.addItemToList(dataProvider.getInstance().getItemByName("Throwing dagger"));
+            battle.addItemToList(dataProvider.getInstance().getItemByName("Burning dagger"));
 
             gui.changePanel(GUI.Panel.Battle);
         });
