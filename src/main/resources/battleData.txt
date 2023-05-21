@@ -1,0 +1,3 @@
+LVL1BATTLE-Knight;knight;1:Skeleton;skeleton;1:Potion,Great potion,Elixir,Throwing dagger,Burning dagger
+LVL5BATTLE-Knight;knight;5,Warlock;warlock;5,Mage;mage;5:Skeleton;skeleton 1;5,Skeleton;skeleton 2;5,Skeleton;skeleton 3;5:Potion,Great potion,Elixir,Throwing dagger,Burning dagger
+LVL10BATTLE-Knight;knight 1;10,Warlock;warlock;10,Mage;mage;10,Knight;knight 2;10:Skeleton;skeleton 1;10,Skeleton;skeleton 2;10,Skeleton;skeleton 3;10,Skeleton;skeleton 4;10:Potion,Great potion,Elixir,Throwing dagger,Burning dagger
