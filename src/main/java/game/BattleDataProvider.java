@@ -18,8 +18,6 @@ public class BattleDataProvider {
     private DataProvider dataProvider;
 
     static Map<String,String> battleMap = new HashMap<>();
-    List<Hero> heroArrayList = new ArrayList<>();
-    List<Enemy> enemyArrayList = new ArrayList<>();
 
     private BattleDataProvider() {
         importData();
@@ -67,7 +65,10 @@ public class BattleDataProvider {
     //Example from battleData.txt LVL1BATTLE:
     //LVL1BATTLE-Knight;knight;1:Skeleton;skeleton;1:Potion,Great potion,Elixir,Throwing dagger,Burning dagger
 
-    public void setUpBattle(String battleName, GUI gui) {
+    public Battle setUpBattle(String battleName, GUI gui) {
+        List<Hero> heroArrayList = new ArrayList<>();
+        List<Enemy> enemyArrayList = new ArrayList<>();
+
         String [] battleData = battleMap.get(battleName).trim().split("\\s*" + ":" + "\\s*");
         System.out.println(battleData[0]);
         System.out.println(battleData[1]);
@@ -92,6 +93,6 @@ public class BattleDataProvider {
             battle.addItemToList(dataProvider.getInstance().getItemByName(itemData[i]));
         }
 
-        gui.changePanel(GUI.Panel.Battle);
+        return battle;
     }
 }

@@ -45,7 +45,8 @@ public class MenuPanel extends JPanel {
         lvl1Button.setForeground(Color.WHITE);
         add(lvl1Button);
         lvl1Button.addActionListener(e -> {
-            battleDataProvider.getInstance().setUpBattle("LVL1BATTLE", gui);
+            battle = battleDataProvider.getInstance().setUpBattle("LVL1BATTLE", gui);
+            gui.changePanel(GUI.Panel.Battle);
         });
     }
 
@@ -56,7 +57,8 @@ public class MenuPanel extends JPanel {
         lvl5Button.setForeground(Color.WHITE);
         add(lvl5Button);
         lvl5Button.addActionListener(e -> {
-            battleDataProvider.getInstance().setUpBattle("LVL5BATTLE", gui);
+            battle = battleDataProvider.getInstance().setUpBattle("LVL5BATTLE", gui);
+            gui.changePanel(GUI.Panel.Battle);
         });
     }
 
@@ -67,7 +69,8 @@ public class MenuPanel extends JPanel {
         lvl10Button.setForeground(Color.WHITE);
         add(lvl10Button);
         lvl10Button.addActionListener(e -> {
-            battleDataProvider.getInstance().setUpBattle("LVL10BATTLE", gui);
+            battle = battleDataProvider.getInstance().setUpBattle("LVL10BATTLE", gui);
+            gui.changePanel(GUI.Panel.Battle);
         });
     }
 
