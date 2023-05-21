@@ -43,11 +43,9 @@ public class BattleDataProvider {
 
             while (line != null) {
                 if(line !=null) {
-                    System.out.println(line);
                     String[] s = line.trim().split("\\s*" + "-" + "\\s*");
                     battleMap.put(s[0], s[1]);
                 }
-
                 line = reader.readLine();
             }
 
@@ -70,9 +68,6 @@ public class BattleDataProvider {
         List<Enemy> enemyArrayList = new ArrayList<>();
 
         String [] battleData = battleMap.get(battleName).trim().split("\\s*" + ":" + "\\s*");
-        System.out.println(battleData[0]);
-        System.out.println(battleData[1]);
-        System.out.println(battleData[2]);
         String [] heroData = battleData[0].trim().split("\\s*" + "," + "\\s*");
         String [] enemyData = battleData[1].trim().split("\\s*" + "," + "\\s*");
         String [] itemData = battleData[2].trim().split("\\s*" + "," + "\\s*");

@@ -71,13 +71,25 @@ public class DataProvider {
 
     private static Map<DeBuff, Integer> getDeBuffs(String deBuffs) {
         Map<DeBuff, Integer> deBuffsMap = new HashMap<>();
-        //adding elements of list
+        if(!deBuffs.isEmpty()){
+            String [] deBuff = deBuffs.trim().split("\\s*;\\s*");
+            for(String newDeBuff: deBuff){
+                String [] part = newDeBuff.trim().split("\\s*:\\s*");
+                deBuffsMap.put(Enum.valueOf(DeBuff.class, part[0]), Integer.parseInt(part[1]));
+            }
+        }
         return deBuffsMap;
     }
 
     private static Map<Buff, Integer> getBuffs(String buffs) {
         Map<Buff, Integer> buffsMap = new HashMap<>();
-        //adding elements of list
+        if(!buffs.isEmpty()){
+            String [] buff = buffs.trim().split("\\s*;\\s*");
+            for(String newBuff: buff){
+                String [] part = newBuff.trim().split("\\s*:\\s*");
+                buffsMap.put(Enum.valueOf(Buff.class, part[0]), Integer.parseInt(part[1]));
+            }
+        }
         return buffsMap;
     }
 

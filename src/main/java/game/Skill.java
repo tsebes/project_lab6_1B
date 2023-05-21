@@ -111,10 +111,12 @@ public class Skill {
                 if (amount > 0) {
                     target.getDamage(amount, attackType);
                 }
-                target.addDeBuffs(deBuffs);
+                target.addDeBuffs(deBuffs, amount <= 0);
             } else {
-                target.restoreHealth(amount);
-                target.addBuffs(buffs);
+                if (amount > 0) {
+                    target.restoreHealth(amount);
+                }
+                target.addBuffs(buffs, amount <= 0);
             }
             executeSpecialEffects();
         }

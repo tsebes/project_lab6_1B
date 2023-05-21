@@ -60,11 +60,15 @@ public class Item {
     public double use(List<Character> targets) {
         for(Character target: targets){
             if (targetingEnemies) {
-                target.getDamage(itemPoints, attackType);
-                target.addDeBuffs(deBuffs);
+                if(itemPoints > 0){
+                    target.getDamage(itemPoints, attackType);
+                }
+                target.addDeBuffs(deBuffs, itemPoints == 0);
             } else {
-                target.restoreHealth(itemPoints);
-                target.addBuffs(buffs);
+                if(itemPoints > 0){
+                    target.restoreHealth(itemPoints);
+                }
+                target.addBuffs(buffs, itemPoints == 0);
             }
         }
         return itemPoints;
