@@ -12,7 +12,7 @@ public class MenuPanel extends JPanel {
 
     private final GUI gui;
     private Battle battle;
-    private DataProvider dataProvider;
+    private BattleDataProvider battleDataProvider;
 
     public MenuPanel(GUI gui) {
         this.gui = gui;
@@ -45,19 +45,7 @@ public class MenuPanel extends JPanel {
         lvl1Button.setForeground(Color.WHITE);
         add(lvl1Button);
         lvl1Button.addActionListener(e -> {
-            //TODO move below to BattleDataProvider
-
-            List<Hero> heroArrayList = new ArrayList<>();
-            List<Enemy> enemyArrayList = new ArrayList<>();
-            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 1", 1));
-            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 1", 1));
-            battle = new Battle(heroArrayList, enemyArrayList, gui.getBattlePanel());
-            battle.addItemToList(dataProvider.getInstance().getItemByName("Potion"));
-            battle.addItemToList(dataProvider.getInstance().getItemByName("Great potion"));
-            battle.addItemToList(dataProvider.getInstance().getItemByName("Elixir"));
-            battle.addItemToList(dataProvider.getInstance().getItemByName("Throwing dagger"));
-            battle.addItemToList(dataProvider.getInstance().getItemByName("Burning dagger"));
-
+            battle = battleDataProvider.getInstance().setUpBattle("LVL1BATTLE", gui);
             gui.changePanel(GUI.Panel.Battle);
         });
     }
@@ -69,27 +57,7 @@ public class MenuPanel extends JPanel {
         lvl5Button.setForeground(Color.WHITE);
         add(lvl5Button);
         lvl5Button.addActionListener(e -> {
-            //TODO move below to BattleDataProvider
-
-            List<Hero> heroArrayList = new ArrayList<>();
-            List<Enemy> enemyArrayList = new ArrayList<>();
-
-
-            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight", 5));
-            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Warlock"), "warlock", 5));
-            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Mage"), "mage", 5));
-            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 1", 5));
-            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 2", 5));
-            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 3", 5));
-
-            battle = new Battle(heroArrayList, enemyArrayList, gui.getBattlePanel());
-
-            battle.addItemToList(dataProvider.getInstance().getItemByName("Potion"));
-            battle.addItemToList(dataProvider.getInstance().getItemByName("Great potion"));
-            battle.addItemToList(dataProvider.getInstance().getItemByName("Elixir"));
-            battle.addItemToList(dataProvider.getInstance().getItemByName("Throwing dagger"));
-            battle.addItemToList(dataProvider.getInstance().getItemByName("Burning dagger"));
-
+            battle = battleDataProvider.getInstance().setUpBattle("LVL5BATTLE", gui);
             gui.changePanel(GUI.Panel.Battle);
         });
     }
@@ -101,28 +69,7 @@ public class MenuPanel extends JPanel {
         lvl10Button.setForeground(Color.WHITE);
         add(lvl10Button);
         lvl10Button.addActionListener(e -> {
-            //TODO move below to BattleDataProvider
-
-            List<Hero> heroArrayList = new ArrayList<>();
-            List<Enemy> enemyArrayList = new ArrayList<>();
-
-            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 1", 10));
-            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Warlock"), "warlock", 10));
-            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Mage"), "mage", 10));
-            heroArrayList.add(new Hero(dataProvider.getInstance().getCharacterClassByName("Knight"), "knight 2", 10));
-            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 1", 10));
-            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 2", 10));
-            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 3", 10));
-            enemyArrayList.add(new Enemy(dataProvider.getInstance().getCharacterClassByName("Skeleton"), "skeleton 4", 10));
-
-            battle = new Battle(heroArrayList, enemyArrayList, gui.getBattlePanel());
-
-            battle.addItemToList(dataProvider.getInstance().getItemByName("Potion"));
-            battle.addItemToList(dataProvider.getInstance().getItemByName("Great potion"));
-            battle.addItemToList(dataProvider.getInstance().getItemByName("Elixir"));
-            battle.addItemToList(dataProvider.getInstance().getItemByName("Throwing dagger"));
-            battle.addItemToList(dataProvider.getInstance().getItemByName("Burning dagger"));
-
+            battle = battleDataProvider.getInstance().setUpBattle("LVL10BATTLE", gui);
             gui.changePanel(GUI.Panel.Battle);
         });
     }
