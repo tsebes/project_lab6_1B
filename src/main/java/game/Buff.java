@@ -1,6 +1,9 @@
 package game;
 
 public enum Buff {
-
-    // TODO: Buff enum
+    STR_UP,
+    INT_UP,
+    SPD_UP,
+    LUC_UP,
+    REGEN
 }

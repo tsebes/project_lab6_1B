@@ -1,6 +1,10 @@
 package game;
 
 public enum DeBuff {
-
-    // TODO: DeBuff enum
+    STR_DOWN,
+    INT_DOWN,
+    SPD_DOWN,
+    LUC_DOWN,
+    BURN,
+    CURSE
 }

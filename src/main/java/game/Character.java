@@ -18,7 +18,7 @@ public abstract class Character {
     protected double basicSpeed;
     protected double basicLuck;
     protected boolean gotDamaged;
-    // TODO: add buffs, debuffs, skills
+    protected LogHandler logHandler;
     protected Map<Buff, Integer> buffs;
     protected Map<DeBuff, Integer> deBuffs;
 
@@ -37,6 +37,8 @@ public abstract class Character {
         this.basicLuck = characterClass.getLvl1Luck() + characterClass.getGrowthLuck() * (level - 1);
         this.currentLuck = this.basicLuck;
         this.gotDamaged = false;
+        this.deBuffs = new HashMap<>();
+        this.buffs = new HashMap<>();
     }
 
     public String getName() {
@@ -139,8 +141,69 @@ public abstract class Character {
         return this.getCharacterClass().getBasicAttack();
     }
 
+    public Map<Buff, Integer> getBuffs() {
+        return buffs;
+    }
+
+    public void setBuffs(Map<Buff, Integer> buffs) {
+        this.buffs = buffs;
+    }
+
+    public Map<DeBuff, Integer> getDeBuffs() {
+        return deBuffs;
+    }
+
+    public void setDeBuffs(Map<DeBuff, Integer> deBuffs) {
+        this.deBuffs = deBuffs;
+    }
+
+    public boolean isGuarding(){
+        return false;
+    }
+
     public void getDamage(double amount, AttackResistanceType attackResistanceType) {
 
+        //changing damage by attackResistanceType
+        amount -= amount * (this.getBasicResistance().get(attackResistanceType) / 100);
+
+        if (isGuarding()) {
+            amount *= 0.5;
+        }
+
+        //making sure amount is ?.?? format
+        amount*=100;
+        amount = Math.round(amount);
+        amount/=100;
+
+        if(amount > 0){
+            gotDamaged = true;
+        }
+
+        //lowering health by amount
+        currentHealthPoints -= amount;
+
+        //making sure currentHealthPoints is ?.?? format
+        currentHealthPoints*=100;
+        currentHealthPoints = Math.round(currentHealthPoints);
+        currentHealthPoints/=100;
+
+        //revealing resistances:
+        if(!this.characterClass.discoveredResistances.get(attackResistanceType)) {
+            this.characterClass.setResistanceDiscovered(attackResistanceType);
+        }
+        String log = this.getName() + " was attacked for " + amount + " damage";
+        if(isGuarding()){
+            log += " (" + this.getName() + " was guarding)";
+        }
+        if(currentHealthPoints <= 0){
+            log += " and died";
+        }
+        logHandler.getInstance().setReaction(log);
+    }
+
+    public void getDamagePercentage(double amount, AttackResistanceType attackResistanceType, DeBuff deBuff) {
+        //Changing percentage amount into actual amount
+        amount *= maxHealthPoints;
         //changing damage by attackResistanceType
         amount -= amount * (this.getBasicResistance().get(attackResistanceType) / 100);
 
@@ -165,11 +228,14 @@ public abstract class Character {
         if(!this.characterClass.discoveredResistances.get(attackResistanceType)) {
             this.characterClass.setResistanceDiscovered(attackResistanceType);
         }
-        //TODO move this to log
-        System.out.println(this.getName() + " was attacked for " + amount + " damage" );
-        if(currentHealthPoints <= 0){
-            System.out.println(this.getName() + " died");
+        String log = this.getName() + " was damaged by " + deBuff + " for " + amount + " damage";
+        if(isGuarding()){
+            log += " (" + this.getName() + " was guarding)";
         }
+        if(currentHealthPoints <= 0){
+            log += " and died";
+        }
+        logHandler.getInstance().setStatusEffects(log);
     }
 
     public boolean checkIfCritical() {
@@ -189,8 +255,23 @@ public abstract class Character {
         currentHealthPoints = Math.round(currentHealthPoints);
         currentHealthPoints/=100;
 
-        //TODO: move this to log
-        System.out.println(this.getName() + " was healed for " + amount + " points");
+        logHandler.getInstance().setReaction(this.getName() + " was healed for " + amount + " points");
+    }
+
+    public void restoreHealthPercentage(double amount, Buff buff) {
+        //Changing percentage amount into actual amount
+        amount *= maxHealthPoints;
+        currentHealthPoints += amount;
+        if(currentHealthPoints > maxHealthPoints){
+            currentHealthPoints = maxHealthPoints;
+        }
+
+        //making sure currentHealthPoints is ?.?? format
+        currentHealthPoints*=100;
+        currentHealthPoints = Math.round(currentHealthPoints);
+        currentHealthPoints/=100;
+
+        logHandler.getInstance().setStatusEffects(this.getName() + " was healed by " + buff +" for " + amount + " points");
     }
 
     public void basicAttack(List<Character> targets) {
@@ -213,19 +294,28 @@ public abstract class Character {
         }
     }
 
-    public void addBuffs(Map<Buff, Integer> newBuffs) {
+    public void addBuffs(Map<Buff, Integer> newBuffs, boolean onlyAction) {
         for(Map.Entry<Buff,Integer> entry: newBuffs.entrySet()){
-            if(!buffs.containsKey(entry.getKey())||buffs.get(entry.getKey())<entry.getValue()){
+            if(buffs == null || !buffs.containsKey(entry.getKey()) || buffs.get(entry.getKey())<entry.getValue()){
                 buffs.put(entry.getKey(), entry.getValue());
+                if(onlyAction){
+                    logHandler.getInstance().setReaction(this.getName() + " was inflicted with " + entry.getKey() + " for " + entry.getValue() + " turns");
+                }else{
+                    logHandler.getInstance().setReaction("and was inflicted with " + entry.getKey() + " for " + entry.getValue() + " turns", true);
+                }
             }
         }
     }
 
-    public void addDeBuffs(Map<DeBuff, Integer> newDeBuffs) {
+    public void addDeBuffs(Map<DeBuff, Integer> newDeBuffs, boolean onlyAction) {
         for(Map.Entry<DeBuff,Integer> entry: newDeBuffs.entrySet()){
-            if(!deBuffs.containsKey(entry.getKey())||deBuffs.get(entry.getKey())<entry.getValue()){
+            if(deBuffs == null || !deBuffs.containsKey(entry.getKey()) || deBuffs.get(entry.getKey())<entry.getValue()){
                 deBuffs.put(entry.getKey(), entry.getValue());
-            }
+                if(onlyAction){
+                    logHandler.getInstance().setReaction(this.getName() + " was inflicted with " + entry.getKey() + " for " + entry.getValue() + " turns");
+                }else{
+                    logHandler.getInstance().setReaction("and was inflicted with " + entry.getKey() + " for " + entry.getValue() + " turns", true);
+                }}
         }
     }
 }

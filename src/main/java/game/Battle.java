@@ -21,13 +21,17 @@ public class Battle {
     protected Item currentItem;
     protected BattlePanel battlePanel;
     protected Double timePassed;
+    protected LogHandler logHandler;
 
 
     public Battle(List<Hero> heroArrayList, List<Enemy> enemyArrayList, BattlePanel battlePanel) {
         this.heroArrayList = heroArrayList;
         this.enemyArrayList = enemyArrayList;
         this.battlePanel = battlePanel;
-        battlePanel.getCharacters().setUpCharacters(this);
+
+        //sets up graphics for new battle
+        battlePanel.setUpNewBattle(this);
+
         initializeTurnOrder(heroArrayList, enemyArrayList);
 
         //adding border to current character
@@ -138,16 +142,13 @@ public class Battle {
 
 
     public void doCurrentAction() {
-
-
         //Ending possible guard
         if(activeCharacter instanceof Hero){
             Hero activeHero = (Hero) activeCharacter;
             activeHero.disableGuard();
         }
 
-        //TODO move this information to logs
-        System.out.println("\nAction of " + activeCharacter.getName());
+        logHandler.getInstance().setActiveCharacterName(activeCharacter.getName());
 
         battlePanel.getCharacters().deleteBorder();
 
@@ -157,44 +158,41 @@ public class Battle {
         boolean dealingDamage;
         switch(this.currentAction) {
             case BASICATTACK:
-
+                logHandler.getInstance().setCurrentAction(Action.BASICATTACK, currentSkill, currentItem);
 
                 delay += 2000;
                 activeCharacter.basicAttack(this.targetsArrayList);
-                turnOrder.put(activeCharacter,turnOrder.get(activeCharacter)+10.0*(50 - activeCharacter.currentSpeed));
+                turnOrder.put(activeCharacter,turnOrder.get(activeCharacter)+10.0*(50 - activeCharacter.currentSpeed/10));
                 battlePanel.getCharacters().animate(true);
                 break;
             case SKILL:
-                //TODO move this information to logs
-                System.out.println("Using Skill: " + currentSkill.getName());
+                logHandler.getInstance().setCurrentAction(Action.SKILL, currentSkill, currentItem);
 
                 delay += 1000;
                 dealingDamage = currentSkill.use(activeCharacter, targetsArrayList) > 0;
                 if(currentSkill.targetingEnemies && dealingDamage){
                     delay += 1000;
                 }
-                turnOrder.put(activeCharacter,turnOrder.get(activeCharacter)+currentSkill.getCoolDownTime()*(50 - activeCharacter.currentSpeed));
+                turnOrder.put(activeCharacter,turnOrder.get(activeCharacter)+currentSkill.getCoolDownTime()*(50 - activeCharacter.currentSpeed/10));
                 battlePanel.getCharacters().animate(dealingDamage);
                 break;
             case GUARD:
-                //TODO move this information to logs
-                System.out.println("Using Guard");
+                logHandler.getInstance().setCurrentAction(Action.GUARD, currentSkill, currentItem);
 
                 Hero activeHero = (Hero) activeCharacter;
                 activeHero.enableGuard();
-                //TODO update changing turnOrder to make it work better
-                turnOrder.put(activeCharacter,turnOrder.get(activeCharacter) + 5.0*(50 - activeCharacter.currentSpeed));
+
+                turnOrder.put(activeCharacter,turnOrder.get(activeCharacter) + 5.0*(50 - activeCharacter.currentSpeed/10));
                 break;
             case ITEM:
-                //TODO move this information to logs
-                System.out.println("Using Item: " + currentItem.getName());
+                logHandler.getInstance().setCurrentAction(Action.ITEM, currentSkill, currentItem);
 
                 delay += 1000;
                 dealingDamage = currentItem.use(targetsArrayList) > 0;
                 if(currentItem.targetingEnemies && dealingDamage){
                     delay += 1000;
                 }
-                turnOrder.put(activeCharacter, turnOrder.get(activeCharacter)+currentItem.getCoolDownTime()*(50 - activeCharacter.currentSpeed));
+                turnOrder.put(activeCharacter, turnOrder.get(activeCharacter)+currentItem.getCoolDownTime()*(50 - activeCharacter.currentSpeed/10));
                 battlePanel.getCharacters().animate(dealingDamage);
                 // removing used item from available items
                 this.itemArrayList.remove(currentItem);
@@ -250,7 +248,131 @@ public class Battle {
         activeCharacter = getFirst(turnOrder).getKey();
     }
 
+    private void lowerBuffsCount(){
+        Map<Buff, Integer> buffs = new HashMap<>();
+        if(activeCharacter.getBuffs() != null){
+            for(Map.Entry<Buff,Integer> entry: activeCharacter.getBuffs().entrySet()){
+                if(entry.getValue() > 1){
+                    buffs.put(entry.getKey(), entry.getValue()-1);
+                }
+            }
+        }
+        activeCharacter.setBuffs(buffs);
+    }
+
+    private void lowerDeBuffsCount(){
+        Map<DeBuff, Integer> deBuffs = new HashMap<>();
+        if(activeCharacter.getDeBuffs() != null){
+            for(Map.Entry<DeBuff,Integer> entry: activeCharacter.getDeBuffs().entrySet()){
+                if(entry.getValue() > 1){
+                    deBuffs.put(entry.getKey(), entry.getValue() - 1);
+                }
+            }
+        }
+        activeCharacter.setDeBuffs(deBuffs);
+    }
+
+    private void changeStats(){
+        for(Character character: targetsArrayList){
+            changeCharacterStats(character);
+        }
+        changeCharacterStats(activeCharacter);
+    }
+
+    private void changeCharacterStats(Character character){
+        double strength = character.getBasicStrength();
+        double intelligence = character.getBasicIntelligence();
+        double speed = character.getBasicSpeed();
+        double luck = character.getBasicLuck();
+        if(character.getBuffs()!=null){
+            for(Map.Entry<Buff,Integer> entry: character.getBuffs().entrySet()){
+                switch(entry.getKey()){
+                    case STR_UP -> {
+                        strength *= 2;
+                    }
+                    case INT_UP -> {
+                        intelligence *= 2;
+                    }
+                    case SPD_UP -> {
+                        speed *= 2;
+                    }
+                    case LUC_UP -> {
+                        luck *= 2;
+                    }
+                    default -> {
+                    }
+                }
+            }
+        }
+
+        if(character.getDeBuffs()!=null){
+            for(Map.Entry<DeBuff,Integer> entry: character.getDeBuffs().entrySet()){
+                switch(entry.getKey()){
+                    case STR_DOWN -> {
+                        strength /= 2;
+                    }
+                    case INT_DOWN -> {
+                        intelligence /= 2;
+                    }
+                    case SPD_DOWN -> {
+                        speed /= 2;
+                    }
+                    case LUC_DOWN -> {
+                        luck /= 2;
+                    }
+                    default -> {
+                    }
+                }
+            }
+        }
+        character.setCurrentStrength(strength);
+        character.setCurrentIntelligence(intelligence);
+        character.setCurrentSpeed(speed);
+        character.setCurrentLuck(luck);
+    }
+
+    private void buffsAndDeBuffsActions(){
+        if(activeCharacter.getDeBuffs() != null){
+            for(Map.Entry<DeBuff,Integer> entry: activeCharacter.getDeBuffs().entrySet()){
+                switch(entry.getKey()){
+                    default -> {
+
+                    }
+                    case BURN -> {
+                        activeCharacter.getDamagePercentage(0.05,AttackResistanceType.FIRE, DeBuff.BURN);
+                    }
+                    case CURSE -> {
+                        activeCharacter.getDamagePercentage(0.5,AttackResistanceType.DARK, DeBuff.CURSE);
+                    }
+                }
+            }
+        }
+
+        if(activeCharacter.getBuffs() != null){
+            for(Map.Entry<Buff,Integer> entry: activeCharacter.getBuffs().entrySet()){
+                switch(entry.getKey()){
+                    default -> {
+
+                    }
+                    case REGEN ->{
+                        activeCharacter.restoreHealthPercentage(0.1, Buff.REGEN);
+                    }
+                }
+            }
+        }
+    }
+
     public void endTurn() {
+        //Making not stat changing buffs and deBuffs work
+        buffsAndDeBuffsActions();
+
+        //Lowering counts of buffs and deBuffs of activeCharacter
+        lowerBuffsCount();
+        lowerDeBuffsCount();
+
+        //Changing current stats to correct values
+        changeStats();
+
         //Changing info (health) in labels under characters
         battlePanel.getCharacters().refresh();
 
@@ -274,7 +396,21 @@ public class Battle {
             //showing which character has its turn
             battlePanel.getCharacters().addActiveBorder();
 
+            //updating logs and log button
+            logHandler.getInstance().makeFullLog();
+            battlePanel.getLogs().addLog(logHandler.getInstance().getFullLog());
+            String basicLog = logHandler.getInstance().getBasicLog();
+            if(currentAction != Action.GUARD){
+                basicLog += " on: ";
+                for(Character character: targetsArrayList){
+                    basicLog += character.getName() + ", ";
+                }
+                basicLog = basicLog.substring(0, basicLog.length() - 2);
+            }
+            battlePanel.getTurns().setLogsButtonText("<html>" + basicLog + "</html>");
+
             clearCurrentAction();
+
             //TODO move below fragment of code to enemy
             if (activeCharacter instanceof Enemy) {
 

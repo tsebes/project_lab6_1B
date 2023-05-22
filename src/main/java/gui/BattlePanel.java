@@ -39,6 +39,7 @@ public class BattlePanel extends JPanel {
         targeting = new TargetingPanel(this);
         analyze = new AnalyzePanel(this);
         logs = new LogsPanel(this);
+
         confirmation = new ConfirmationPanel(this);
         actionStopper = new ActionStopperPanel(this);
         items = new ItemPanel(this);
@@ -138,6 +139,12 @@ public class BattlePanel extends JPanel {
                 }
             }
         }
+    }
+
+    public void setUpNewBattle(Battle battle){
+        characters.setUpCharacters(battle);
+        logs.deleteLogs();
+        turns.setLogsButtonText("");
     }
 
     public TurnPanel getTurns() {

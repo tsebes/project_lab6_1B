@@ -20,15 +20,20 @@ public class TurnPanel extends JPanel {
     }
 
     private void addLogsButton() {
-        JButton logsButton = new JButton("Logs");
+        JButton logsButton = new JButton("");
         logsButton.setBackground(Color.DARK_GRAY);
         logsButton.setBounds(0, 350, 200, 50);
-        logsButton.setForeground(Color.RED);
+        logsButton.setFont(new Font("Serif", Font.BOLD, 10));
+        logsButton.setForeground(Color.WHITE);
         this.logsButton=logsButton;
         add(logsButton);
         logsButton.addActionListener(e -> {
             battlePanel.changePanel(BattlePanel.Panel.Logs);
         });
+    }
+
+    public void setLogsButtonText(String info){
+        logsButton.setText(info);
     }
 
     public void deleteLogActionListener(){
