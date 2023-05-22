@@ -10,7 +10,6 @@ public class LogHandler {
     private String statusEffects;
     private String basicLog;
     private String fullLog;
-    private int numberOfLines;
 
     private LogHandler(){
         reaction = null;
@@ -30,7 +29,6 @@ public class LogHandler {
 
     public void setActiveCharacterName(String activeCharacterName){
         this.activeCharacterName = activeCharacterName;
-        numberOfLines = 1;
     }
 
     public void setCurrentAction(Action action, Skill skill, Item item){
@@ -56,7 +54,6 @@ public class LogHandler {
         }else{
             reaction += ",\n" + reactionPart;
         }
-        numberOfLines += 1;
     }
 
     public void setReaction(String reactionPart, boolean continuation){
@@ -71,9 +68,8 @@ public class LogHandler {
         if(statusEffects==null){
             statusEffects = statusEffectsPart;
         }else{
-            statusEffects += ",\n" + statusEffectsPart;
+            statusEffects += ", \n" + statusEffectsPart;
         }
-        numberOfLines += 1;
     }
 
     public void makeFullLog(){
@@ -83,7 +79,7 @@ public class LogHandler {
             fullLog +=  " - " + reaction;
         }
         if(statusEffects != null){
-            fullLog += statusEffects;
+            fullLog += " " + statusEffects;
         }
         activeCharacterName = null;
         currentAction = null;
@@ -97,9 +93,5 @@ public class LogHandler {
 
     public String getFullLog() {
         return fullLog;
-    }
-
-    public int getNumberOfLines() {
-        return numberOfLines;
     }
 }

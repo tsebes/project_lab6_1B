@@ -395,10 +395,10 @@ public class Battle {
 
             //showing which character has its turn
             battlePanel.getCharacters().addActiveBorder();
-            logHandler.getInstance().makeFullLog();
 
-            //updating info on log button
-            battlePanel.getLogs().addLog(logHandler.getInstance().getFullLog(),logHandler.getInstance().getNumberOfLines());
+            //updating logs and log button
+            logHandler.getInstance().makeFullLog();
+            battlePanel.getLogs().addLog(logHandler.getInstance().getFullLog());
             String basicLog = logHandler.getInstance().getBasicLog();
             if(currentAction != Action.GUARD){
                 basicLog += " on: ";
