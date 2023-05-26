@@ -11,12 +11,14 @@ public class ItemsInfoPanel extends JPanel {
 
     private final BattlePanel battlePanel;
     private Item item;
+    private int amount;
     private JLabel itemTitle;
     private JLabel itemTarget;
     private JLabel itemModifier;
     private JLabel itemAttackType;
     private JLabel itemCooldown;
     private JLabel itemBuffsDebuffs;
+    private JLabel itemAmount;
 
     public ItemsInfoPanel(BattlePanel battle) {
         this.battlePanel = battle;
@@ -31,6 +33,7 @@ public class ItemsInfoPanel extends JPanel {
         addItemAttackType();
         addItemCooldown();
         addItemBuffsDebuffs();
+        addItemAmount();
     }
 
     private void addItemTitle() {
@@ -87,12 +90,29 @@ public class ItemsInfoPanel extends JPanel {
         add(buffsDebuffs);
     }
 
+    private void addItemAmount(){
+        JLabel amount = new JLabel("", SwingConstants.CENTER);
+        amount.setFont(new Font("Serif", Font.PLAIN, 20));
+        amount.setForeground(Color.WHITE);
+        amount.setBounds(100, 170, 400, 30);
+        itemAmount = amount;
+        add(amount);
+    }
+
     public Item getItem() {
         return item;
     }
 
     public void setItem(Item Item) {
         this.item = Item;
+    }
+
+    public int getItemAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public void refresh(){
@@ -134,5 +154,6 @@ public class ItemsInfoPanel extends JPanel {
             }
         }
         itemBuffsDebuffs.setText(buffsDebuffs);
+        itemAmount.setText("Amount: " + amount);
     }
 }

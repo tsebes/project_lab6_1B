@@ -85,7 +85,9 @@ public class BattleDataProvider {
         battle = new Battle(heroArrayList, enemyArrayList, gui.getBattlePanel());
 
         for(int i = 0;i < itemData.length;i++) {
-            battle.addItemToList(dataProvider.getInstance().getItemByName(itemData[i]));
+            Item newItem = dataProvider.getInstance().getItemByName(itemData[i]);
+            int newAmount = dataProvider.getInstance().getItemAmount(newItem);
+            battle.addItemToMap(newItem, newAmount);
         }
 
         return battle;

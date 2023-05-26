@@ -49,11 +49,11 @@ public class Data {
     };
 
     static final String[] itemsArray = {
-            "Potion, false, false, PHYSICAL, 10,,,15",
-            "Great potion, false, false, PHYSICAL, 20,,,15",
-            "Elixir, false, false, PHYSICAL, 50,,,15",
-            "Throwing dagger, false, true, PHYSICAL, 10,,,15",
-            "Burning dagger, false, true, FIRE, 10,,,15",
+            "Potion, false, false, PHYSICAL, 10,,,15,1",
+            "Great potion, false, false, PHYSICAL, 20,,,15,1",
+            "Elixir, false, false, PHYSICAL, 50,,,15,2",
+            "Throwing dagger, false, true, PHYSICAL, 10,,,15,1",
+            "Burning dagger, false, true, FIRE, 10,,,15,1",
             // Creating item tutorial:
             // String name,
             // Boolean isAOE,
@@ -63,7 +63,7 @@ public class Data {
             // Map<Buff,Integer> buffs (currently not working but will be divided by ; done like this: 'buff:duration'),
             // Map<DeBuff> deBuffs (currently not working but will be divided by ; done like this: 'debuff:duration'),
             // double coolDownTime
-
+            // int amount
     };
 
 }
