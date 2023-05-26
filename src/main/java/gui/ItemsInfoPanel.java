@@ -1,31 +1,138 @@
 package gui;
 
+import game.*;
+import game.Item;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.Map;
 
 public class ItemsInfoPanel extends JPanel {
 
     private final BattlePanel battlePanel;
+    private Item item;
+    private JLabel itemTitle;
+    private JLabel itemTarget;
+    private JLabel itemModifier;
+    private JLabel itemAttackType;
+    private JLabel itemCooldown;
+    private JLabel itemBuffsDebuffs;
 
     public ItemsInfoPanel(BattlePanel battle) {
         this.battlePanel = battle;
         //TODO rework menu graphics
         setBounds(200, 400, 600, 200);
-        setBackground(Color.BLUE);
+        setBackground(Color.DARK_GRAY);
         setVisible(false);
         setLayout(null);
-        addTitle();
+        addItemTitle();
+        addItemTarget();
+        addItemModifier();
+        addItemAttackType();
+        addItemCooldown();
+        addItemBuffsDebuffs();
     }
 
-    private void addTitle() {
-        JLabel title = new JLabel("Work in progress, here will be item info", SwingConstants.CENTER);
+    private void addItemTitle() {
+        JLabel title = new JLabel("", SwingConstants.CENTER);
         title.setFont(new Font("Serif", Font.BOLD, 20));
         title.setForeground(Color.WHITE);
         title.setBounds(100, 0, 400, 40);
+        itemTitle = title;
         add(title);
     }
 
+    private void addItemTarget(){
+        JLabel target = new JLabel("", SwingConstants.CENTER);
+        target.setFont(new Font("Serif", Font.PLAIN, 20));
+        target.setForeground(Color.WHITE);
+        target.setBounds(25, 50, 250, 30);
+        itemTarget = target;
+        add(target);
+    }
+
+    private void addItemModifier(){
+        JLabel modifier = new JLabel("", SwingConstants.CENTER);
+        modifier.setFont(new Font("Serif", Font.PLAIN, 20));
+        modifier.setForeground(Color.WHITE);
+        modifier.setBounds(325, 50, 250, 30);
+        itemModifier = modifier;
+        add(modifier);
+    }
+
+    private void addItemAttackType(){
+        JLabel attackType = new JLabel("", SwingConstants.CENTER);
+        attackType.setFont(new Font("Serif", Font.PLAIN, 20));
+        attackType.setForeground(Color.WHITE);
+        attackType.setBounds(25, 90, 250, 30);
+        itemAttackType = attackType;
+        add(attackType);
+    }
+
+    private void addItemCooldown(){
+        JLabel cooldown = new JLabel("", SwingConstants.CENTER);
+        cooldown.setFont(new Font("Serif", Font.PLAIN, 20));
+        cooldown.setForeground(Color.WHITE);
+        cooldown.setBounds(325, 90, 250, 30);
+        itemCooldown = cooldown;
+        add(cooldown);
+    }
+
+    private void addItemBuffsDebuffs(){
+        JLabel buffsDebuffs = new JLabel("", SwingConstants.CENTER);
+        buffsDebuffs.setFont(new Font("Serif", Font.PLAIN, 20));
+        buffsDebuffs.setForeground(Color.WHITE);
+        buffsDebuffs.setBounds(25, 130, 250, 30);
+        itemBuffsDebuffs = buffsDebuffs;
+        add(buffsDebuffs);
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item Item) {
+        this.item = Item;
+    }
+
     public void refresh(){
-        //TODO set up to show info of chosen item
+        itemTitle.setText(item.getName());
+        String target = "Target: ";
+        if(item.getAOE()){
+            target += "all ";
+            if(item.getTargetingEnemies()){
+                target += "enemies";
+            }else{
+                target += "allies";
+            }
+        }else{
+            target += "single ";
+            if(item.getTargetingEnemies()){
+                target += "enemy";
+            }else{
+                target += "ally";
+            }
+        }
+        itemTarget.setText(target);
+        itemModifier.setText("Modifier: " + item.getItemPoints());
+        itemAttackType.setText("Type: " + item.getAttackType().toString());
+        itemCooldown.setText("Cooldown: " + item.getCoolDownTime());
+        String buffsDebuffs = "";
+        if(item.getTargetingEnemies()){
+            if(item.getDeBuffs().size() > 0){
+                buffsDebuffs += "Debuffs: ";
+                for(Map.Entry<DeBuff,Integer> entry: item.getDeBuffs().entrySet()){
+                    buffsDebuffs += entry.getKey().toString() + " ";
+                }
+            }
+        }else{
+            if(item.getBuffs().size() > 0) {
+                buffsDebuffs += "Buffs: ";
+                for (Map.Entry<Buff, Integer> entry : item.getBuffs().entrySet()) {
+                    buffsDebuffs += entry.getKey().toString() + " ";
+                }
+            }
+        }
+        itemBuffsDebuffs.setText(buffsDebuffs);
     }
 }
