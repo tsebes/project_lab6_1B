@@ -33,6 +33,7 @@ public class Battle {
         battlePanel.setUpNewBattle(this);
 
         initializeTurnOrder(heroArrayList, enemyArrayList);
+        battlePanel.getTurns().refresh();
 
         //adding border to current character
         battlePanel.getCharacters().addActiveBorder();
@@ -217,6 +218,9 @@ public class Battle {
                 graveyardList.add(character);
             }
         }
+
+        // refresh turn order panel
+        battlePanel.getTurns().refresh();
 
             Timer endTurnTimer = new Timer(delay, new ActionListener() {
                 @Override
