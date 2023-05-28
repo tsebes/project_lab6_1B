@@ -1,8 +1,7 @@
 package gui;
 
-import game.AttackResistanceType;
+import game.*;
 import game.Character;
-import game.CharacterClass;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,6 +23,17 @@ public class AnalyzePanel extends JPanel {
     private JLabel targetEnergyResistance;
     private JLabel targetDarkResistance;
     private JLabel targetLightResistance;
+    private JLabel targetBuff1;
+    private JLabel targetBuff2;
+    private JLabel targetBuff3;
+    private JLabel targetBuff4;
+    private JLabel targetBuff5;
+    private JLabel targetDebuff1;
+    private JLabel targetDebuff2;
+    private JLabel targetDebuff3;
+    private JLabel targetDebuff4;
+    private JLabel targetDebuff5;
+    private JLabel targetDebuff6;
 
     public AnalyzePanel(BattlePanel battle) {
         this.battlePanel = battle;
@@ -35,6 +45,8 @@ public class AnalyzePanel extends JPanel {
         addTargetTitle();
         addTargetLevel();
         addTargetHP();
+        addBuffLabel();
+        addDebuffLabel();
         addResistanceLabel();
         addPhysicalResistance();
         addAirResistance();
@@ -60,7 +72,7 @@ public class AnalyzePanel extends JPanel {
         JLabel level = new JLabel("", SwingConstants.CENTER);
         level.setFont(new Font("Serif", Font.BOLD, 20));
         level.setForeground(Color.WHITE);
-        level.setBounds(10, 40, 100, 40);
+        level.setBounds(10, 30, 100, 40);
         targetLevel = level;
         add(level);
     }
@@ -69,89 +81,182 @@ public class AnalyzePanel extends JPanel {
         JLabel hp = new JLabel("", SwingConstants.CENTER);
         hp.setFont(new Font("Serif", Font.BOLD, 20));
         hp.setForeground(Color.WHITE);
-        hp.setBounds(120, 40, 200, 40);
+        hp.setBounds(120, 30, 200, 40);
         targetHP = hp;
         add(hp);
     }
 
     private void addResistanceLabel() {
-        JLabel resistanceLabel = new JLabel("Known resistances:", SwingConstants.CENTER);
+        JLabel resistanceLabel = new JLabel("Known resistances:", SwingConstants.LEFT);
         resistanceLabel.setFont(new Font("Serif", Font.BOLD, 20));
         resistanceLabel.setForeground(Color.WHITE);
-        resistanceLabel.setBounds(10, 70, 175, 40);
+        resistanceLabel.setBounds(10, 70, 175, 20);
         add(resistanceLabel);
     }
 
     private void addPhysicalResistance() {
-        JLabel physicalResistance = new JLabel("PHYSICAL: ???", SwingConstants.CENTER);
-        physicalResistance.setFont(new Font("Serif", Font.BOLD, 20));
+        JLabel physicalResistance = new JLabel("PHYSICAL: ???", SwingConstants.LEFT);
+        physicalResistance.setFont(new Font("Serif", Font.BOLD, 18));
         physicalResistance.setForeground(Color.WHITE);
-        physicalResistance.setBounds(10, 100, 200, 40);
+        physicalResistance.setBounds(10, 100, 200, 20);
         targetPhysicalResistance = physicalResistance;
         add(physicalResistance);
     }
 
     private void addAirResistance() {
-        JLabel airResistance = new JLabel("AIR: ???", SwingConstants.CENTER);
-        airResistance.setFont(new Font("Serif", Font.BOLD, 20));
+        JLabel airResistance = new JLabel("AIR: ???", SwingConstants.LEFT);
+        airResistance.setFont(new Font("Serif", Font.BOLD, 18));
         airResistance.setForeground(Color.WHITE);
-        airResistance.setBounds(160, 100, 200, 40);
+        airResistance.setBounds(10, 125, 200, 20);
         targetAirResistance = airResistance;
         add(airResistance);
     }
 
     private void addEarthResistance() {
-        JLabel earthResistance = new JLabel("EARTH: ???", SwingConstants.CENTER);
-        earthResistance.setFont(new Font("Serif", Font.BOLD, 20));
+        JLabel earthResistance = new JLabel("EARTH: ???", SwingConstants.LEFT);
+        earthResistance.setFont(new Font("Serif", Font.BOLD, 18));
         earthResistance.setForeground(Color.WHITE);
-        earthResistance.setBounds(300, 100, 200, 40);
+        earthResistance.setBounds(10, 150, 200, 20);
         targetEarthResistance = earthResistance;
         add(earthResistance);
     }
 
     private void addFireResistance() {
-        JLabel fireResistance = new JLabel("FIRE: ???", SwingConstants.CENTER);
-        fireResistance.setFont(new Font("Serif", Font.BOLD, 20));
+        JLabel fireResistance = new JLabel("FIRE: ???", SwingConstants.LEFT);
+        fireResistance.setFont(new Font("Serif", Font.BOLD, 18));
         fireResistance.setForeground(Color.WHITE);
-        fireResistance.setBounds(440, 100, 200, 40);
+        fireResistance.setBounds(10, 175, 200, 20);
         targetFireResistance = fireResistance;
         add(fireResistance);
     }
 
     private void addWaterResistance() {
-        JLabel waterResistance = new JLabel("WATER: ???", SwingConstants.CENTER);
-        waterResistance.setFont(new Font("Serif", Font.BOLD, 20));
+        JLabel waterResistance = new JLabel("WATER: ???", SwingConstants.LEFT);
+        waterResistance.setFont(new Font("Serif", Font.BOLD, 18));
         waterResistance.setForeground(Color.WHITE);
-        waterResistance.setBounds(0, 130, 200, 40);
+        waterResistance.setBounds(180, 100, 200, 20);
         targetWaterResistance = waterResistance;
         add(waterResistance);
     }
 
     private void addEnergyResistance() {
-        JLabel energyResistance = new JLabel("ENERGY: ???", SwingConstants.CENTER);
-        energyResistance.setFont(new Font("Serif", Font.BOLD, 20));
+        JLabel energyResistance = new JLabel("ENERGY: ???", SwingConstants.LEFT);
+        energyResistance.setFont(new Font("Serif", Font.BOLD, 18));
         energyResistance.setForeground(Color.WHITE);
-        energyResistance.setBounds(160, 130, 200, 40);
+        energyResistance.setBounds(180, 125, 200, 20);
         targetEnergyResistance = energyResistance;
         add(energyResistance);
     }
 
     private void addDarkResistance() {
-        JLabel darkResistance = new JLabel("DARK: ???", SwingConstants.CENTER);
-        darkResistance.setFont(new Font("Serif", Font.BOLD, 20));
+        JLabel darkResistance = new JLabel("DARK: ???", SwingConstants.LEFT);
+        darkResistance.setFont(new Font("Serif", Font.BOLD, 18));
         darkResistance.setForeground(Color.WHITE);
-        darkResistance.setBounds(300, 130, 200, 40);
+        darkResistance.setBounds(180, 150, 200, 20);
         targetDarkResistance = darkResistance;
         add(darkResistance);
     }
 
     private void addLightResistance() {
-        JLabel lightResistance = new JLabel("LIGHT: ???", SwingConstants.CENTER);
-        lightResistance.setFont(new Font("Serif", Font.BOLD, 20));
+        JLabel lightResistance = new JLabel("LIGHT: ???", SwingConstants.LEFT);
+        lightResistance.setFont(new Font("Serif", Font.BOLD, 18));
         lightResistance.setForeground(Color.WHITE);
-        lightResistance.setBounds(440, 130, 200, 40);
+        lightResistance.setBounds(180, 175, 200, 20);
         targetLightResistance = lightResistance;
         add(lightResistance);
+    }
+
+    private void addBuffLabel() {
+        JLabel buffLabel = new JLabel("Buffs:", SwingConstants.LEFT);
+        buffLabel.setFont(new Font("Serif", Font.BOLD, 20));
+        buffLabel.setForeground(Color.WHITE);
+        buffLabel.setBounds(330, 40, 100, 20);
+        add(buffLabel);
+
+        JLabel buff1 = new JLabel("", SwingConstants.LEFT);
+        buff1.setFont(new Font("Serif", Font.BOLD, 18));
+        buff1.setForeground(Color.WHITE);
+        buff1.setBounds(330, 70, 100, 18);
+        add(buff1);
+        targetBuff1 = buff1;
+
+        JLabel buff2 = new JLabel("", SwingConstants.LEFT);
+        buff2.setFont(new Font("Serif", Font.BOLD, 18));
+        buff2.setForeground(Color.WHITE);
+        buff2.setBounds(330, 90, 100, 18);
+        add(buff2);
+        targetBuff2 = buff2;
+
+        JLabel buff3 = new JLabel("", SwingConstants.LEFT);
+        buff3.setFont(new Font("Serif", Font.BOLD, 18));
+        buff3.setForeground(Color.WHITE);
+        buff3.setBounds(330, 110, 100, 18);
+        add(buff3);
+        targetBuff3 = buff3;
+
+        JLabel buff4 = new JLabel("", SwingConstants.LEFT);
+        buff4.setFont(new Font("Serif", Font.BOLD, 18));
+        buff4.setForeground(Color.WHITE);
+        buff4.setBounds(330, 130, 100, 18);
+        add(buff4);
+        targetBuff4 = buff4;
+
+        JLabel buff5 = new JLabel("", SwingConstants.LEFT);
+        buff5.setFont(new Font("Serif", Font.BOLD, 18));
+        buff5.setForeground(Color.WHITE);
+        buff5.setBounds(330, 150, 100, 18);
+        add(buff5);
+        targetBuff5 = buff5;
+    }
+
+    private void addDebuffLabel() {
+        JLabel debuffLabel = new JLabel("Debuffs:", SwingConstants.LEFT);
+        debuffLabel.setFont(new Font("Serif", Font.BOLD, 20));
+        debuffLabel.setForeground(Color.WHITE);
+        debuffLabel.setBounds(460, 40, 100, 20);
+        add(debuffLabel);
+
+        JLabel debuff1 = new JLabel("", SwingConstants.LEFT);
+        debuff1.setFont(new Font("Serif", Font.BOLD, 18));
+        debuff1.setForeground(Color.WHITE);
+        debuff1.setBounds(460, 70, 100, 18);
+        add(debuff1);
+        targetDebuff1 = debuff1;
+
+        JLabel debuff2 = new JLabel("", SwingConstants.LEFT);
+        debuff2.setFont(new Font("Serif", Font.BOLD, 18));
+        debuff2.setForeground(Color.WHITE);
+        debuff2.setBounds(460, 90, 100, 18);
+        add(debuff2);
+        targetDebuff2 = debuff2;
+
+        JLabel debuff3 = new JLabel("", SwingConstants.LEFT);
+        debuff3.setFont(new Font("Serif", Font.BOLD, 18));
+        debuff3.setForeground(Color.WHITE);
+        debuff3.setBounds(460, 110, 100, 18);
+        add(debuff3);
+        targetDebuff3 = debuff3;
+
+        JLabel debuff4 = new JLabel("", SwingConstants.LEFT);
+        debuff4.setFont(new Font("Serif", Font.BOLD, 18));
+        debuff4.setForeground(Color.WHITE);
+        debuff4.setBounds(460, 130, 100, 18);
+        add(debuff4);
+        targetDebuff4 = debuff4;
+
+        JLabel debuff5 = new JLabel("", SwingConstants.LEFT);
+        debuff5.setFont(new Font("Serif", Font.BOLD, 18));
+        debuff5.setForeground(Color.WHITE);
+        debuff5.setBounds(460, 150, 100, 18);
+        add(debuff5);
+        targetDebuff5 = debuff5;
+
+        JLabel debuff6 = new JLabel("", SwingConstants.LEFT);
+        debuff6.setFont(new Font("Serif", Font.BOLD, 18));
+        debuff6.setForeground(Color.WHITE);
+        debuff6.setBounds(460, 170, 100, 18);
+        add(debuff6);
+        targetDebuff6 = debuff6;
     }
 
     public void refresh() {
@@ -192,5 +297,32 @@ public class AnalyzePanel extends JPanel {
                 }
             }
         }
+
+        Map<Buff, Integer> buffs = target.getBuffs();
+        Map<DeBuff, Integer> deBuffs = target.getDeBuffs();
+
+        for(Map.Entry<Buff,Integer> entry : buffs.entrySet()) {
+            if(entry.getValue()!=0) {
+                switch(entry.getKey()) {
+                    case STR_UP -> {
+                        targetBuff1.setText(entry.getKey()+" "+entry.getValue());
+                    }
+                    case INT_UP -> {
+                        targetBuff2.setText(entry.getKey()+" "+entry.getValue());
+                    }
+                    case SPD_UP -> {
+                        targetBuff3.setText(entry.getKey()+" "+entry.getValue());
+                    }
+                    case LUC_UP -> {
+                        targetBuff4.setText(entry.getKey()+" "+entry.getValue());
+                    }
+                    case REGEN -> {
+                        targetBuff5.setText(entry.getKey()+" "+entry.getValue());
+                    }
+                }
+            }
+        }
+
+
     }
 }
