@@ -152,7 +152,7 @@ public class DataProvider {
         return charactersClassesList;
     }
 
-    public static List<Item> getAllItemsList() {
-        return allItemsList;
+    public static Map<Item, Integer> getAllItemsMap() {
+        return allItemsMap;
     }
 }

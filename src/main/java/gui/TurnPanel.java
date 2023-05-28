@@ -68,6 +68,7 @@ public class TurnPanel extends JPanel {
                     turnOrderLabels.get(i).setBackground(Color.RED);
                     turnOrderLabels.get(i).setForeground(Color.WHITE);
                 }
+                turnOrderLabels.get(i).setVisible(true);
             } else {
                 turnOrderLabels.get(i).setVisible(false);
             }
