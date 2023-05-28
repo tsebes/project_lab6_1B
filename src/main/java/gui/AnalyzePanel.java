@@ -266,34 +266,34 @@ public class AnalyzePanel extends JPanel {
         Map<AttackResistanceType, Double> basicResistances = targetCharacterClass.getBasicResistances();
         Map<AttackResistanceType, Boolean> discoveredResistances = targetCharacterClass.getDiscoveredResistances();
 
-        targetTitle.setText("Analyze: "+target.getName());
+        targetTitle.setText("Analyze: " + target.getName());
 
-        targetLevel.setText("Level: "+target.getLevel());
+        targetLevel.setText("Level: " + target.getLevel());
 
-        targetHP.setText("HP: "+target.getCurrentHealthPoints()+"/"+target.getMaxHealthPoints());
+        targetHP.setText("HP: " + target.getCurrentHealthPoints() + "/" + target.getMaxHealthPoints());
 
-        for(Map.Entry<AttackResistanceType, Boolean> entry : discoveredResistances.entrySet()) {
-            if(entry.getValue()) {
-                switch(entry.getKey()) {
-                    case PHYSICAL -> targetPhysicalResistance.setText(entry.getKey()+": "+basicResistances.get(entry.getKey())+"%");
-                    case AIR -> targetAirResistance.setText(entry.getKey()+": "+basicResistances.get(entry.getKey())+"%");
-                    case EARTH -> targetEarthResistance.setText(entry.getKey()+": "+basicResistances.get(entry.getKey())+"%");
-                    case FIRE -> targetFireResistance.setText(entry.getKey()+": "+basicResistances.get(entry.getKey())+"%");
-                    case WATER -> targetWaterResistance.setText(entry.getKey()+": "+basicResistances.get(entry.getKey())+"%");
-                    case ENERGY -> targetEnergyResistance.setText(entry.getKey()+": "+basicResistances.get(entry.getKey())+"%");
-                    case DARK -> targetDarkResistance.setText(entry.getKey()+": "+basicResistances.get(entry.getKey())+"%");
-                    case LIGHT -> targetLightResistance.setText(entry.getKey()+": "+basicResistances.get(entry.getKey())+"%");
+        for (Map.Entry<AttackResistanceType, Boolean> entry : discoveredResistances.entrySet()) {
+            if (entry.getValue()) {
+                switch (entry.getKey()) {
+                    case PHYSICAL -> targetPhysicalResistance.setText(entry.getKey() + ": " + basicResistances.get(entry.getKey()) + "%");
+                    case AIR -> targetAirResistance.setText(entry.getKey() + ": " + basicResistances.get(entry.getKey()) + "%");
+                    case EARTH -> targetEarthResistance.setText(entry.getKey() + ": " + basicResistances.get(entry.getKey()) + "%");
+                    case FIRE -> targetFireResistance.setText(entry.getKey() + ": " + basicResistances.get(entry.getKey()) + "%");
+                    case WATER -> targetWaterResistance.setText(entry.getKey() + ": " + basicResistances.get(entry.getKey()) + "%");
+                    case ENERGY -> targetEnergyResistance.setText(entry.getKey() + ": " + basicResistances.get(entry.getKey()) + "%");
+                    case DARK -> targetDarkResistance.setText(entry.getKey() + ": " + basicResistances.get(entry.getKey()) + "%");
+                    case LIGHT -> targetLightResistance.setText(entry.getKey() + ": " + basicResistances.get(entry.getKey()) + "%");
                 }
             } else {
-                switch(entry.getKey()) {
-                    case PHYSICAL -> targetPhysicalResistance.setText(entry.getKey()+": ???");
-                    case AIR -> targetAirResistance.setText(entry.getKey()+": ???");
-                    case EARTH -> targetEarthResistance.setText(entry.getKey()+": ???");
-                    case FIRE -> targetFireResistance.setText(entry.getKey()+": ???");
-                    case WATER -> targetWaterResistance.setText(entry.getKey()+": ???");
-                    case ENERGY -> targetEnergyResistance.setText(entry.getKey()+": ???");
-                    case DARK -> targetDarkResistance.setText(entry.getKey()+": ???");
-                    case LIGHT -> targetLightResistance.setText(entry.getKey()+": ???");
+                switch (entry.getKey()) {
+                    case PHYSICAL -> targetPhysicalResistance.setText(entry.getKey() + ": ???");
+                    case AIR -> targetAirResistance.setText(entry.getKey() + ": ???");
+                    case EARTH -> targetEarthResistance.setText(entry.getKey() + ": ???");
+                    case FIRE -> targetFireResistance.setText(entry.getKey() + ": ???");
+                    case WATER -> targetWaterResistance.setText(entry.getKey() + ": ???");
+                    case ENERGY -> targetEnergyResistance.setText(entry.getKey() + ": ???");
+                    case DARK -> targetDarkResistance.setText(entry.getKey() + ": ???");
+                    case LIGHT -> targetLightResistance.setText(entry.getKey() + ": ???");
                 }
             }
         }
@@ -301,28 +301,50 @@ public class AnalyzePanel extends JPanel {
         Map<Buff, Integer> buffs = target.getBuffs();
         Map<DeBuff, Integer> deBuffs = target.getDeBuffs();
 
-        for(Map.Entry<Buff,Integer> entry : buffs.entrySet()) {
-            if(entry.getValue()!=0) {
-                switch(entry.getKey()) {
+        for (Map.Entry<Buff, Integer> entry : buffs.entrySet()) {
+            if (entry.getValue() != 0) {
+                switch (entry.getKey()) {
                     case STR_UP -> {
-                        targetBuff1.setText(entry.getKey()+" "+entry.getValue());
+                        targetBuff1.setText(entry.getKey() + " " + entry.getValue());
                     }
                     case INT_UP -> {
-                        targetBuff2.setText(entry.getKey()+" "+entry.getValue());
+                        targetBuff2.setText(entry.getKey() + " " + entry.getValue());
                     }
                     case SPD_UP -> {
-                        targetBuff3.setText(entry.getKey()+" "+entry.getValue());
+                        targetBuff3.setText(entry.getKey() + " " + entry.getValue());
                     }
                     case LUC_UP -> {
-                        targetBuff4.setText(entry.getKey()+" "+entry.getValue());
+                        targetBuff4.setText(entry.getKey() + " " + entry.getValue());
                     }
                     case REGEN -> {
-                        targetBuff5.setText(entry.getKey()+" "+entry.getValue());
+                        targetBuff5.setText(entry.getKey() + " " + entry.getValue());
                     }
                 }
             }
         }
-
-
+        for(Map.Entry<DeBuff,Integer> entry : deBuffs.entrySet()) {
+            if (entry.getValue() != 0) {
+                switch (entry.getKey()) {
+                    case STR_DOWN -> {
+                        targetDebuff1.setText(entry.getKey() + " " + entry.getValue());
+                    }
+                    case INT_DOWN -> {
+                        targetDebuff2.setText(entry.getKey() + " " + entry.getValue());
+                    }
+                    case SPD_DOWN -> {
+                        targetDebuff3.setText(entry.getKey() + " " + entry.getValue());
+                    }
+                    case LUC_DOWN -> {
+                        targetDebuff4.setText(entry.getKey() + " " + entry.getValue());
+                    }
+                    case BURN -> {
+                        targetDebuff5.setText(entry.getKey() + " " + entry.getValue());
+                    }
+                    case CURSE -> {
+                        targetDebuff6.setText(entry.getKey() + " " + entry.getValue());
+                    }
+                }
+            }
+        }
     }
 }
