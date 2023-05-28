@@ -147,4 +147,12 @@ public class DataProvider {
         }
         return null;
     }
+
+    public static List<CharacterClass> getCharactersClassesList() {
+        return charactersClassesList;
+    }
+
+    public static List<Item> getAllItemsList() {
+        return allItemsList;
+    }
 }

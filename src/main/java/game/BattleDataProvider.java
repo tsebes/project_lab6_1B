@@ -2,10 +2,7 @@ package game;
 
 import gui.GUI;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
@@ -36,9 +33,10 @@ public class BattleDataProvider {
 
     void importData() {
         BufferedReader reader;
-
+        File file = new File(
+                "src/main/java/battleData.txt");
         try {
-            reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/battleData.txt")));
+            reader = new BufferedReader(new FileReader(file));
             String line = reader.readLine();
 
             while (line != null) {
@@ -91,5 +89,9 @@ public class BattleDataProvider {
         }
 
         return battle;
+    }
+
+    public static Map<String, String> getBattleMap() {
+        return battleMap;
     }
 }
