@@ -301,6 +301,17 @@ public class AnalyzePanel extends JPanel {
         Map<Buff, Integer> buffs = target.getBuffs();
         Map<DeBuff, Integer> deBuffs = target.getDeBuffs();
 
+        targetBuff1.setText("");
+        targetBuff2.setText("");
+        targetBuff3.setText("");
+        targetBuff4.setText("");
+        targetBuff5.setText("");
+        targetDebuff1.setText("");
+        targetDebuff2.setText("");
+        targetDebuff3.setText("");
+        targetDebuff4.setText("");
+        targetDebuff5.setText("");
+
         for (Map.Entry<Buff, Integer> entry : buffs.entrySet()) {
             if (entry.getValue() != 0) {
                 switch (entry.getKey()) {

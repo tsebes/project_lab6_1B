@@ -75,9 +75,9 @@ public class CustomBattlePanel extends JPanel{
         add(importButton);
 
         List<CharacterClass> charactersClassesList = new ArrayList<>();
-        List<Item> allItemsList = new ArrayList<>();
+        Map<Item, Integer> allItemsMap;
         charactersClassesList = dataProvider.getInstance().getCharactersClassesList();
-        allItemsList = dataProvider.getInstance().getAllItemsList();
+        allItemsMap = dataProvider.getInstance().getAllItemsMap();
 
         String [] characterNames = new String[200];
         String [] itemNames = new String[100];
@@ -86,9 +86,16 @@ public class CustomBattlePanel extends JPanel{
             characterNames[counter] = charactersClassesList.get(counter).getCharacterClassName();
         }
 
-        for (int counter = 0; counter < allItemsList.size(); counter++) {
-            itemNames[counter] = allItemsList.get(counter).getName();
+        if(allItemsMap.size() > 0){
+            int counter = 0;
+            for(Map.Entry<Item,Integer> entry: allItemsMap.entrySet()){
+                itemNames[counter] = entry.getKey().getName();
+                counter++;
+            }
         }
+        //for (int counter = 0; counter < allItemsMap.size(); counter++) {
+        //    itemNames[counter] = allItemsMap.get(counter).getName();
+        //}
 
         JLabel bn = new JLabel("Battle Name:", SwingConstants.LEFT);
         bn.setFont(new Font("Serif", Font.PLAIN, 25));
