@@ -14,7 +14,7 @@ public class Battle {
     protected List<Character> graveyardList = new ArrayList<>();
     protected Character activeCharacter;
     protected Map<Character, Double> turnOrder = new HashMap<>();
-    protected List<Item> itemArrayList = new ArrayList<>();
+    protected Map<Item, Integer> itemsMap = new HashMap<>();
     protected List<Character> targetsArrayList = new ArrayList<>();
     protected Action currentAction;
     protected Skill currentSkill;
@@ -71,16 +71,16 @@ public class Battle {
         this.activeCharacter = activeCharacter;
     }
 
-    public List<Item> getItemArrayList() {
-        return itemArrayList;
+    public Map<Item, Integer> getItemsMap() {
+        return itemsMap;
     }
 
-    public void setItemArrayList(List<Item> itemArrayList) {
-        this.itemArrayList = itemArrayList;
+    public void setItemsMap(Map<Item, Integer> itemsMap) {
+        this.itemsMap = itemsMap;
     }
 
-    public void addItemToList(Item item) {
-        this.itemArrayList.add(item);
+    public void addItemToMap(Item item, int amount) {
+        this.itemsMap.put(item, amount);
     }
 
     public Map<Character, Double> getTurnOrder() {
@@ -195,7 +195,11 @@ public class Battle {
                 turnOrder.put(activeCharacter, turnOrder.get(activeCharacter)+currentItem.getCoolDownTime()*(50 - activeCharacter.currentSpeed/10));
                 battlePanel.getCharacters().animate(dealingDamage);
                 // removing used item from available items
-                this.itemArrayList.remove(currentItem);
+                if (this.itemsMap.get(currentItem) == 1) {
+                    this.itemsMap.remove(currentItem);
+                } else {
+                    this.itemsMap.put(currentItem, this.itemsMap.get(currentItem) - 1);
+                }
                 break;
         }
 

@@ -1,13 +1,13 @@
 package gui;
 
+import game.*;
 import game.Action;
-import game.Battle;
 import game.Character;
-import game.Item;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ItemPanel extends JPanel {
 
@@ -122,7 +122,7 @@ public class ItemPanel extends JPanel {
     }
 
     private void setUpItemToButton(JButton button, int number){
-        Item item = battle.getItemArrayList().get(currentPage*4 + number - 1);
+        Item item = new ArrayList<>(this.battle.getItemsMap().keySet()).get(currentPage*4 + number - 1);
         button.setText(item.getName());
 
         button.addActionListener(e -> {
@@ -147,13 +147,24 @@ public class ItemPanel extends JPanel {
         });
     }
 
+    public void setUpItemInfoToButton(JButton button, int number){
+        Item item = new ArrayList<>(this.battle.getItemsMap().keySet()).get(currentPage*4 + number - 1);
+        int amount = this.battle.getItemsMap().get(item);
+        button.addActionListener(e -> {
+            battlePanel.getItemInfo().setItem(item);
+            battlePanel.getItemInfo().setAmount(amount);
+            battlePanel.changePanel(BattlePanel.Panel.ItemInfo);
+        });
+    }
+
     public void refresh(){
         Character activeCharacter = battlePanel.getBattle().getActiveCharacter();
         battle = battlePanel.getBattle();
+        numberOfPages = (int)Math.ceil((double)this.battle.getItemsMap().keySet().size()/4.0);
+
         if(character == null || character != activeCharacter){
             character = activeCharacter;
             currentPage = 0;
-            numberOfPages = (int)Math.ceil((double)battle.getItemArrayList().size()/4.0);
         }else{
             if(currentPage<0){
                 currentPage = numberOfPages - 1;
@@ -161,46 +172,81 @@ public class ItemPanel extends JPanel {
                 currentPage = 0;
             }
         }
+
         clearActionListeners(item1);
         clearActionListeners(item2);
         clearActionListeners(item3);
         clearActionListeners(item4);
+        clearActionListeners(item1Info);
+        clearActionListeners(item2Info);
+        clearActionListeners(item3Info);
+        clearActionListeners(item4Info);
 
-        if(battle.getItemArrayList().isEmpty()) {
+        if(this.battle.getItemsMap().keySet().isEmpty()) {
             item1.setVisible(false);
             item2.setVisible(false);
             item3.setVisible(false);
             item4.setVisible(false);
-        }else if(currentPage < numberOfPages - 1 || battle.getItemArrayList().size()%4 == 0){
+            item1Info.setVisible(false);
+            item2Info.setVisible(false);
+            item3Info.setVisible(false);
+            item4Info.setVisible(false);
+        }else if(currentPage < numberOfPages - 1 || this.battle.getItemsMap().keySet().size()%4 == 0){
             item1.setVisible(true);
+            item1Info.setVisible(true);
             setUpItemToButton(item1,1);
+            setUpItemInfoToButton(item1Info, 1);
             item2.setVisible(true);
+            item2Info.setVisible(true);
             setUpItemToButton(item2,2);
+            setUpItemInfoToButton(item2Info, 2);
             item3.setVisible(true);
+            item3Info.setVisible(true);
             setUpItemToButton(item3,3);
+            setUpItemInfoToButton(item3Info, 3);
             item4.setVisible(true);
+            item4Info.setVisible(true);
             setUpItemToButton(item4,4);
-        }else if(battle.getItemArrayList().size()%4 == 3){
+            setUpItemInfoToButton(item4Info, 4);
+        }else if(this.battle.getItemsMap().keySet().size()%4 == 3){
             item1.setVisible(true);
+            item1Info.setVisible(true);
             setUpItemToButton(item1,1);
+            setUpItemInfoToButton(item1Info, 1);
             item2.setVisible(true);
+            item2Info.setVisible(true);
             setUpItemToButton(item2,2);
+            setUpItemInfoToButton(item2Info, 2);
             item3.setVisible(true);
+            item3Info.setVisible(true);
             setUpItemToButton(item3,3);
+            setUpItemInfoToButton(item3Info, 3);
             item4.setVisible(false);
-        }else if(battle.getItemArrayList().size()%4 == 2){
+            item4Info.setVisible(false);
+        }else if(this.battle.getItemsMap().keySet().size()%4 == 2){
             item1.setVisible(true);
+            item1Info.setVisible(true);
             setUpItemToButton(item1,1);
+            setUpItemInfoToButton(item1Info, 1);
             item2.setVisible(true);
+            item2Info.setVisible(true);
             setUpItemToButton(item2,2);
+            setUpItemInfoToButton(item2Info, 2);
             item3.setVisible(false);
+            item3Info.setVisible(false);
             item4.setVisible(false);
+            item4Info.setVisible(false);
         }else{
             item1.setVisible(true);
+            item1Info.setVisible(true);
             setUpItemToButton(item1,1);
+            setUpItemInfoToButton(item1Info, 1);
             item2.setVisible(false);
+            item2Info.setVisible(false);
             item3.setVisible(false);
+            item3Info.setVisible(false);
             item4.setVisible(false);
+            item4Info.setVisible(false);
         }
     }
 }

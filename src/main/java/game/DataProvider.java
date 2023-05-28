@@ -8,7 +8,7 @@ import java.util.Map;
 public class DataProvider {
     static List<CharacterClass> charactersClassesList = new ArrayList<>();
     static List<Skill> allSkillsList = new ArrayList<>();
-    static List<Item> allItemsList = new ArrayList<>();
+    static Map<Item, Integer> allItemsMap = new HashMap<>();
     private static volatile DataProvider instance;
 
     public static final String DATA_SEPARATOR = ",";
@@ -65,7 +65,8 @@ public class DataProvider {
             Map<Buff, Integer> buffs = getBuffs(s[5]);
             Map<DeBuff, Integer> deBuffs = getDeBuffs(s[6]);
             double coolDownTime =  Double.parseDouble(s[7]);
-            allItemsList.add(new Item(s[0], AOE, targetingEnemies, attackType, skillPoints, buffs, deBuffs, coolDownTime));
+            int amount = Integer.parseInt(s[8]);
+            allItemsMap.put(new Item(s[0], AOE, targetingEnemies, attackType, skillPoints, buffs, deBuffs, coolDownTime), amount);
         }
     }
 
@@ -126,12 +127,16 @@ public class DataProvider {
     }
 
     public static Item getItemByName(String itemName) {
-        for(Item item: allItemsList){
+        for(Item item: allItemsMap.keySet()){
             if(item.getName().equals(itemName)){
                 return item;
             }
         }
         return null;
+    }
+
+    public static int getItemAmount(Item item) {
+        return allItemsMap.get(item);
     }
 
     public static CharacterClass getCharacterClassByName(String characterClassName) {
