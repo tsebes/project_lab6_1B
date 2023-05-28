@@ -20,8 +20,6 @@ public class CustomBattlePanel extends JPanel{
     private DataProvider dataProvider;
     private BattleDataProvider battleDataProvider;
     private Map<String,String> battleMap = new HashMap<>();
-    private Map<String,String> battleMap2 = new HashMap<>();
-    private Map<String,String> battleMap3 = new HashMap<>();
     private String battleName;
     private String [] singleHeroData = new String[] {};
     private String [] singleEnemyData = new String[] {};
@@ -54,14 +52,18 @@ public class CustomBattlePanel extends JPanel{
         add(title);
 
         battleMap = battleDataProvider.getInstance().getBattleMap();
-        String[] battleList = new String[100];
-        int inc = 0;
+        List<String> battleList = new ArrayList<>();
+
         for(String key: battleMap.keySet()){
-            battleList[inc]=key;
-            inc++;
+            battleList.add(key);
         }
 
-        JComboBox ib = new JComboBox(battleList);
+        String[] array = new String[battleList.size()];
+        for(int i = 0; i < array.length; i++) {
+            array[i] = battleList.get(i);
+        }
+
+        JComboBox ib = new JComboBox(array);
         ib.setBounds(175,75,200,20);
         ib.setSelectedIndex(-1);
         add(ib);
@@ -404,6 +406,11 @@ public class CustomBattlePanel extends JPanel{
                 } catch (IOException err) {
                     err.printStackTrace();
                 }
+
+                ib.addItem((String)bnt.getText());
+                ib.setSelectedIndex(-1);
+                battleMap.put(bnt.getText(),characters+items);
+                System.out.println(battleMap);
             }
         });
 
