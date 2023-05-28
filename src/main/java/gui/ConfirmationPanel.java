@@ -9,12 +9,14 @@ import java.awt.*;
 public class ConfirmationPanel extends JPanel {
 
     private final BattlePanel battlePanel;
+    private final TurnPanel turnPanel;
     private JLabel actionTitle;
     private JLabel actionInfo;
     private JLabel actionTargets;
 
-    public ConfirmationPanel(BattlePanel battlePanel) {
+    public ConfirmationPanel(BattlePanel battlePanel, TurnPanel turnPanel) {
         this.battlePanel = battlePanel;
+        this.turnPanel = turnPanel;
         //TODO rework menu graphics
         setBounds(200, 400, 600, 200);
         setBackground(Color.CYAN);

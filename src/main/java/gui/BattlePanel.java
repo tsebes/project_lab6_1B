@@ -40,7 +40,7 @@ public class BattlePanel extends JPanel {
         analyze = new AnalyzePanel(this);
         logs = new LogsPanel(this);
 
-        confirmation = new ConfirmationPanel(this);
+        confirmation = new ConfirmationPanel(this, turns);
         actionStopper = new ActionStopperPanel(this);
         items = new ItemPanel(this);
         skillInfo = new SkillsInfoPanel(this);
