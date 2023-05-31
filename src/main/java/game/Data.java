@@ -8,7 +8,9 @@ public class Data {
             "Knight,Blade storm;Water Blade;Air Blade;Fire Blade;Earth Blade;Battle Focus,30;-10;0;0;0;0;-10;-10,5,5,6,4,20,3,1,2,2,5,PHYSICAL",
             "Mage,Fire storm;Flood;Typhoon;Earthquake;Energy Bolt;Energy storm;Healing aura,-20;50;10;10;10;30;-10;-10,2,8,3,4,13,1,3,2,2,3,FIRE",
             "Warlock,Dark Bolt;Dark Blast;Death Calling;Death Parade;Energy Bolt;Energy storm,-20;10;10;10;10;30;-50;90,1,9,6,1,15,1,4,2,2,4,DARK",
-            "Skeleton,Undead charge,-10;-20;100;60;60;0;-80;100,7,5,6,2,15,4,2,2,2,4,PHYSICAL"
+            "Skeleton,Undead charge,-10;-20;100;60;60;0;-80;100,7,5,6,2,15,4,2,2,2,4,PHYSICAL",
+            "Wolf,Earthquake,-20;-10;100;40;80;0;-60;100,7,5,6,2,15,4,4,2,4,2,PHYSICAL",
+            "Daemon,Energy storm,10;20;50;50;100;50;50;100,7,5,6,2,15,4,4,2,4,2,ENERGY"
             // Creating character tutorial:
             // characterName,
             // names of character skills, divided by ';',
