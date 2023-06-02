@@ -24,7 +24,6 @@ public class ItemsInfoPanel extends JPanel {
         this.battlePanel = battle;
         //TODO rework menu graphics
         setBounds(200, 400, 600, 200);
-        setBackground(Color.DARK_GRAY);
         setVisible(false);
         setLayout(null);
         addItemTitle();

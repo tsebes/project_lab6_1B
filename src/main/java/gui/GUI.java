@@ -21,7 +21,6 @@ public class GUI extends JFrame{
         customBattlePanel = new CustomBattlePanel(this);
         battleEndPanel = new BattleEndPanel(this);
 
-        //TODO add other panels
         configureFrame();
         setVisible(true);
     }

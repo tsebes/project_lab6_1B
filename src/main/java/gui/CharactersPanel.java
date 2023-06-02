@@ -417,8 +417,6 @@ public class CharactersPanel extends JPanel {
                 return button;
             }
         }
-        //TODO delete error information popup
-        System.out.println("failed to find button");
         return null;
     }
 
@@ -433,8 +431,6 @@ public class CharactersPanel extends JPanel {
                 return label;
             }
         }
-        //TODO delete error information popup
-        System.out.println("failed to find label");
         return null;
     }
 

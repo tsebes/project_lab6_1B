@@ -223,6 +223,9 @@ public abstract class Character {
 
         //making sure currentHealthPoints is ?.?? format
         currentHealthPoints*=100;
+        if(currentHealthPoints <= 0){
+            currentHealthPoints = 1;
+        }
         currentHealthPoints = Math.round(currentHealthPoints);
         currentHealthPoints/=100;
 
@@ -233,9 +236,6 @@ public abstract class Character {
         String log = this.getName() + " was damaged by " + deBuff + " for " + amount + " damage";
         if(isGuarding()){
             log += " (" + this.getName() + " was guarding)";
-        }
-        if(currentHealthPoints <= 0){
-            log += " and died";
         }
         logHandler.getInstance().setStatusEffects(log);
     }

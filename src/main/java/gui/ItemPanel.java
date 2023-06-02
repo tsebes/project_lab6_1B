@@ -32,7 +32,6 @@ public class ItemPanel extends JPanel {
         this.battle = battlePanel.getBattle();
         //TODO rework menu graphics
         setBounds(200, 400, 600, 200);
-        setBackground(Color.BLUE);
         setLayout(null);
         addPageLeftButton();
         addPageRightButton();

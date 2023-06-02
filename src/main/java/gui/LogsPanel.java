@@ -18,18 +18,19 @@ public class LogsPanel  extends JPanel {
         this.battlePanel = battlePanel;
         //TODO rework menu graphics
         setBounds(0, 0, 800, 600);
-        setBackground(new Color(135, 56, 27));
         subPanel =new JPanel(){
             @Override
             public Dimension getPreferredSize() {
                 return new Dimension(750, logsLabels.size() * 55 + 5);
             }
         };
+        subPanel.setOpaque(false);
         scrollPane = new JScrollPane(subPanel);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setBounds(20, 20, 770, 560);
-        subPanel.setBackground(new Color(135, 56, 27));
+        scrollPane.setOpaque(false);
+        scrollPane.getViewport().setOpaque(false);
         add(scrollPane);
         setVisible(false);
         setLayout(null);
@@ -59,10 +60,8 @@ public class LogsPanel  extends JPanel {
 
     public void addLog(String information){
         JLabel logLabel = new JLabel("<html>" + information + "</html>", SwingConstants.LEFT);
-        logLabel.setFont(new Font("Serif", Font.BOLD, 10));
+        logLabel.setFont(new Font("Serif", Font.BOLD, 12));
         logLabel.setForeground(Color.BLACK);
-        logLabel.setBackground(new Color(181, 88, 54));
-        logLabel.setOpaque(true);
         logLabel.setPreferredSize(new Dimension(750, 50));;
         logsLabels.add(logLabel);
         subPanel.add(logLabel);
