@@ -22,15 +22,18 @@ public class Battle {
     protected BattlePanel battlePanel;
     protected Double timePassed;
     protected LogHandler logHandler;
+    protected boolean won;
 
 
     public Battle(List<Hero> heroArrayList, List<Enemy> enemyArrayList, BattlePanel battlePanel) {
         this.heroArrayList = heroArrayList;
         this.enemyArrayList = enemyArrayList;
         this.battlePanel = battlePanel;
+        won = false;
 
         //sets up graphics for new battle
         battlePanel.setUpNewBattle(this);
+        logHandler.getInstance().clearDamageDealt();
 
         initializeTurnOrder(heroArrayList, enemyArrayList);
         battlePanel.getTurns().refresh();
@@ -116,6 +119,10 @@ public class Battle {
         return targetsArrayList;
     }
 
+    public boolean getWon() {
+        return won;
+    }
+
     //set target
     public void setTarget(Character target) {
         this.targetsArrayList.add(target);
@@ -147,6 +154,9 @@ public class Battle {
         if(activeCharacter instanceof Hero){
             Hero activeHero = (Hero) activeCharacter;
             activeHero.disableGuard();
+            logHandler.getInstance().setDamageDealer(activeCharacter.getName());
+        }else{
+            logHandler.getInstance().setDamageDealer("Enemy");
         }
 
         logHandler.getInstance().setActiveCharacterName(activeCharacter.getName());
@@ -370,6 +380,16 @@ public class Battle {
         }
     }
 
+    //function which checks if battle ended and sets won if player won
+    private void checkBattleEnd(){
+        if(enemyArrayList.size() == 0){
+            won = true;
+            battlePanel.goToBattleEnd();
+        }else if(heroArrayList.size() == 0){
+            battlePanel.goToBattleEnd();
+        }
+    }
+
     public void endTurn() {
         //Making not stat changing buffs and deBuffs work
         buffsAndDeBuffsActions();
@@ -380,6 +400,8 @@ public class Battle {
 
         //Changing current stats to correct values
         changeStats();
+
+        checkBattleEnd();
 
         //Changing info (health) in labels under characters
         battlePanel.getCharacters().refresh();

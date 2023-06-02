@@ -1,5 +1,8 @@
 package game;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LogHandler {
 
     private static volatile LogHandler instance;
@@ -10,6 +13,8 @@ public class LogHandler {
     private String statusEffects;
     private String basicLog;
     private String fullLog;
+    private String damageDealer;
+    private Map<String, Double> damageDealtMap;
 
     private LogHandler(){
         reaction = null;
@@ -87,11 +92,35 @@ public class LogHandler {
         statusEffects = null;
     }
 
+    public void setDamageDealer(String damageDealer){
+        this.damageDealer = damageDealer;
+    }
+
+    public void addDamageDealt(double damage){
+        if(damageDealtMap.containsKey(damageDealer)){
+            damage = damageDealtMap.get(damageDealer) + damage;
+            damage*=100;
+            damage = Math.round(damage);
+            damage/=100;
+            damageDealtMap.put(damageDealer, damage);
+        }else{
+            damageDealtMap.put(damageDealer, damage);
+        }
+    }
+
+    public void clearDamageDealt(){
+        damageDealtMap = new HashMap<>();
+    }
+
     public String getBasicLog(){
         return basicLog;
     }
 
     public String getFullLog() {
         return fullLog;
+    }
+
+    public Map<String, Double> getDamageDealtMap() {
+        return damageDealtMap;
     }
 }

@@ -451,6 +451,10 @@ public class CharactersPanel extends JPanel {
         return battle;
     }
 
+    public void endBattle(){
+        battle = null;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
 

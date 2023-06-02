@@ -1,6 +1,5 @@
 package game;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,11 +12,11 @@ public class Skill {
     protected final double skillPoints;
     protected final Map<Buff, Integer> buffs;
     protected final Map<DeBuff, Integer> deBuffs;
-    protected ArrayList<SpecialEffect> specialEffects;
+    protected List<SpecialEffect> specialEffects;
     protected final double coolDownTime;
     protected final String description;
 
-    public Skill(String name, Boolean isAOE, Boolean targetingEnemies, AttackResistanceType attackType, double skillPoints, Map<Buff, Integer> buffs, Map<DeBuff, Integer> deBuffs, double coolDownTime, String description) {
+    public Skill(String name, Boolean isAOE, Boolean targetingEnemies, AttackResistanceType attackType, double skillPoints, Map<Buff, Integer> buffs, Map<DeBuff, Integer> deBuffs, double coolDownTime, String description, List<SpecialEffect> specialEffects) {
         this.name = name;
         this.isAOE = isAOE;
         this.targetingEnemies = targetingEnemies;
@@ -27,6 +26,7 @@ public class Skill {
         this.deBuffs = deBuffs;
         this.coolDownTime = coolDownTime;
         this.description = description;
+        this.specialEffects = specialEffects;
     }
 
     public String getName() {
@@ -61,11 +61,11 @@ public class Skill {
         return targetingEnemies;
     }
 
-    public ArrayList<SpecialEffect> getSpecialEffects() {
+    public List<SpecialEffect> getSpecialEffects() {
         return specialEffects;
     }
 
-    public void setSpecialEffects(ArrayList<SpecialEffect> specialEffects) {
+    public void setSpecialEffects(List<SpecialEffect> specialEffects) {
         this.specialEffects = specialEffects;
     }
 
@@ -73,11 +73,17 @@ public class Skill {
         return coolDownTime;
     }
 
-    private void executeSpecialEffects() {
+    private void executeSpecialEffects(List<Character> targets) {
         if(specialEffects!=null){
             for (SpecialEffect specialEffect : specialEffects) {
-                // TODO: add special effects actions
                 switch (specialEffect) {
+                    case AnalyzeEnemy -> {
+                        for(Character target: targets) {
+                            for (AttackResistanceType attackResistanceType : AttackResistanceType.values()) {
+                                target.getCharacterClass().discoveredResistances.put(attackResistanceType, true);
+                            }
+                        }
+                    }
                     default -> {}
                 }
             }
@@ -118,7 +124,7 @@ public class Skill {
                 }
                 target.addBuffs(buffs, amount <= 0);
             }
-            executeSpecialEffects();
+            executeSpecialEffects(targets);
         }
         return amount;
     }
