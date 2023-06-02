@@ -76,6 +76,10 @@ public class BattlePanel extends JPanel {
         });
     }
 
+    public void goToBattleEnd(){
+        gui.changePanel(GUI.Panel.BattleEnd);
+    }
+
     public void changePanel(Panel panel) {
         if(panel == Panel.Logs){
             skills.setVisible(false);

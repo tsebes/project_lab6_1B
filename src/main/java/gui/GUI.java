@@ -11,6 +11,7 @@ public class GUI extends JFrame{
     private final BattlePanel battlePanel;
     private final TutorialPanel tutorialPanel;
     private final CustomBattlePanel customBattlePanel;
+    private final BattleEndPanel battleEndPanel;
 
     public GUI() {
         menuPanel = new MenuPanel(this);
@@ -18,6 +19,7 @@ public class GUI extends JFrame{
         battlePanel = new BattlePanel(this);
         tutorialPanel = new TutorialPanel(this);
         customBattlePanel = new CustomBattlePanel(this);
+        battleEndPanel = new BattleEndPanel(this);
 
         //TODO add other panels
         configureFrame();
@@ -38,6 +40,7 @@ public class GUI extends JFrame{
         creditsPanel.setVisible(false);
         battlePanel.setVisible(false);
         menuPanel.setVisible(false);
+        battleEndPanel.setVisible(false);
         switch (panel) {
             case Menu -> {
                 setContentPane(menuPanel);
@@ -70,6 +73,12 @@ public class GUI extends JFrame{
                 pack();
                 customBattlePanel.setVisible(true);
             }
+            case BattleEnd -> {
+                battleEndPanel.refresh();
+                setContentPane(battleEndPanel);
+                pack();
+                battleEndPanel.setVisible(true);
+            }
         }
     }
 
@@ -81,6 +90,7 @@ public class GUI extends JFrame{
         Menu,
         Credits,
         Battle,
+        BattleEnd,
         Tutorial,
         CustomBattle
     }

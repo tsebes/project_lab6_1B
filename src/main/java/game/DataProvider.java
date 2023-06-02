@@ -51,7 +51,8 @@ public class DataProvider {
             Map<Buff, Integer> buffs = getBuffs(s[5]);
             Map<DeBuff, Integer> deBuffs = getDeBuffs(s[6]);
             double coolDownTime =  Double.parseDouble(s[7]);
-            allSkillsList.add(new Skill(s[0], AOE, targetingEnemies, attackType, skillPoints, buffs, deBuffs, coolDownTime, s[8]));
+            List<SpecialEffect> specialEffects = getSpecialEffects(s[8]);
+            allSkillsList.add(new Skill(s[0], AOE, targetingEnemies, attackType, skillPoints, buffs, deBuffs, coolDownTime, s[9], specialEffects));
         }
     }
 
@@ -80,6 +81,17 @@ public class DataProvider {
             }
         }
         return deBuffsMap;
+    }
+
+    private static List<SpecialEffect> getSpecialEffects(String specialEffect){
+        List<SpecialEffect> specialEffects = new ArrayList<>();
+        if(!specialEffect.isEmpty()){
+            String [] special = specialEffect.trim().split("\\s*;\\s*");
+            for(String newSpecial: special){
+                specialEffects.add(Enum.valueOf(SpecialEffect.class, newSpecial));
+            }
+        }
+        return specialEffects;
     }
 
     private static Map<Buff, Integer> getBuffs(String buffs) {

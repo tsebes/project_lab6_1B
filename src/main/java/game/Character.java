@@ -179,6 +179,8 @@ public abstract class Character {
             gotDamaged = true;
         }
 
+        logHandler.getInstance().addDamageDealt(amount);
+
         //lowering health by amount
         currentHealthPoints -= amount;
 
