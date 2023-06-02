@@ -32,7 +32,6 @@ public class CustomBattlePanel extends JPanel{
         setBackground(Color.DARK_GRAY);
         setLayout(null);
         addTitle();
-        //TODO add options
         setUpCustomBattlePanel();
     }
 

@@ -4,6 +4,7 @@ import game.Character;
 import game.Hero;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.*;
@@ -19,7 +20,6 @@ public class TurnPanel extends JPanel {
         this.battlePanel = battlePanel;
         //TODO rework menu graphics
         setBounds(600, 0, 200, 400);
-        setBackground(Color.GRAY);
         setLayout(null);
         addTurnPanel();
         addLogsButton();
@@ -27,10 +27,12 @@ public class TurnPanel extends JPanel {
 
     private void addLogsButton() {
         JButton logsButton = new JButton("");
-        logsButton.setBackground(Color.DARK_GRAY);
-        logsButton.setBounds(0, 350, 200, 50);
+        logsButton.setBounds(20, 350, 160, 50);
         logsButton.setFont(new Font("Serif", Font.BOLD, 10));
-        logsButton.setForeground(Color.WHITE);
+        logsButton.setForeground(Color.BLACK);
+        logsButton.setOpaque(false);
+        logsButton.setContentAreaFilled(false);
+        logsButton.setBorderPainted(false);
         this.logsButton=logsButton;
         add(logsButton);
         logsButton.addActionListener(e -> {
@@ -45,9 +47,9 @@ public class TurnPanel extends JPanel {
     private void addTurnPanel() {
         for (int i = 0; i < 8; i++) {
             JLabel turnOrder = new JLabel("", SwingConstants.CENTER);
-            turnOrder.setFont(new Font("Serif", Font.PLAIN, 20));
+            turnOrder.setFont(new Font("Serif", Font.BOLD, 20));
             turnOrder.setBounds(0, 43 * i + 5, 200, 40);
-            turnOrder.setOpaque(true);
+            turnOrder.setOpaque(false);
 
             turnOrderLabels.add(turnOrder);
             add(turnOrder);
@@ -61,14 +63,12 @@ public class TurnPanel extends JPanel {
         for (int i = 0; i < turnOrderLabels.size(); i++) {
             if (i < entryList.size()) {
                turnOrderLabels.get(i).setText(entryList.get(i).getKey().getName() + ": " + entryList.get(i).getValue().toString());
-                if(entryList.get(i).getKey() instanceof Hero) {
-                    turnOrderLabels.get(i).setBackground(Color.GREEN);
-                    turnOrderLabels.get(i).setForeground(Color.BLACK);
-                } else {
-                    turnOrderLabels.get(i).setBackground(Color.RED);
-                    turnOrderLabels.get(i).setForeground(Color.WHITE);
-                }
-                turnOrderLabels.get(i).setVisible(true);
+               if(entryList.get(i).getKey() instanceof Hero) {
+                   turnOrderLabels.get(i).setForeground(new Color(0, 100, 0));
+               } else {
+                   turnOrderLabels.get(i).setForeground(Color.RED);
+               }
+               turnOrderLabels.get(i).setVisible(true);
             } else {
                 turnOrderLabels.get(i).setVisible(false);
             }

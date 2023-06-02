@@ -19,7 +19,6 @@ public class ConfirmationPanel extends JPanel {
         this.turnPanel = turnPanel;
         //TODO rework menu graphics
         setBounds(200, 400, 600, 200);
-        setBackground(Color.CYAN);
         setVisible(false);
         setLayout(null);
         addActionTitle();
@@ -98,7 +97,6 @@ public class ConfirmationPanel extends JPanel {
         confirmButton.setForeground(Color.WHITE);
         add(confirmButton);
         confirmButton.addActionListener(e -> {
-            //TODO do chosen action
             battlePanel.changePanel(BattlePanel.Panel.Skills);
             battlePanel.getBattle().doCurrentAction();
             });

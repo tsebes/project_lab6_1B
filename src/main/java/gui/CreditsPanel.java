@@ -15,7 +15,7 @@ public class CreditsPanel extends JPanel  {
         setLayout(null);
         addTitle();
         addGoBackButton();
-        //TODO add options
+        //TODO add credits (programmers and pages we took graphics from)
     }
 
     private void addTitle() {

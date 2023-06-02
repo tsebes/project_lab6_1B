@@ -79,7 +79,6 @@ public class BattleOptionsPanel extends JPanel {
             battlePanel.changePanel(BattlePanel.Panel.Targeting);
             battlePanel.getTargeting().changeInformationPanel("Using analyze");
             battlePanel.getCharacters().addTargetingAll();
-            //TODO make analyze work
         });
     }
 

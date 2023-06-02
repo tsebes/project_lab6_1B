@@ -15,7 +15,7 @@ public class TutorialPanel extends JPanel {
         setLayout(null);
         addTitle();
         addGoBackButton();
-        //TODO add options
+        //TODO add tutorial
     }
 
     private void addTitle() {

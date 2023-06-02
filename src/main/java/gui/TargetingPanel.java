@@ -13,7 +13,6 @@ public class TargetingPanel   extends JPanel {
         this.battlePanel = battlePanel;
         //TODO rework menu graphics
         setBounds(200, 400, 600, 200);
-        setBackground(Color.GREEN);
         setVisible(false);
         setLayout(null);
         addTitle();
@@ -24,7 +23,7 @@ public class TargetingPanel   extends JPanel {
         JLabel title = new JLabel("Choose target", SwingConstants.CENTER);
         panelTitle = title;
         title.setFont(new Font("Serif", Font.PLAIN, 30));
-        title.setForeground(Color.WHITE);
+        title.setForeground(Color.BLACK);
         title.setBounds(200, 0, 200, 40);
         add(title);
     }
@@ -33,7 +32,7 @@ public class TargetingPanel   extends JPanel {
         JLabel basicInfo = new JLabel("", SwingConstants.CENTER);
         this.basicInfo = basicInfo;
         basicInfo.setFont(new Font("Serif", Font.PLAIN, 20));
-        basicInfo.setForeground(Color.WHITE);
+        basicInfo.setForeground(Color.BLACK);
         basicInfo.setBounds(100, 50, 400, 30);
         add(basicInfo);
     }

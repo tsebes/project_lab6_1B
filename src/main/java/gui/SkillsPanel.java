@@ -29,7 +29,6 @@ public class SkillsPanel  extends JPanel {
         this.battlePanel = battlePanel;
         //TODO rework menu graphics
         setBounds(200, 400, 600, 200);
-        setBackground(Color.BLUE);
         setLayout(null);
         addPageLeftButton();
         addPageRightButton();

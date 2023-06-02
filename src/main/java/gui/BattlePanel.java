@@ -23,14 +23,20 @@ public class BattlePanel extends JPanel {
     private JButton exitButton;
 
     public BattlePanel(GUI gui) {
-        ImageIcon image = new ImageIcon(getClass().getResource("/background.png"));
-
-        turns = new TurnPanel(this);
+        ImageIcon turnImage = new ImageIcon(getClass().getResource("/turn-background.png"));
+        turns = new TurnPanel(this){
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(turnImage.getImage(), 0, 0, null);
+            }
+        };
+        ImageIcon charactersImage = new ImageIcon(getClass().getResource("/background.png"));
         characters = new CharactersPanel(this){
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(image.getImage(), 0, 0, null);
+                g.drawImage(charactersImage.getImage(), 0, 0, null);
             }
         };
 
@@ -38,7 +44,14 @@ public class BattlePanel extends JPanel {
         bOptions = new BattleOptionsPanel(this);
         targeting = new TargetingPanel(this);
         analyze = new AnalyzePanel(this);
-        logs = new LogsPanel(this);
+        ImageIcon logsImage = new ImageIcon(getClass().getResource("/log-background.png"));
+        logs = new LogsPanel(this){
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(logsImage.getImage(), 0, 0, null);
+            }
+        };
 
         confirmation = new ConfirmationPanel(this, turns);
         actionStopper = new ActionStopperPanel(this);
