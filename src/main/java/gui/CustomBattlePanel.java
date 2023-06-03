@@ -400,7 +400,7 @@ public class CustomBattlePanel extends JPanel{
                 String battleDataString = bnt.getText()+"-"+characters+items;
 
                 try {
-                    File file = new File("src/main/java/battleData.txt");
+                    File file = new File("src/main/resources/battleData.txt");
                     file.setWritable(true);
                     file.setReadable(true);
                     FileWriter fw = new FileWriter(file, true);
