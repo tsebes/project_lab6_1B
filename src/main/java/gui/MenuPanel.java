@@ -81,8 +81,8 @@ public class MenuPanel extends JPanel {
         bossButton.setForeground(Color.WHITE);
         add(bossButton);
         bossButton.addActionListener(e -> {
-            //TODO set up battle and start it
-            //gui.changePanel(GUI.Panel.Battle);
+            battle = battleDataProvider.getInstance().setUpBattle("BOSS", gui);
+            gui.changePanel(GUI.Panel.Battle);
         });
     }
 

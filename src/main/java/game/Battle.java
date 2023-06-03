@@ -441,20 +441,8 @@ public class Battle {
 
             clearCurrentAction();
 
-            //TODO move below fragment of code to enemy
             if (activeCharacter instanceof Enemy) {
-
-                //Random action of enemy
-                setCurrentAction(Action.BASICATTACK);
-                Random chance = new Random();
-                int result = chance.nextInt(heroArrayList.size());
-                setTarget(heroArrayList.get(result));
-                doCurrentAction();
-                for (Map.Entry<Character, Double> e : turnOrder.entrySet()) {
-                    Double value = e.getValue();
-                    value -= timePassed;
-                    turnOrder.put(e.getKey(),value);
-                }
+                Enemy.enemyAction(activeCharacter,this);
                 setTimePassed(0.0);
             }
             else{
