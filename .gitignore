@@ -9,3 +9,4 @@
 /.idea
 /out
 /target/
+/src/main/resources/battleData.txt
