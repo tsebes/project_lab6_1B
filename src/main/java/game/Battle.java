@@ -164,6 +164,7 @@ public class Battle {
         battlePanel.getCharacters().deleteBorder();
 
         int delay = 1;
+        double cooldown;
 
         setTimePassed(turnOrder.get(activeCharacter));
         boolean dealingDamage;
@@ -173,7 +174,11 @@ public class Battle {
 
                 delay += 2000;
                 activeCharacter.basicAttack(this.targetsArrayList);
-                turnOrder.put(activeCharacter,turnOrder.get(activeCharacter)+10.0*(50 - activeCharacter.currentSpeed/10));
+                cooldown = turnOrder.get(activeCharacter)+10.0*(50 - activeCharacter.currentSpeed/10);
+                cooldown *= 100;
+                cooldown = Math.round(cooldown);
+                cooldown /= 100;
+                turnOrder.put(activeCharacter, cooldown);
                 battlePanel.getCharacters().animate(true);
                 break;
             case SKILL:
@@ -184,7 +189,11 @@ public class Battle {
                 if(currentSkill.targetingEnemies && dealingDamage){
                     delay += 1000;
                 }
-                turnOrder.put(activeCharacter,turnOrder.get(activeCharacter)+currentSkill.getCoolDownTime()*(50 - activeCharacter.currentSpeed/10));
+                cooldown = turnOrder.get(activeCharacter)+currentSkill.getCoolDownTime()*(50 - activeCharacter.currentSpeed/10);
+                cooldown *= 100;
+                cooldown = Math.round(cooldown);
+                cooldown /= 100;
+                turnOrder.put(activeCharacter, cooldown);
                 battlePanel.getCharacters().animate(dealingDamage);
                 break;
             case GUARD:
@@ -193,7 +202,11 @@ public class Battle {
                 Hero activeHero = (Hero) activeCharacter;
                 activeHero.enableGuard();
 
-                turnOrder.put(activeCharacter,turnOrder.get(activeCharacter) + 5.0*(50 - activeCharacter.currentSpeed/10));
+                cooldown = turnOrder.get(activeCharacter) + 5.0*(50 - activeCharacter.currentSpeed/10);
+                cooldown *= 100;
+                cooldown = Math.round(cooldown);
+                cooldown /= 100;
+                turnOrder.put(activeCharacter, cooldown);
                 break;
             case ITEM:
                 logHandler.getInstance().setCurrentAction(Action.ITEM, currentSkill, currentItem);
@@ -203,7 +216,11 @@ public class Battle {
                 if(currentItem.targetingEnemies && dealingDamage){
                     delay += 1000;
                 }
-                turnOrder.put(activeCharacter, turnOrder.get(activeCharacter)+currentItem.getCoolDownTime()*(50 - activeCharacter.currentSpeed/10));
+                cooldown = turnOrder.get(activeCharacter)+currentItem.getCoolDownTime()*(50 - activeCharacter.currentSpeed/10);
+                cooldown *= 100;
+                cooldown = Math.round(cooldown);
+                cooldown /= 100;
+                turnOrder.put(activeCharacter, cooldown);
                 battlePanel.getCharacters().animate(dealingDamage);
                 // removing used item from available items
                 if (this.itemsMap.get(currentItem) == 1) {
