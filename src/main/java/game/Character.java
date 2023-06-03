@@ -122,19 +122,19 @@ public abstract class Character {
     }
 
     public double getBasicStrength() {
-        return this.getCharacterClass().getLvl1Strength();
+        return basicStrength;
     }
 
     public double getBasicIntelligence() {
-        return this.getCharacterClass().getLvl1Intelligence();
+        return basicIntelligence;
     }
 
     public double getBasicSpeed() {
-        return this.getCharacterClass().getLvl1Speed();
+        return basicSpeed;
     }
 
     public double getBasicLuck() {
-        return this.getCharacterClass().getLvl1Luck();
+        return basicLuck;
     }
 
     public AttackResistanceType getBasicAttack() {

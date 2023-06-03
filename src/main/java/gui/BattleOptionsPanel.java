@@ -11,7 +11,6 @@ public class BattleOptionsPanel extends JPanel {
 
     public BattleOptionsPanel(BattlePanel battlePanel) {
         this.battlePanel = battlePanel;
-        //TODO rework menu graphics
         setBounds(0, 400, 200, 200);
         setBackground(Color.DARK_GRAY);
         setLayout(null);

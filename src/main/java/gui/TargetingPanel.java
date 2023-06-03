@@ -11,7 +11,6 @@ public class TargetingPanel   extends JPanel {
 
     public TargetingPanel(BattlePanel battlePanel) {
         this.battlePanel = battlePanel;
-        //TODO rework menu graphics
         setBounds(200, 400, 600, 200);
         setVisible(false);
         setLayout(null);

@@ -18,7 +18,6 @@ public class TurnPanel extends JPanel {
 
     public TurnPanel(BattlePanel battlePanel) {
         this.battlePanel = battlePanel;
-        //TODO rework menu graphics
         setBounds(600, 0, 200, 400);
         setLayout(null);
         addTurnPanel();

@@ -17,7 +17,6 @@ public class ConfirmationPanel extends JPanel {
     public ConfirmationPanel(BattlePanel battlePanel, TurnPanel turnPanel) {
         this.battlePanel = battlePanel;
         this.turnPanel = turnPanel;
-        //TODO rework menu graphics
         setBounds(200, 400, 600, 200);
         setVisible(false);
         setLayout(null);

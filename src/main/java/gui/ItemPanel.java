@@ -30,7 +30,6 @@ public class ItemPanel extends JPanel {
     public ItemPanel(BattlePanel battlePanel) {
         this.battlePanel = battlePanel;
         this.battle = battlePanel.getBattle();
-        //TODO rework menu graphics
         setBounds(200, 400, 600, 200);
         setLayout(null);
         addPageLeftButton();

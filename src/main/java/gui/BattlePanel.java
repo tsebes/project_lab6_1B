@@ -107,7 +107,6 @@ public class BattlePanel extends JPanel {
         };
         actionStopper = new ActionStopperPanel(this);
         this.gui = gui;
-        //TODO rework menu graphics
         setPreferredSize(new Dimension(800, 600));
         setBackground(Color.DARK_GRAY);
         setLayout(null);
