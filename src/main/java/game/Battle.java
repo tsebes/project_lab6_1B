@@ -246,11 +246,6 @@ public class Battle {
             endTurnTimer.start();
     }
 
-    public static <Character, Double> Map.Entry<Character, Double> getFirst(Map<Character, Double> map) {
-        if (map.isEmpty()) return null;
-        return map.entrySet().iterator().next();
-    }
-
     public void initializeTurnOrder(List<Hero> heroArrayList, List<Enemy> enemyArrayList) {
         for(int i = 0;i < heroArrayList.size();i++) {
             turnOrder.put(heroArrayList.get(i),heroArrayList.get(i).getBasicSpeed());
@@ -415,8 +410,6 @@ public class Battle {
             value -= timePassed;
             turnOrder.put(e.getKey(),value);
         }
-
-        //TODO change getFirst to work - fragment of code below might help
 
         Map.Entry<Character, Double> minEntry = null;
         for (Map.Entry<Character, Double> entry : turnOrder.entrySet()) {

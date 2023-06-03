@@ -27,7 +27,6 @@ public class CustomBattlePanel extends JPanel{
 
     public CustomBattlePanel(GUI gui) {
         this.gui = gui;
-        //TODO rework options graphics
         setPreferredSize(new Dimension(800, 600));
         setBackground(Color.DARK_GRAY);
         setLayout(null);
@@ -401,7 +400,7 @@ public class CustomBattlePanel extends JPanel{
                 String battleDataString = bnt.getText()+"-"+characters+items;
 
                 try {
-                    File file = new File("src/main/java/battleData.txt");
+                    File file = new File("src/main/resources/battleData.txt");
                     file.setWritable(true);
                     file.setReadable(true);
                     FileWriter fw = new FileWriter(file, true);
@@ -416,7 +415,7 @@ public class CustomBattlePanel extends JPanel{
                 ib.addItem((String)bnt.getText());
                 ib.setSelectedIndex(-1);
                 battleMap.put(bnt.getText(),characters+items);
-                System.out.println(battleMap);
+                //System.out.println(battleMap);
             }
         });
 

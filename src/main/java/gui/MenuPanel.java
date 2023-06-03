@@ -16,7 +16,6 @@ public class MenuPanel extends JPanel {
 
     public MenuPanel(GUI gui) {
         this.gui = gui;
-        //TODO rework menu graphics
         setPreferredSize(new Dimension(800, 600));
         setBackground(Color.DARK_GRAY);
         setLayout(null);

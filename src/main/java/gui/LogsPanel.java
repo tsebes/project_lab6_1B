@@ -16,7 +16,6 @@ public class LogsPanel  extends JPanel {
 
     public LogsPanel(BattlePanel battlePanel) {
         this.battlePanel = battlePanel;
-        //TODO rework menu graphics
         setBounds(0, 0, 800, 600);
         subPanel =new JPanel(){
             @Override

@@ -1,0 +1,4 @@
+LVL1BATTLE-Knight;knight;1:Slime;slime;1:Potion,Great potion,Throwing dagger,Burning dagger,
+LVL5BATTLE-Knight;knight;5,Cleric;cleric;5,Mage;mage;5:Skeleton;skeleton 1;5,Skeleton;skeleton 2;5,Skeleton;skeleton 3;5:Potion,Great potion,Throwing dagger,Burning dagger,Healing talisman
+LVL10BATTLE-Knight;knight 1;10,Cleric;cleric;10,Mage;mage;10,Warlock;warlock;10:Skeleton;skeleton 1;10,Wolf;wolf;10,Daemon;daemon;10,Skeleton;skeleton 4;10:Potion,Great potion,Throwing dagger,Burning dagger,Kill switch,Healing talisman
+BOSS-Knight;knight 1;50,Cleric;cleric;50,Mage;mage;50,Warlock;warlock;50:Daemon;daemon 1;50,Daemon;daemon 2;50,Demon Lord;Boss;50:Potion,Great potion,Elixir,Throwing dagger,Burning dagger,Healing talisman

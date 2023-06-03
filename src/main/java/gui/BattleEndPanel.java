@@ -16,7 +16,6 @@ public class BattleEndPanel extends JPanel {
     private LogHandler logHandler;
 
     public BattleEndPanel(GUI gui) {
-        //TODO update graphics
         this.gui = gui;
         setPreferredSize(new Dimension(800, 600));
         setBackground(Color.DARK_GRAY);

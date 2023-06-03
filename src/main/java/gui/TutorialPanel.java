@@ -24,7 +24,6 @@ public class TutorialPanel extends JPanel {
 
     public TutorialPanel(GUI gui) {
         this.gui = gui;
-        //TODO rework options graphics
         setPreferredSize(new Dimension(800, 600));
         setBackground(Color.DARK_GRAY);
         setLayout(null);
@@ -33,7 +32,7 @@ public class TutorialPanel extends JPanel {
         addPageLeftButton();
         addGoBackButton();
         addPageRightButton();
-        //TODO add tutorial
+        //TODO rework tutorial
     }
 
     private void addTitle() {

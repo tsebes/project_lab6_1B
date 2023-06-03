@@ -34,7 +34,7 @@ public class BattleDataProvider {
     void importData() {
         BufferedReader reader;
         File file = new File(
-                "src/main/java/battleData.txt");
+                "src/main/resources/battleData.txt");
         try {
             reader = new BufferedReader(new FileReader(file));
             String line = reader.readLine();
