@@ -260,10 +260,14 @@ public class Battle {
             turnOrder.put(enemyArrayList.get(i),enemyArrayList.get(i).getBasicSpeed());
         }
 
-        //needs test
-        turnOrder.entrySet().stream().sorted(Map.Entry.<Character,Double>comparingByValue());
+        Map.Entry<Character, Double> minEntry = null;
+        for (Map.Entry<Character, Double> entry : turnOrder.entrySet()) {
+            if (minEntry == null || entry.getValue().compareTo(minEntry.getValue()) < 0) {
+                minEntry = entry;
+            }
+        }
 
-        activeCharacter = getFirst(turnOrder).getKey();
+        activeCharacter = minEntry.getKey();
     }
 
     private void lowerBuffsCount(){
