@@ -31,9 +31,9 @@ public class ConfirmationPanel extends JPanel {
     private void addActionTitle() {
         JLabel title = new JLabel("Title", SwingConstants.CENTER);
         actionTitle = title;
-        title.setFont(new Font("Serif", Font.PLAIN, 35));
+        title.setFont(new Font("Serif", Font.PLAIN, 30));
         title.setForeground(Color.BLACK);
-        title.setBounds(0, 0, 600, 35);
+        title.setBounds(0, 10, 600, 30);
         add(title);
     }
 
@@ -80,9 +80,12 @@ public class ConfirmationPanel extends JPanel {
 
     private void addCancelButton() {
         JButton cancelButton = new JButton("Cancel");
-        cancelButton.setBackground(new Color(178,17,17));
+        cancelButton.setOpaque(false);
+        cancelButton.setContentAreaFilled(false);
+        cancelButton.setBorderPainted(false);
         cancelButton.setBounds(75, 125, 150, 50);
-        cancelButton.setForeground(Color.WHITE);
+        cancelButton.setFont(new Font("Serif", Font.BOLD, 20));
+        cancelButton.setForeground(Color.BLACK);
         add(cancelButton);
         cancelButton.addActionListener(e -> {
             battlePanel.changePanel(BattlePanel.Panel.Skills);
@@ -92,9 +95,12 @@ public class ConfirmationPanel extends JPanel {
 
     private void addConfirmButton() {
         JButton confirmButton = new JButton("Confirm");
-        confirmButton.setBackground(new Color(178,17,17));
+        confirmButton.setOpaque(false);
+        confirmButton.setContentAreaFilled(false);
+        confirmButton.setBorderPainted(false);
         confirmButton.setBounds(375, 125, 150, 50);
-        confirmButton.setForeground(Color.WHITE);
+        confirmButton.setForeground(Color.BLACK);
+        confirmButton.setFont(new Font("Serif", Font.BOLD, 20));
         add(confirmButton);
         confirmButton.addActionListener(e -> {
             battlePanel.changePanel(BattlePanel.Panel.Skills);

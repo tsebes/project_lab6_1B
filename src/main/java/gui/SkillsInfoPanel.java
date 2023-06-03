@@ -7,7 +7,6 @@ import game.SpecialEffect;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Map;
 
 public class SkillsInfoPanel extends JPanel {
@@ -42,8 +41,8 @@ public class SkillsInfoPanel extends JPanel {
     private void addSkillTitle() {
         JLabel title = new JLabel("", SwingConstants.CENTER);
         title.setFont(new Font("Serif", Font.BOLD, 20));
-        title.setForeground(Color.WHITE);
-        title.setBounds(100, 0, 400, 40);
+        title.setForeground(Color.BLACK);
+        title.setBounds(100, 5, 400, 40);
         skillTitle = title;
         add(title);
     }
@@ -51,7 +50,7 @@ public class SkillsInfoPanel extends JPanel {
     private void addSkillTarget(){
         JLabel target = new JLabel("", SwingConstants.CENTER);
         target.setFont(new Font("Serif", Font.PLAIN, 20));
-        target.setForeground(Color.WHITE);
+        target.setForeground(Color.BLACK);
         target.setBounds(25, 50, 250, 30);
         skillTarget = target;
         add(target);
@@ -60,7 +59,7 @@ public class SkillsInfoPanel extends JPanel {
     private void addSkillModifier(){
         JLabel modifier = new JLabel("", SwingConstants.CENTER);
         modifier.setFont(new Font("Serif", Font.PLAIN, 20));
-        modifier.setForeground(Color.WHITE);
+        modifier.setForeground(Color.BLACK);
         modifier.setBounds(325, 50, 250, 30);
         skillModifier = modifier;
         add(modifier);
@@ -69,8 +68,8 @@ public class SkillsInfoPanel extends JPanel {
     private void addSkillAttackType(){
         JLabel attackType = new JLabel("", SwingConstants.CENTER);
         attackType.setFont(new Font("Serif", Font.PLAIN, 20));
-        attackType.setForeground(Color.WHITE);
-        attackType.setBounds(25, 90, 250, 30);
+        attackType.setForeground(Color.BLACK);
+        attackType.setBounds(25, 85, 250, 30);
         skillAttackType = attackType;
         add(attackType);
     }
@@ -78,8 +77,8 @@ public class SkillsInfoPanel extends JPanel {
     private void addSkillCooldown(){
         JLabel cooldown = new JLabel("", SwingConstants.CENTER);
         cooldown.setFont(new Font("Serif", Font.PLAIN, 20));
-        cooldown.setForeground(Color.WHITE);
-        cooldown.setBounds(325, 90, 250, 30);
+        cooldown.setForeground(Color.BLACK);
+        cooldown.setBounds(325, 85, 250, 30);
         skillCooldown = cooldown;
         add(cooldown);
     }
@@ -87,8 +86,8 @@ public class SkillsInfoPanel extends JPanel {
     private void addSkillBuffsDebuffs(){
         JLabel buffsDebuffs = new JLabel("", SwingConstants.CENTER);
         buffsDebuffs.setFont(new Font("Serif", Font.PLAIN, 20));
-        buffsDebuffs.setForeground(Color.WHITE);
-        buffsDebuffs.setBounds(25, 130, 250, 30);
+        buffsDebuffs.setForeground(Color.BLACK);
+        buffsDebuffs.setBounds(25, 120, 250, 30);
         skillBuffsDebuffs = buffsDebuffs;
         add(buffsDebuffs);
     }
@@ -96,8 +95,8 @@ public class SkillsInfoPanel extends JPanel {
     private void addSkillSpecialEffects(){
         JLabel SpecialEffect = new JLabel("", SwingConstants.CENTER);
         SpecialEffect.setFont(new Font("Serif", Font.PLAIN, 20));
-        SpecialEffect.setForeground(Color.WHITE);
-        SpecialEffect.setBounds(325, 130, 250, 30);
+        SpecialEffect.setForeground(Color.BLACK);
+        SpecialEffect.setBounds(325, 120, 250, 30);
         skillSpecialEffect = SpecialEffect;
         add(SpecialEffect);
     }
@@ -105,8 +104,8 @@ public class SkillsInfoPanel extends JPanel {
     private void addSkillDescription(){
         JLabel description = new JLabel("Description", SwingConstants.CENTER);
         description.setFont(new Font("Serif", Font.PLAIN, 15));
-        description.setForeground(Color.WHITE);
-        description.setBounds(25, 170, 550, 30);
+        description.setForeground(Color.BLACK);
+        description.setBounds(25, 155, 550, 30);
         skillDescription = description;
         add(description);
     }
@@ -159,7 +158,7 @@ public class SkillsInfoPanel extends JPanel {
         }
         skillBuffsDebuffs.setText(buffsDebuffs);
         String specialEffects = "";
-        if(skill.getSpecialEffects() != null){
+        if(skill.getSpecialEffects().size() > 0){
             specialEffects += "Special effects: ";
             for(SpecialEffect effect : skill.getSpecialEffects()){
                 specialEffects += effect.toString();

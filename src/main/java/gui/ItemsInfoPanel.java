@@ -38,8 +38,8 @@ public class ItemsInfoPanel extends JPanel {
     private void addItemTitle() {
         JLabel title = new JLabel("", SwingConstants.CENTER);
         title.setFont(new Font("Serif", Font.BOLD, 20));
-        title.setForeground(Color.WHITE);
-        title.setBounds(100, 0, 400, 40);
+        title.setForeground(Color.BLACK);
+        title.setBounds(100, 5, 400, 40);
         itemTitle = title;
         add(title);
     }
@@ -47,7 +47,7 @@ public class ItemsInfoPanel extends JPanel {
     private void addItemTarget(){
         JLabel target = new JLabel("", SwingConstants.CENTER);
         target.setFont(new Font("Serif", Font.PLAIN, 20));
-        target.setForeground(Color.WHITE);
+        target.setForeground(Color.BLACK);
         target.setBounds(25, 50, 250, 30);
         itemTarget = target;
         add(target);
@@ -56,7 +56,7 @@ public class ItemsInfoPanel extends JPanel {
     private void addItemModifier(){
         JLabel modifier = new JLabel("", SwingConstants.CENTER);
         modifier.setFont(new Font("Serif", Font.PLAIN, 20));
-        modifier.setForeground(Color.WHITE);
+        modifier.setForeground(Color.BLACK);
         modifier.setBounds(325, 50, 250, 30);
         itemModifier = modifier;
         add(modifier);
@@ -65,8 +65,8 @@ public class ItemsInfoPanel extends JPanel {
     private void addItemAttackType(){
         JLabel attackType = new JLabel("", SwingConstants.CENTER);
         attackType.setFont(new Font("Serif", Font.PLAIN, 20));
-        attackType.setForeground(Color.WHITE);
-        attackType.setBounds(25, 90, 250, 30);
+        attackType.setForeground(Color.BLACK);
+        attackType.setBounds(25, 85, 250, 30);
         itemAttackType = attackType;
         add(attackType);
     }
@@ -74,8 +74,8 @@ public class ItemsInfoPanel extends JPanel {
     private void addItemCooldown(){
         JLabel cooldown = new JLabel("", SwingConstants.CENTER);
         cooldown.setFont(new Font("Serif", Font.PLAIN, 20));
-        cooldown.setForeground(Color.WHITE);
-        cooldown.setBounds(325, 90, 250, 30);
+        cooldown.setForeground(Color.BLACK);
+        cooldown.setBounds(325, 85, 250, 30);
         itemCooldown = cooldown;
         add(cooldown);
     }
@@ -83,8 +83,8 @@ public class ItemsInfoPanel extends JPanel {
     private void addItemBuffsDebuffs(){
         JLabel buffsDebuffs = new JLabel("", SwingConstants.CENTER);
         buffsDebuffs.setFont(new Font("Serif", Font.PLAIN, 20));
-        buffsDebuffs.setForeground(Color.WHITE);
-        buffsDebuffs.setBounds(25, 130, 250, 30);
+        buffsDebuffs.setForeground(Color.BLACK);
+        buffsDebuffs.setBounds(25, 120, 250, 30);
         itemBuffsDebuffs = buffsDebuffs;
         add(buffsDebuffs);
     }
@@ -92,8 +92,8 @@ public class ItemsInfoPanel extends JPanel {
     private void addItemAmount(){
         JLabel amount = new JLabel("", SwingConstants.CENTER);
         amount.setFont(new Font("Serif", Font.PLAIN, 20));
-        amount.setForeground(Color.WHITE);
-        amount.setBounds(100, 170, 400, 30);
+        amount.setForeground(Color.BLACK);
+        amount.setBounds(100, 155, 400, 30);
         itemAmount = amount;
         add(amount);
     }
