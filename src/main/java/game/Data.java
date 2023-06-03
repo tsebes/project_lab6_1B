@@ -12,6 +12,8 @@ public class Data {
             "Skeleton,Undead charge,-10;-20;100;60;60;0;-80;100,7,5,6,2,15,4,2,2,2,4,PHYSICAL",
             "Wolf,Earthquake,-20;-10;100;40;80;0;-60;100,7,5,6,2,15,5,4,2,3,2,PHYSICAL",
             "Daemon,Energy storm,10;20;50;50;100;50;50;100,4,6,6,2,15,3,5,2,4,2,ENERGY"
+            "Slime,Devour,100;0;0;100;0;-100;0;0,5,5,5,5,5,3,3,2,2,5,PHYSICAL",
+            "Demon Lord,Fire storm;Purgatory;Dark Blast;Demon Lord's Aura,50;100;50;50;50;50;-100;100,10,10,10,10,25,5,5,2,3,5,DARK"
             // Creating character tutorial:
             // characterName,
             // names of character skills, divided by ';',
@@ -43,6 +45,9 @@ public class Data {
             "Grant regen,true,false,ENERGY,0.5,REGEN:5;,,20.0,,Heals small amount of hp and grants regen to all allies",
             "All seeing eye,false,true,PHYSICAL,0.0,,,20.0,AnalyzeEnemy,Uses magic to see all enemy weaknesses",
             "Undead charge,false,true,PHYSICAL,1.3,,,12.0,,Skeleton charges at enemy",
+            "Devour,false,true,EARTH,2.0,,SPD_DOWN:1,20.0,,Slime coats the enemy trying to devour it",
+            "Purgatory,true,true,DARK,4.0,,CURSE:2,50.0,,Demon Lord engulfs the area in dark flames",
+            "Demon Lord's Aura,true,false,ENERGY,0.0,STR_UP:3;INT_UP:3;REGEN:3,,20.0,,Dark aura strengthens allies strength and intelligence and provides healing"
             // Creating skill tutorial:
             // String name,
             // Boolean isAOE,
