@@ -40,8 +40,10 @@ public class SkillsPanel  extends JPanel {
 
     private void addPageLeftButton() {
         JButton leftButton = new JButton("<");
-        leftButton.setBackground(new Color(178,17,17));
-        leftButton.setBounds(25, 75, 50, 50);
+        leftButton.setOpaque(false);
+        leftButton.setContentAreaFilled(false);
+        leftButton.setBorderPainted(false);
+        leftButton.setBounds(0, 0, 45, 200);
         leftButton.setForeground(Color.WHITE);
         pageLeft = leftButton;
         add(leftButton);
@@ -53,8 +55,10 @@ public class SkillsPanel  extends JPanel {
 
     private void addPageRightButton() {
         JButton rightButton = new JButton(">");
-        rightButton.setBackground(new Color(178,17,17));
-        rightButton.setBounds(525, 75, 50, 50);
+        rightButton.setOpaque(false);
+        rightButton.setContentAreaFilled(false);
+        rightButton.setBorderPainted(false);
+        rightButton.setBounds(555, 0, 45, 200);
         rightButton.setForeground(Color.WHITE);
         pageRight = rightButton;
         add(rightButton);
@@ -66,36 +70,41 @@ public class SkillsPanel  extends JPanel {
 
     private void addSkillButton(int buttonNumber) {
         JButton skillButton = new JButton("");
-        skillButton.setBackground(new Color(178,17,17));
-        skillButton.setForeground(Color.WHITE);
+        skillButton.setFont(new Font("SansSerif", Font.BOLD, 20));
+        skillButton.setOpaque(false);
+        skillButton.setContentAreaFilled(false);
+        skillButton.setBorderPainted(false);
+        skillButton.setForeground(Color.BLACK);
 
-        JButton skillInfoButton = new JButton("?");
-        skillInfoButton.setBackground(Color.BLACK);
-        skillInfoButton.setForeground(Color.WHITE);
-        skillInfoButton.setFont(new Font("Serif", Font.PLAIN, 5));
+        JButton skillInfoButton = new JButton("???");
+        skillInfoButton.setOpaque(false);
+        skillInfoButton.setContentAreaFilled(false);
+        skillInfoButton.setBorderPainted(false);
+        skillInfoButton.setForeground(Color.BLACK);
+        skillInfoButton.setFont(new Font("Serif", Font.BOLD, 15));
 
         switch (buttonNumber){
             case 1:
-                skillButton.setBounds(100, 25, 175, 65);
-                skillInfoButton.setBounds(275, 25, 10, 10);
+                skillButton.setBounds(75, 25, 200, 40);
+                skillInfoButton.setBounds(75, 65, 200, 40);
                 skill1 = skillButton;
                 skill1Info = skillInfoButton;
                 break;
             case 2:
-                skillButton.setBounds(325, 25, 175, 65);
-                skillInfoButton.setBounds(500, 25, 10, 10);
+                skillButton.setBounds(325, 25, 200, 40);
+                skillInfoButton.setBounds(325, 65, 200, 40);
                 skill2 = skillButton;
                 skill2Info = skillInfoButton;
                 break;
             case 3:
-                skillButton.setBounds(100, 110, 175, 65);
-                skillInfoButton.setBounds(275, 110, 10, 10);
+                skillButton.setBounds(75, 110, 200, 40);
+                skillInfoButton.setBounds(75, 150, 200, 40);
                 skill3 = skillButton;
                 skill3Info = skillInfoButton;
                 break;
             case 4:
-                skillButton.setBounds(325, 110, 175, 65);
-                skillInfoButton.setBounds(500, 110, 10, 10);
+                skillButton.setBounds(325, 110, 200, 40);
+                skillInfoButton.setBounds(325, 150, 200, 40);
                 skill4 = skillButton;
                 skill4Info = skillInfoButton;
                 break;

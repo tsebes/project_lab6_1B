@@ -23,7 +23,11 @@ public class BattlePanel extends JPanel {
     private JButton exitButton;
 
     public BattlePanel(GUI gui) {
+        ImageIcon charactersImage = new ImageIcon(getClass().getResource("/background.png"));
         ImageIcon turnImage = new ImageIcon(getClass().getResource("/turn-background.png"));
+        ImageIcon bOptionsImage = new ImageIcon(getClass().getResource("/battle options-background.png"));
+        ImageIcon bActionImage = new ImageIcon(getClass().getResource("/battle action-background.png"));
+        ImageIcon logsImage = new ImageIcon(getClass().getResource("/log-background.png"));
         turns = new TurnPanel(this){
             @Override
             protected void paintComponent(Graphics g) {
@@ -31,7 +35,6 @@ public class BattlePanel extends JPanel {
                 g.drawImage(turnImage.getImage(), 0, 0, null);
             }
         };
-        ImageIcon charactersImage = new ImageIcon(getClass().getResource("/background.png"));
         characters = new CharactersPanel(this){
             @Override
             protected void paintComponent(Graphics g) {
@@ -39,12 +42,13 @@ public class BattlePanel extends JPanel {
                 g.drawImage(charactersImage.getImage(), 0, 0, null);
             }
         };
-
-        skills = new SkillsPanel(this);
-        bOptions = new BattleOptionsPanel(this);
-        targeting = new TargetingPanel(this);
-        analyze = new AnalyzePanel(this);
-        ImageIcon logsImage = new ImageIcon(getClass().getResource("/log-background.png"));
+        bOptions = new BattleOptionsPanel(this){
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(bOptionsImage.getImage(), 0, 0, null);
+            }
+        };
         logs = new LogsPanel(this){
             @Override
             protected void paintComponent(Graphics g) {
@@ -52,12 +56,56 @@ public class BattlePanel extends JPanel {
                 g.drawImage(logsImage.getImage(), 0, 0, null);
             }
         };
-
-        confirmation = new ConfirmationPanel(this, turns);
+        skills = new SkillsPanel(this){
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(bActionImage.getImage(), 0, 0, null);
+            }
+        };
+        targeting = new TargetingPanel(this){
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(bActionImage.getImage(), 0, 0, null);
+            }
+        };
+        analyze = new AnalyzePanel(this){
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(bActionImage.getImage(), 0, 0, null);
+            }
+        };
+        confirmation = new ConfirmationPanel(this, turns){
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(bActionImage.getImage(), 0, 0, null);
+            }
+        };
+        items = new ItemPanel(this){
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(bActionImage.getImage(), 0, 0, null);
+            }
+        };
+        skillInfo = new SkillsInfoPanel(this){
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(bActionImage.getImage(), 0, 0, null);
+            }
+        };
+        itemInfo = new ItemsInfoPanel(this){
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(bActionImage.getImage(), 0, 0, null);
+            }
+        };
         actionStopper = new ActionStopperPanel(this);
-        items = new ItemPanel(this);
-        skillInfo = new SkillsInfoPanel(this);
-        itemInfo = new ItemsInfoPanel(this);
         this.gui = gui;
         //TODO rework menu graphics
         setPreferredSize(new Dimension(800, 600));

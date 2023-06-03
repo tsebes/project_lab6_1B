@@ -43,8 +43,10 @@ public class ItemPanel extends JPanel {
 
     private void addPageLeftButton() {
         JButton leftButton = new JButton("<");
-        leftButton.setBackground(new Color(178,17,17));
-        leftButton.setBounds(25, 75, 50, 50);
+        leftButton.setOpaque(false);
+        leftButton.setContentAreaFilled(false);
+        leftButton.setBorderPainted(false);
+        leftButton.setBounds(0, 0, 45, 200);
         leftButton.setForeground(Color.WHITE);
         pageLeft = leftButton;
         add(leftButton);
@@ -56,8 +58,10 @@ public class ItemPanel extends JPanel {
 
     private void addPageRightButton() {
         JButton rightButton = new JButton(">");
-        rightButton.setBackground(new Color(178,17,17));
-        rightButton.setBounds(525, 75, 50, 50);
+        rightButton.setOpaque(false);
+        rightButton.setContentAreaFilled(false);
+        rightButton.setBorderPainted(false);
+        rightButton.setBounds(555, 0, 45, 200);
         rightButton.setForeground(Color.WHITE);
         pageRight = rightButton;
         add(rightButton);
@@ -69,36 +73,41 @@ public class ItemPanel extends JPanel {
 
     private void addItemButton(int buttonNumber) {
         JButton itemButton = new JButton("");
-        itemButton.setBackground(new Color(178,17,17));
-        itemButton.setForeground(Color.WHITE);
+        itemButton.setFont(new Font("SansSerif", Font.BOLD, 20));
+        itemButton.setOpaque(false);
+        itemButton.setContentAreaFilled(false);
+        itemButton.setBorderPainted(false);
+        itemButton.setForeground(Color.BLACK);
 
         JButton itemInfoButton = new JButton("?");
-        itemInfoButton.setBackground(Color.BLACK);
-        itemInfoButton.setForeground(Color.WHITE);
-        itemInfoButton.setFont(new Font("Serif", Font.PLAIN, 5));
+        itemInfoButton.setOpaque(false);
+        itemInfoButton.setContentAreaFilled(false);
+        itemInfoButton.setBorderPainted(false);
+        itemInfoButton.setForeground(Color.BLACK);
+        itemInfoButton.setFont(new Font("Serif", Font.BOLD, 15));
 
         switch (buttonNumber){
             case 1:
-                itemButton.setBounds(100, 25, 175, 65);
-                itemInfoButton.setBounds(275, 25, 10, 10);
+                itemButton.setBounds(75, 25, 200, 40);
+                itemInfoButton.setBounds(75, 65, 200, 40);
                 item1 = itemButton;
                 item1Info = itemInfoButton;
                 break;
             case 2:
-                itemButton.setBounds(325, 25, 175, 65);
-                itemInfoButton.setBounds(500, 25, 10, 10);
+                itemButton.setBounds(325, 25, 200, 40);
+                itemInfoButton.setBounds(325, 65, 200, 40);
                 item2 = itemButton;
                 item2Info = itemInfoButton;
                 break;
             case 3:
-                itemButton.setBounds(100, 110, 175, 65);
-                itemInfoButton.setBounds(275, 110, 10, 10);
+                itemButton.setBounds(75, 110, 200, 40);
+                itemInfoButton.setBounds(75, 150, 200, 40);
                 item3 = itemButton;
                 item3Info = itemInfoButton;
                 break;
             case 4:
-                itemButton.setBounds(325, 110, 175, 65);
-                itemInfoButton.setBounds(500, 110, 10, 10);
+                itemButton.setBounds(325, 110, 200, 40);
+                itemInfoButton.setBounds(325, 150, 200, 40);
                 item4 = itemButton;
                 item4Info = itemInfoButton;
                 break;
