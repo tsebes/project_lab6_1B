@@ -11,7 +11,7 @@ public class Data {
             "Cleric,Bless;Grant regen;Healing aura;Light Blast;Battle Focus;Energy Bolt;Energy storm,0;10;10;10;10;30;100;-20,1,9,6,1,15,1,4,2,1,3,LIGHT",
             "Skeleton,Undead charge,-10;-20;100;60;60;0;-80;100,7,5,6,2,15,4,2,2,2,4,PHYSICAL",
             "Wolf,Earthquake,-20;-10;100;40;80;0;-60;100,7,5,6,2,15,5,4,2,3,2,PHYSICAL",
-            "Daemon,Energy storm,10;20;50;50;100;50;50;100,4,6,6,2,15,3,5,2,4,2,ENERGY"
+            "Daemon,Energy storm,10;20;50;50;100;50;50;100,4,6,6,2,15,3,5,2,4,2,ENERGY",
             "Slime,Devour,100;0;0;100;0;-100;0;0,5,5,5,5,5,3,3,2,2,5,PHYSICAL",
             "Demon Lord,Fire storm;Purgatory;Dark Blast;Demon Lord's Aura,50;100;50;50;50;50;-100;100,10,10,10,10,25,5,5,2,3,5,DARK"
             // Creating character tutorial:
