@@ -24,7 +24,7 @@ public class TargetingPanel   extends JPanel {
         panelTitle = title;
         title.setFont(new Font("Serif", Font.PLAIN, 30));
         title.setForeground(Color.BLACK);
-        title.setBounds(200, 0, 200, 40);
+        title.setBounds(200, 10, 200, 30);
         add(title);
     }
 

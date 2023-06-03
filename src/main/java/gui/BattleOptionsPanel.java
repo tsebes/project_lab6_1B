@@ -13,7 +13,7 @@ public class BattleOptionsPanel extends JPanel {
         this.battlePanel = battlePanel;
         //TODO rework menu graphics
         setBounds(0, 400, 200, 200);
-        setBackground(Color.GRAY);
+        setBackground(Color.DARK_GRAY);
         setLayout(null);
         addAttackButton();
         addSkillsButton();
@@ -24,7 +24,8 @@ public class BattleOptionsPanel extends JPanel {
 
     private void addAttackButton() {
         JButton attackButton = new JButton("Attack");
-        attackButton.setBackground(Color.WHITE);
+        attackButton.setOpaque(false);
+        attackButton.setContentAreaFilled(false);
         attackButton.setBounds(0, 0, 200, 40);
         attackButton.setForeground(Color.RED);
         attackButton.setBorder(new LineBorder(Color.BLACK));
@@ -40,12 +41,14 @@ public class BattleOptionsPanel extends JPanel {
 
     private void addSkillsButton() {
         JButton skillsButton = new JButton("Skill");
-        skillsButton.setBackground(Color.WHITE);
+        skillsButton.setOpaque(false);
+        skillsButton.setContentAreaFilled(false);
         skillsButton.setBounds(0, 40, 200, 40);
         skillsButton.setForeground(Color.RED);
         skillsButton.setBorder(new LineBorder(Color.BLACK));
         add(skillsButton);
         skillsButton.addActionListener(e -> {
+            battlePanel.getCharacters().clearTargetingAll();
             battlePanel.getBattle().clearCurrentAction();
             battlePanel.getBattle().setCurrentAction(Action.SKILL);
             battlePanel.changePanel(BattlePanel.Panel.Skills);
@@ -54,7 +57,8 @@ public class BattleOptionsPanel extends JPanel {
 
     private void addGuardButton() {
         JButton guardButton = new JButton("Guard");
-        guardButton.setBackground(Color.WHITE);
+        guardButton.setOpaque(false);
+        guardButton.setContentAreaFilled(false);
         guardButton.setBounds(0, 80, 200, 40);
         guardButton.setForeground(Color.RED);
         guardButton.setBorder(new LineBorder(Color.BLACK));
@@ -68,7 +72,8 @@ public class BattleOptionsPanel extends JPanel {
 
     private void addAnalyzeButton() {
         JButton analyzeButton = new JButton("Analyze");
-        analyzeButton.setBackground(Color.WHITE);
+        analyzeButton.setOpaque(false);
+        analyzeButton.setContentAreaFilled(false);
         analyzeButton.setBounds(0, 120, 200, 40);
         analyzeButton.setForeground(Color.RED);
         analyzeButton.setBorder(new LineBorder(Color.BLACK));
@@ -84,12 +89,14 @@ public class BattleOptionsPanel extends JPanel {
 
     private void addItemButton() {
         JButton itemButton = new JButton("Item");
-        itemButton.setBackground(Color.WHITE);
+        itemButton.setOpaque(false);
+        itemButton.setContentAreaFilled(false);
         itemButton.setBounds(0, 160, 200, 40);
         itemButton.setForeground(Color.RED);
         itemButton.setBorder(new LineBorder(Color.BLACK));
         add(itemButton);
         itemButton.addActionListener(e -> {
+            battlePanel.getCharacters().clearTargetingAll();
             battlePanel.getBattle().clearCurrentAction();
             battlePanel.getBattle().setCurrentAction(Action.ITEM);
             battlePanel.changePanel(BattlePanel.Panel.Items);

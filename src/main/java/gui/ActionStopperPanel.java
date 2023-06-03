@@ -10,7 +10,7 @@ public class ActionStopperPanel extends JPanel {
     public ActionStopperPanel(BattlePanel battle) {
         this.battlePanel = battle;
         setBounds(0, 400, 800, 200);
-        setBackground(Color.WHITE);
+        setBackground(Color.DARK_GRAY);
         setVisible(false);
         setLayout(null);
     }
