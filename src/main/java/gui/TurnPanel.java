@@ -4,7 +4,6 @@ import game.Character;
 import game.Hero;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.*;
@@ -20,7 +19,7 @@ public class TurnPanel extends JPanel {
         this.battlePanel = battlePanel;
         setBounds(600, 0, 200, 400);
         setLayout(null);
-        addTurnPanel();
+        addTurnLabel();
         addLogsButton();
     }
 
@@ -43,7 +42,7 @@ public class TurnPanel extends JPanel {
         logsButton.setText(info);
     }
 
-    private void addTurnPanel() {
+    private void addTurnLabel() {
         for (int i = 0; i < 8; i++) {
             JLabel turnOrder = new JLabel("", SwingConstants.CENTER);
             turnOrder.setFont(new Font("Serif", Font.BOLD, 20));

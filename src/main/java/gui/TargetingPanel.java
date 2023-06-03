@@ -15,7 +15,7 @@ public class TargetingPanel   extends JPanel {
         setVisible(false);
         setLayout(null);
         addTitle();
-        addInformationPanel();
+        addInformationLabel();
     }
 
     private void addTitle() {
@@ -27,7 +27,7 @@ public class TargetingPanel   extends JPanel {
         add(title);
     }
 
-    private void addInformationPanel(){
+    private void addInformationLabel(){
         JLabel basicInfo = new JLabel("", SwingConstants.CENTER);
         this.basicInfo = basicInfo;
         basicInfo.setFont(new Font("Serif", Font.PLAIN, 20));
