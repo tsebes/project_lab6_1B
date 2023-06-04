@@ -3,6 +3,7 @@ package gui;
 import game.Enemy;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class GUI extends JFrame{
 
@@ -19,7 +20,14 @@ public class GUI extends JFrame{
         battlePanel = new BattlePanel(this);
         tutorialPanel = new TutorialPanel(this);
         customBattlePanel = new CustomBattlePanel(this);
-        battleEndPanel = new BattleEndPanel(this);
+        ImageIcon battleEndImage = new ImageIcon(getClass().getResource("/battle-end-background.png"));
+        battleEndPanel = new BattleEndPanel(this){
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(battleEndImage.getImage(), 0, 0, null);
+            }
+        };
 
         configureFrame();
         setVisible(true);
