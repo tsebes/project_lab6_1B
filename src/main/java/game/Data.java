@@ -10,7 +10,7 @@ public class Data {
             "Warlock,Dark Bolt;Dark Blast;Death Calling;Death Parade;Energy Bolt;Energy storm,-20;10;10;10;10;30;-50;90,1,9,9,5,15,1,1.4,1,1,3,DARK",
             "Cleric,Bless;Grant regen;Healing aura;Light Blast;Battle Focus;Energy Bolt;Energy storm,0;10;10;10;10;30;100;-20,2,9,6,7,15,1,1.3,1,1,2,LIGHT",
             "Skeleton,Undead charge,-10;-20;100;60;60;0;-80;100,9,5,8,2,15,1.5,1.5,1.6,1,5,PHYSICAL",
-            "Wolf,Earthquake,-20;-10;100;40;80;0;-60;100,12,3,8,1,12,1.5,1.5,1.8,1,5,PHYSICAL",
+            "Wolf,Earthquake,-20;-10;100;40;80;0;-60;40,12,3,8,1,12,1.5,1.5,1.8,1,5,PHYSICAL",
             "Daemon,Energy storm,10;20;50;50;100;50;50;100,6,6,6,6,25,1.7,1.7,1,1,5,ENERGY",
             "Slime,Devour,100;0;0;100;0;-100;0;0,7,7,5,5,8,1.2,1.2,1,1,5,PHYSICAL",
             "Demon Lord,Fire storm;Purgatory;Dark Blast;Demon Lord's Aura,50;100;50;50;50;50;-100;100,12,12,5,5,25,2,2,1,1,8,DARK"

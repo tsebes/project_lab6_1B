@@ -423,9 +423,12 @@ public class Battle {
         battlePanel.getCharacters().refresh();
 
         for (Map.Entry<Character, Double> e : turnOrder.entrySet()) {
-            Double value = e.getValue();
+            double value = e.getValue();
             value -= timePassed;
-            turnOrder.put(e.getKey(),value);
+            value *= 100;
+            value = Math.round(value);
+            value /= 100;
+            turnOrder.put(e.getKey(), value);
         }
 
         Map.Entry<Character, Double> minEntry = null;

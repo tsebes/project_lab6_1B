@@ -38,7 +38,7 @@ public class BattleEndPanel extends JPanel {
 
     private void addLabels() {
         JLabel resultLabel = new JLabel("", SwingConstants.CENTER);
-        resultLabel.setBounds(100, 50, 600, 100);
+        resultLabel.setBounds(100, 12, 600, 80);
         resultLabel.setForeground(Color.BLACK);
         resultLabel.setFont(new Font("Serif", Font.BOLD, 40));
         add(resultLabel);
