@@ -36,9 +36,9 @@ public class TutorialPanel extends JPanel {
     }
 
     private void addTitle() {
-        title.setFont(new Font("Serif", Font.PLAIN, 40));
+        title.setFont(new Font("Serif", Font.PLAIN, 30));
         title.setForeground(Color.WHITE);
-        title.setBounds(50, 5, 700, 40);
+        title.setBounds(50, 5, 700, 32);
         add(title);
     }
 
