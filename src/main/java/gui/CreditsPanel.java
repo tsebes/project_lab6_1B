@@ -20,6 +20,7 @@ public class CreditsPanel extends JPanel  {
             " - https://chierit.itch.io/boss-demon-slime",
             " - https://rvros.itch.io/pixel-art-animated-slime",
             " - https://opengameart.org/content/lpc-wolf-animation",
+            " - https://sanctumpixel.itch.io/imp-axe-demon-pixel-art-character",
             "",
             "UI interface: ",
             " - freepik (aopsan)",
